@@ -1,5 +1,6 @@
 // ============================================================
-// SMART ZAMBIA – GLOBAL JAVASCRIPT
+// SMART ZAMBIA – COMPLETE JAVASCRIPT
+// Premium Tesla/ABB/SpaceX Inspired Theme
 // ============================================================
 
 (function() {
@@ -40,13 +41,11 @@
                 <button class="toast-close" aria-label="Dismiss notification">&times;</button>
             `;
 
-            // Close button
             const closeBtn = toast.querySelector('.toast-close');
             closeBtn.addEventListener('click', () => this.remove(toast));
 
             this.container.appendChild(toast);
 
-            // Auto remove
             if (duration > 0) {
                 setTimeout(() => {
                     if (toast.parentNode) this.remove(toast);
@@ -81,7 +80,29 @@
     };
 
     // ============================================================
-    // 2. MOBILE MENU
+    // 2. WATERMARK INJECTION
+    // ============================================================
+    function addWatermark() {
+        if (document.querySelector('.watermark')) return;
+
+        const watermark = document.createElement('div');
+        watermark.className = 'watermark';
+        watermark.setAttribute('aria-hidden', 'true');
+
+        watermark.innerHTML = `
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#1B5E20">S</text>
+                <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#E65100">Z</text>
+                <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FFC107" stroke="#F57C00" stroke-width="2" />
+                <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,183,77,0.15)" stroke-width="2" />
+            </svg>
+        `;
+
+        document.body.prepend(watermark);
+    }
+
+    // ============================================================
+    // 3. MOBILE MENU
     // ============================================================
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
@@ -93,7 +114,6 @@
             this.setAttribute('aria-expanded', navLinks.classList.contains('open'));
         });
 
-        // Close on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('open');
@@ -102,7 +122,6 @@
             });
         });
 
-        // Close on outside click
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.navbar')) {
                 navLinks.classList.remove('open');
@@ -113,7 +132,7 @@
     }
 
     // ============================================================
-    // 3. DARK MODE
+    // 4. DARK MODE
     // ============================================================
     const darkToggle = document.getElementById('darkToggle');
     const body = document.body;
@@ -121,7 +140,6 @@
     if (darkToggle) {
         const icon = darkToggle.querySelector('i');
 
-        // Load saved preference
         if (localStorage.getItem('darkMode') === 'true') {
             body.classList.add('dark-mode');
             if (icon) icon.classList.replace('fa-moon', 'fa-sun');
@@ -134,16 +152,17 @@
             if (icon) {
                 if (isDark) {
                     icon.classList.replace('fa-moon', 'fa-sun');
+                    Toast.info('Dark mode enabled', '🌓', 2000);
                 } else {
                     icon.classList.replace('fa-sun', 'fa-moon');
+                    Toast.info('Light mode enabled', '☀️', 2000);
                 }
             }
-            Toast.info(isDark ? 'Dark mode enabled' : 'Light mode enabled', '🌓', 2000);
         });
     }
 
     // ============================================================
-    // 4. NAVBAR SCROLL EFFECT
+    // 5. NAVBAR SCROLL EFFECT
     // ============================================================
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
@@ -151,14 +170,12 @@
     window.addEventListener('scroll', function() {
         const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Add shadow when scrolled
         if (currentScroll > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
 
-        // Hide/show on scroll direction (optional)
         if (currentScroll > lastScroll && currentScroll > 200) {
             navbar.style.transform = 'translateY(-100%)';
         } else {
@@ -168,7 +185,7 @@
     });
 
     // ============================================================
-    // 5. SCROLL TO TOP BUTTON
+    // 6. SCROLL TO TOP BUTTON
     // ============================================================
     const scrollBtn = document.createElement('button');
     scrollBtn.className = 'scroll-top';
@@ -189,9 +206,8 @@
     });
 
     // ============================================================
-    // 6. FLOATING WHATSAPP BUTTON
+    // 7. FLOATING WHATSAPP BUTTON
     // ============================================================
-    // Check if it already exists (to avoid duplicates)
     if (!document.querySelector('.floating-wa')) {
         const waBtn = document.createElement('a');
         waBtn.className = 'floating-wa';
@@ -203,7 +219,7 @@
     }
 
     // ============================================================
-    // 7. SERVICE FILTER + SEARCH
+    // 8. SERVICE FILTER + SEARCH
     // ============================================================
     const filterBtns = document.querySelectorAll('.filter-btn');
     const serviceCards = document.querySelectorAll('.service-card');
@@ -256,7 +272,7 @@
     }
 
     // ============================================================
-    // 8. REAL-TIME EMAIL VALIDATION
+    // 9. REAL-TIME EMAIL VALIDATION
     // ============================================================
     const emailFields = document.querySelectorAll('input[type="email"]');
 
@@ -288,7 +304,7 @@
     });
 
     // ============================================================
-    // 9. CAPTCHA ROTATION
+    // 10. CAPTCHA ROTATION
     // ============================================================
     document.querySelectorAll('.captcha-row').forEach(row => {
         const label = row.querySelector('#captchaLabel') || row.querySelector('label');
@@ -302,18 +318,16 @@
     });
 
     // ============================================================
-    // 10. FORM SUBMISSION HANDLER (with security)
+    // 11. FORM SUBMISSION HANDLER (with security)
     // ============================================================
     const forms = document.querySelectorAll('form');
 
     forms.forEach(form => {
-        // Set timestamp
         const timestampField = form.querySelector('#formTimestamp');
         if (timestampField) {
             timestampField.value = Date.now();
         }
 
-        // Auto-save to localStorage
         const formId = form.id || 'form';
         const saveKey = `smartZambia_${formId}_data`;
 
@@ -348,16 +362,13 @@
             }
         }
 
-        // Load saved data
         loadFormData();
 
-        // Auto-save on change
         form.querySelectorAll('input, textarea, select').forEach(el => {
             el.addEventListener('change', saveFormData);
             el.addEventListener('input', saveFormData);
         });
 
-        // Rate limiting
         function checkRateLimit(formId) {
             const now = Date.now();
             const key = `smartZambia_${formId}_submissions`;
@@ -372,18 +383,17 @@
             return true;
         }
 
-        // Form submission
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // ---- SECURITY: Honeypot ----
+            // Honeypot
             const honeypot = this.querySelector('.honeypot input');
             if (honeypot && honeypot.value.trim() !== '') {
                 Toast.error('Bot detected. Submission blocked.', 'Security check');
                 return;
             }
 
-            // ---- SECURITY: CAPTCHA ----
+            // CAPTCHA
             const captchaRow = this.querySelector('.captcha-row');
             if (captchaRow) {
                 const label = captchaRow.querySelector('label');
@@ -400,7 +410,7 @@
                 }
             }
 
-            // ---- SECURITY: Timestamp ----
+            // Timestamp
             const timestamp = this.querySelector('#formTimestamp');
             if (timestamp) {
                 const elapsed = (Date.now() - parseInt(timestamp.value)) / 1000;
@@ -410,13 +420,12 @@
                 }
             }
 
-            // ---- Rate limiting ----
-            const formId = this.id || 'form';
+            // Rate limiting
             if (!checkRateLimit(formId)) {
                 return;
             }
 
-            // ---- Validate email ----
+            // Validate email
             const emailInput = this.querySelector('input[type="email"]');
             if (emailInput) {
                 const email = emailInput.value.trim();
@@ -429,7 +438,7 @@
                 }
             }
 
-            // ---- Build message ----
+            // Build message
             const name = this.querySelector('#userName, #contactName, #partnerName')?.value?.trim() || 'Unknown';
             const email = this.querySelector('input[type="email"]')?.value?.trim() || '';
             const message = this.querySelector('textarea')?.value?.trim() || 'No message provided';
@@ -442,24 +451,18 @@
             fullMessage += `📌 Subject: ${subject}\n`;
             fullMessage += `\n📝 Message:\n${message}`;
 
-            // ---- Show success toast ----
             Toast.success('We will contact you shortly!', '✅ Thank you!');
 
-            // ---- Redirect to WhatsApp ----
             const waNumber = '260958752821';
             const waMsg = encodeURIComponent(fullMessage);
             setTimeout(() => {
                 window.open(`https://wa.me/${waNumber}?text=${waMsg}`, '_blank');
             }, 1000);
-
-            // ---- Clear saved data (optional) ----
-            // localStorage.removeItem(saveKey);
-            // form.reset();
         });
     });
 
     // ============================================================
-    // 11. STAT COUNTER ANIMATION
+    // 12. STAT COUNTER ANIMATION
     // ============================================================
     const statNumbers = document.querySelectorAll('.stat-number');
 
@@ -494,7 +497,7 @@
     }
 
     // ============================================================
-    // 12. LIGHTBOX GALLERY
+    // 13. LIGHTBOX GALLERY
     // ============================================================
     const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.getElementById('lightbox');
@@ -536,7 +539,7 @@
     }
 
     // ============================================================
-    // 13. ACTIVE NAV LINK HIGHLIGHT
+    // 14. ACTIVE NAV LINK HIGHLIGHT
     // ============================================================
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(link => {
@@ -549,7 +552,7 @@
     });
 
     // ============================================================
-    // 14. SMOOTH SCROLL FOR ANCHOR LINKS
+    // 15. SMOOTH SCROLL FOR ANCHOR LINKS
     // ============================================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -558,13 +561,15 @@
             const target = document.querySelector(href);
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const offset = 80;
+                const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
             }
         });
     });
 
     // ============================================================
-    // 15. KEYBOARD ACCESSIBILITY
+    // 16. KEYBOARD ACCESSIBILITY
     // ============================================================
     document.addEventListener('keydown', function(e) {
         // Ctrl+Shift+D to toggle dark mode
@@ -572,9 +577,60 @@
             e.preventDefault();
             if (darkToggle) darkToggle.click();
         }
+        // Escape to close lightbox
+        if (e.key === 'Escape') {
+            if (lightbox && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        }
     });
 
-    console.log('⚡ Smart Zambia – Website loaded successfully');
+    // ============================================================
+    // 17. PREMIUM EFFECTS – Typing & Parallax
+    // ============================================================
+    function initTyping() {
+        const heroText = document.querySelector('.hero-premium h1');
+        if (!heroText) return;
+
+        const originalText = heroText.textContent;
+        const words = originalText.split(' ');
+        const highlightIndex = words.findIndex(w => w.includes('Future') || w.includes('Zambia'));
+
+        heroText.innerHTML = words.map((word, i) => {
+            const isHighlight = i === highlightIndex || i === highlightIndex + 1;
+            return `<span class="${isHighlight ? 'highlight' : ''}" style="display:inline-block; opacity:0; animation: fadeInUp 0.6s ease forwards ${i * 0.1}s;">${word}</span>`;
+        }).join(' ');
+    }
+
+    function initParallax() {
+        const hero = document.querySelector('.hero-premium');
+        if (!hero) return;
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            hero.style.backgroundPositionY = `${scrolled * 0.3}px`;
+        });
+    }
+
+    // ============================================================
+    // 18. INITIALIZE ALL FEATURES
+    // ============================================================
+    // Add watermark
+    if (document.readyState === 'complete') {
+        addWatermark();
+    } else {
+        window.addEventListener('load', addWatermark);
+    }
+
+    // Premium features
+    if (document.body.classList.contains('premium')) {
+        initTyping();
+        initParallax();
+    }
+
+    // Console branding
+    console.log('⚡ Smart Zambia – Premium Edition');
     console.log('🌓 Toggle dark mode: Ctrl+Shift+D');
+    console.log('📱 WhatsApp: +260 958 752 821');
 
 })();
