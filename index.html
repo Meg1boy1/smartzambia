@@ -1,342 +1,252 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Zambia – Local · Smart · Innovative</title>
-    <meta name="description" content="Smart Zambia – Affordable, fast engineering for local communities. Electrical, Mechanical, Civil, IT." />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Smart Zambia — Engineering Solutions</title>
+
+    <!-- ===== Google Fonts ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+    <!-- ===== Font Awesome ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- ===== Custom CSS ===== -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ===== WATERMARK LOGO (Background) ===== -->
-    <div class="watermark" aria-hidden="true">
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#198A00">S</text>
-            <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#EF7D00">Z</text>
-            <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FCD116" stroke="#DE2010" stroke-width="2" />
-            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(239,125,0,0.15)" stroke-width="2" />
-        </svg>
-    </div>
+    <!-- ============================================================ -->
+    <!-- HEADER / NAVIGATION                                            -->
+    <!-- ============================================================ -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-inner">
 
-    <!-- ===== BACKGROUND ORBS (Animated) ===== -->
-    <div class="bg-orbs" aria-hidden="true">
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-        <div class="orb"></div>
-    </div>
-
-    <!-- ===== NAVIGATION ===== -->
-    <header class="navbar">
-        <div class="container">
-            <a href="index.html" class="logo" aria-label="Smart Zambia home">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#198A00">S</text>
-                    <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#EF7D00">Z</text>
-                    <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FCD116" stroke="#DE2010" stroke-width="2" />
-                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(239,125,0,0.15)" stroke-width="2" />
+            <!-- ---- Logo ---- -->
+            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
+                <svg class="logo-svg" viewBox="0 0 80 80" width="52" height="52">
+                    <!-- Background circle -->
+                    <circle cx="40" cy="40" r="38" fill="none" stroke="var(--clr-copper)" stroke-width="2"/>
+                    <!-- S -->
+                    <text x="20" y="54" font-family="'Orbitron', sans-serif" font-size="40" font-weight="900" fill="var(--clr-green)" stroke="var(--clr-green)" stroke-width="0.5">S</text>
+                    <!-- Z -->
+                    <text x="42" y="54" font-family="'Orbitron', sans-serif" font-size="40" font-weight="900" fill="var(--clr-copper)" stroke="var(--clr-copper)" stroke-width="0.5">Z</text>
+                    <!-- Lightning bolt -->
+                    <polygon points="48,16 36,38 44,38 36,60 58,34 48,34" fill="#FFD700" stroke="#FFD700" stroke-width="1.5" opacity="0.9"/>
                 </svg>
-                <div class="logo-text">
-                    <span class="green">Smart</span><span class="orange">Zambia</span>
-                    <small>⚡ local · smart · innovative</small>
-                </div>
+                <span class="logo-text">Smart<span>Zambia</span></span>
             </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#why">Why Us</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#partner">Partner</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div style="display:flex; align-items:center; gap:12px;">
-                <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+
+            <!-- ---- Nav Toggle (mobile) ---- -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+
+            <!-- ---- Nav ---- -->
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
         </div>
     </header>
 
-    <!-- ============================================================
-    HERO – Local · Smart · Innovative
-    ============================================================ -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="badge-glow">
-                    <i class="fas fa-bolt"></i>
-                    <span>Built for local communities · Since 2026</span>
+    <!-- ============================================================ -->
+    <!-- HERO SECTION                                                  -->
+    <!-- ============================================================ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> Engineering Excellence
+            </div>
+
+            <h1 class="hero-title">
+                <span class="hero-title-line">Building Zambia's</span>
+                <span class="hero-title-line highlight">Smart Future</span>
+            </h1>
+
+            <p class="hero-sub">
+                Electrical · Mechanical · Civil · IT — innovative solutions for homes, businesses, and communities.
+            </p>
+
+            <div class="hero-actions">
+                <a href="services.html" class="btn btn-primary">
+                    <i class="fas fa-cogs"></i> Our Services
+                </a>
+                <a href="contact.html" class="btn btn-outline">
+                    <i class="fas fa-comment-dots"></i> Get in Touch
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="120">0</span>
+                    <span class="stat-label">Projects Done</span>
                 </div>
-                <h1>
-                    <span id="typed-text"></span>
-                    <span class="cursor">|</span>
-                </h1>
-                <p>
-                    Electrical · Mechanical · Civil · IT — we deliver <strong>cheap, fast</strong>
-                    and professional services for <strong>local homes and small businesses</strong>.
-                    From fixing a plug to wiring your entire neighbourhood.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#services" class="btn btn-primary">
-                        <i class="fas fa-bolt"></i> Our Services
-                    </a>
-                    <a href="https://wa.me/260958752821?text=Hello%20Smart%20Zambia%20–%20I%20need%20a%20quote!" class="btn btn-whatsapp" target="_blank" rel="noopener">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="#partner" class="btn btn-outline-light">
-                        <i class="fas fa-handshake"></i> Partner with us
-                    </a>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="98">0</span>
+                    <span class="stat-label">Happy Clients</span>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-icon"><i class="fas fa-home"></i></span>
-                        <div class="stat-number" data-target="120">120+</div>
-                        <div class="stat-label">Local jobs done</div>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-icon"><i class="fas fa-smile"></i></span>
-                        <div class="stat-number" data-target="98">98%</div>
-                        <div class="stat-label">Happy neighbours</div>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-icon"><i class="fas fa-clock"></i></span>
-                        <div class="stat-number" data-target="24">24/7</div>
-                        <div class="stat-label">Emergency support</div>
-                    </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="4">0</span>
+                    <span class="stat-label">Service Disciplines</span>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- ============================================================
-    WHY SMART ZAMBIA – Local · Smart · Innovation
-    ============================================================ -->
-    <section class="section-pad" id="why">
+    <!-- ============================================================ -->
+    <!-- QUICK LINKS / SERVICE PREVIEW                                 -->
+    <!-- ============================================================ -->
+    <section class="quick-services" id="quickServices">
         <div class="container">
-            <div class="section-header">
-                <span class="badge">Why us</span>
-                <h2 class="section-title">
-                    Local · Smart · <span class="highlight">Innovation</span>
-                </h2>
-                <p class="section-sub">
-                    We understand local challenges and use smart, innovative solutions to solve them – fast and affordable.
-                </p>
-            </div>
-            <div class="why-grid">
-                <div class="why-card" data-delay="1">
-                    <div class="why-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <h4>🇿🇲 Proudly Local</h4>
-                    <p>We're Zambian, working in your community. We understand local needs, materials, and budgets.</p>
-                </div>
-                <div class="why-card" data-delay="2">
-                    <div class="why-icon"><i class="fas fa-microchip"></i></div>
-                    <h4>🧠 Smart Solutions</h4>
-                    <p>We use modern tools and smart planning to deliver quality work that lasts.</p>
-                </div>
-                <div class="why-card" data-delay="3">
-                    <div class="why-icon"><i class="fas fa-rocket"></i></div>
-                    <h4>💡 Innovative Thinking</h4>
-                    <p>We don't just fix problems – we find better ways to do things, saving you time and money.</p>
-                </div>
-                <div class="why-card" data-delay="4">
-                    <div class="why-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h4>🤝 Community First</h4>
-                    <p>We treat every job like it's for our own family. Quality, honesty, and respect come standard.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ============================================================
-    SERVICES – Local Small Works
-    ============================================================ -->
-    <section class="section-pad" style="padding-top:0;" id="services">
-        <div class="container">
-            <div class="section-header">
-                <span class="badge">What we do</span>
-                <h2 class="section-title">
-                    Local <span class="highlight">services</span> you can trust
-                </h2>
-                <p class="section-sub">
-                    No project is too small. From a single socket to a full house wiring – we've got you covered.
-                </p>
+            <div class="section-label">
+                <span class="label-line"></span>
+                <span class="label-text">What We Do</span>
+                <span class="label-line"></span>
             </div>
+
+            <h2 class="section-title">Engineering Solutions for Every Need</h2>
+
             <div class="service-grid">
-                <!-- Electrical -->
-                <div class="service-card" data-delay="1">
-                    <div class="service-icon"><i class="fas fa-bolt"></i></div>
+
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-bolt"></i></div>
                     <h3>Electrical</h3>
-                    <p>House wiring, socket repairs, lighting installation, solar system setup, and backup power.</p>
-                    <span class="tag">Local &amp; small jobs</span>
+                    <p>Wiring, lighting, solar, and smart home automation systems.</p>
+                    <a href="services.html#electrical" class="card-link">Learn More →</a>
                 </div>
-                <!-- Mechanical -->
-                <div class="service-card" data-delay="2">
-                    <div class="service-icon"><i class="fas fa-fan"></i></div>
+
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
                     <h3>Mechanical</h3>
-                    <p>AC installation &amp; servicing, fan repairs, pump fixes, and general mechanical maintenance.</p>
-                    <span class="tag">Local &amp; small jobs</span>
+                    <p>HVAC, plumbing, machinery, and industrial maintenance.</p>
+                    <a href="services.html#mechanical" class="card-link">Learn More →</a>
                 </div>
-                <!-- Civil -->
-                <div class="service-card" data-delay="3">
-                    <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
                     <h3>Civil</h3>
-                    <p>Small concrete works, plumbing, drainage, borehole installation, and structural checks.</p>
-                    <span class="tag">Local &amp; small jobs</span>
+                    <p>Structural design, site development, and infrastructure.</p>
+                    <a href="services.html#civil" class="card-link">Learn More →</a>
                 </div>
-                <!-- IT -->
-                <div class="service-card" data-delay="4">
-                    <div class="service-icon"><i class="fas fa-network-wired"></i></div>
-                    <h3>IT &amp; Smart Home</h3>
-                    <p>Wi‑Fi setup, network cabling, security cameras, and smart home automation for your peace of mind.</p>
-                    <span class="tag">Local &amp; small jobs</span>
+
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>IT Services</h3>
+                    <p>Network setup, cybersecurity, software, and digital solutions.</p>
+                    <a href="services.html#it" class="card-link">Learn More →</a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CALL TO ACTION – SMART HOUSE                                  -->
+    <!-- ============================================================ -->
+    <section class="cta-smart" id="ctaSmart">
+        <div class="container cta-smart-inner">
+            <div class="cta-smart-text">
+                <span class="cta-tag"><i class="fas fa-house-signal"></i> Smart Living</span>
+                <h2>Want to Build a <span>Smart House</span>?</h2>
+                <p>Let's bring your vision to life with integrated automation, energy efficiency, and modern design.</p>
+                <a href="contact.html?subject=smart-house" class="btn btn-primary btn-lg">
+                    <i class="fas fa-arrow-right"></i> Contact Us Today
+                </a>
+            </div>
+            <div class="cta-smart-visual">
+                <div class="smart-grid">
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
+                    <span></span><span></span><span></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-    PARTNER REGISTRATION FORM
-    ============================================================ -->
-    <section class="section-pad" style="padding-top:0;" id="partner">
-        <div class="container">
-            <div class="partner-wrap">
-                <div class="section-header">
-                    <span class="badge">Partner with us</span>
-                    <h2 class="section-title">
-                        Grow with <span class="highlight">Smart Zambia</span>
-                    </h2>
-                    <p class="section-sub">
-                        Are you a local contractor, plumber, electrician, or innovator? Register below to join our network.
-                        We'll review your application and get back to you.
-                    </p>
-                </div>
-                <div class="partner-form">
-                    <form id="partnerForm" method="POST" action="https://formsubmit.co/emmanuelmumba153@gmail.com">
-                        <!-- FormSubmit will forward the email -->
-                        <input type="hidden" name="_captcha" value="false" />
-                        <input type="hidden" name="_subject" value="New Partner Registration – Smart Zambia" />
-                        <input type="hidden" name="_template" value="table" />
-                        <input type="text" name="_honey" style="display:none" />
+    <!-- ============================================================ -->
+    <!-- FOOTER                                                        -->
+    <!-- ============================================================ -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
 
-                        <div class="form-group">
-                            <label for="partnerName">Full name <span class="required">*</span></label>
-                            <input type="text" id="partnerName" name="name" placeholder="e.g. Banda Mwamba" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerBusiness">Business / Company name</label>
-                            <input type="text" id="partnerBusiness" name="business" placeholder="e.g. Banda's Electrical Services" />
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerWhat">What do you do? <span class="required">*</span></label>
-                            <textarea id="partnerWhat" name="what_do_you_do" rows="3" placeholder="Describe your work – e.g. electrical repairs, plumbing, carpentry, IT support, etc." required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerHowLong">How long have you been working in this field? <span class="required">*</span></label>
-                            <select id="partnerHowLong" name="experience" required>
-                                <option value="">Select experience...</option>
-                                <option value="Less than 1 year">Less than 1 year</option>
-                                <option value="1–3 years">1–3 years</option>
-                                <option value="3–5 years">3–5 years</option>
-                                <option value="5–10 years">5–10 years</option>
-                                <option value="More than 10 years">More than 10 years</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerPhone">Phone number <span class="required">*</span></label>
-                            <input type="tel" id="partnerPhone" name="phone" placeholder="e.g. 097 123 4567" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerEmail">Email address <span class="required">*</span></label>
-                            <input type="email" id="partnerEmail" name="email" placeholder="e.g. banda@example.com" required />
-                            <div class="validation-error" id="partnerEmailError">Please enter a valid email.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="partnerLocation">Where are you based? <span class="required">*</span></label>
-                            <input type="text" id="partnerLocation" name="location" placeholder="e.g. Lusaka, Kabwe, Ndola" required />
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <i class="fas fa-paper-plane"></i> Register now
-                        </button>
-                        <p class="form-note">
-                            <i class="fas fa-lock"></i> Your details are safe. We'll contact you within 48 hours.
-                        </p>
-                    </form>
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <svg class="logo-svg" viewBox="0 0 80 80" width="40" height="40">
+                        <circle cx="40" cy="40" r="38" fill="none" stroke="var(--clr-copper)" stroke-width="2"/>
+                        <text x="20" y="54" font-family="'Orbitron', sans-serif" font-size="40" font-weight="900" fill="var(--clr-green)">S</text>
+                        <text x="42" y="54" font-family="'Orbitron', sans-serif" font-size="40" font-weight="900" fill="var(--clr-copper)">Z</text>
+                        <polygon points="48,16 36,38 44,38 36,60 58,34 48,34" fill="#FFD700" stroke="#FFD700" stroke-width="1.5" opacity="0.9"/>
+                    </svg>
+                    <span class="logo-text">Smart<span>Zambia</span></span>
+                </a>
+                <p class="footer-tagline">Engineering solutions through innovation and implementation.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
+
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="partner.html">Partners</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html#electrical">Electrical</a></li>
+                    <li><a href="services.html#mechanical">Mechanical</a></li>
+                    <li><a href="services.html#civil">Civil</a></li>
+                    <li><a href="services.html#it">IT Services</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
+                </ul>
+            </div>
+
         </div>
-    </section>
 
-    <!-- ============================================================
-    CONTACT / FOOTER
-    ============================================================ -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <h4>📍 Smart Zambia</h4>
-                    <p>
-                        Affordable, fast, and professional engineering services for
-                        <strong>local communities, homes, and small businesses</strong>.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4>Quick links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#why">Why Us</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#partner">Partner</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Electrical</a></li>
-                        <li><a href="#services">Mechanical</a></li>
-                        <li><a href="#services">Civil</a></li>
-                        <li><a href="#services">IT &amp; Smart Home</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li>
-                            <i class="fas fa-phone" style="width:20px;"></i>
-                            <a href="tel:+260958752821">+260 958 752 821</a>
-                            <span style="font-size:0.75rem;color:rgba(255,255,255,0.3);display:block;padding-left:20px;">
-                                <i class="fas fa-phone-alt"></i> Call &nbsp;·&nbsp; <i class="fab fa-whatsapp"></i> WhatsApp
-                            </span>
-                        </li>
-                        <li><i class="fas fa-envelope"></i> info@smartzambia.co.zm</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#EF7D00;"></i> for local communities.</p>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
+                <p class="footer-secure"><i class="fas fa-shield-alt"></i> Secure &bull; Reliable &bull; Local</p>
             </div>
         </div>
     </footer>
 
-    <!-- ============================================================
-    TOAST CONTAINER (for notifications)
-    ============================================================ -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- ============================================================
-    SCRIPTS
-    ============================================================ -->
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                       -->
+    <!-- ============================================================ -->
     <script src="script.js"></script>
+
 </body>
 </html>
