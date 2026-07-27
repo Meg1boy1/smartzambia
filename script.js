@@ -1,70 +1,96 @@
-// ------------------------------------------------------------------
-// Smart Zambia – Enhanced Main Script
-// ------------------------------------------------------------------
+/* -----------------------------------------------
+   Smart Zambia – Enhanced Main Script
+   ----------------------------------------------- */
 
 (function () {
     'use strict';
 
-    /* ---------- DOM element references ---------- */
+    // DOM references
     const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+    const navMenu = document.getElementById('nav-menu');
     const navbar = document.querySelector('.navbar');
 
-    /* ---------- 1. Mobile Navigation ---------- */
-    if (hamburger && navLinks) {
-        // Toggle mobile menu
+    /* ---------- 1. Mobile Navigation (accessible) ---------- */
+    if (hamburger && navMenu) {
+        // Toggle menu
         hamburger.addEventListener('click', () => {
-            const isActive = navLinks.classList.toggle('active');
+            const isOpen = navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', isActive);
+            hamburger.setAttribute('aria-expanded', isOpen);
         });
 
         // Close menu when a link is clicked
-        navLinks.querySelectorAll('a').forEach(link => {
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+                navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
             });
         });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                navLinks.classList.remove('active');
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.focus();
             }
         });
 
-        // Close menu on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
-                hamburger.focus(); // return focus to hamburger
             }
         });
     }
 
-    /* ---------- 2. Active Navigation Highlighting ---------- */
+    /* ---------- 2. Smooth scroll for internal # links ---------- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Update URL without jump
+                history.pushState(null, null, targetId);
+            }
+        });
+    });
+
+    /* ---------- 3. Navbar shadow on scroll (throttled) ---------- */
+    function updateNavbarShadow() {
+        if (navbar) {
+            navbar.style.boxShadow = window.scrollY > 50
+                ? '0 4px 20px rgba(0,0,0,0.1)'
+                : 'none';
+        }
+    }
+    window.addEventListener('scroll', throttle(updateNavbarShadow, 100));
+
+    /* ---------- 4. Active navigation highlighting ---------- */
     function setActiveNavLink() {
         const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-        const navItems = document.querySelectorAll('.nav-links a');
+        const navLinksAll = document.querySelectorAll('.nav-links a');
 
-        navItems.forEach(link => {
+        // Remove existing active class
+        navLinksAll.forEach(link => link.classList.remove('active-link'));
+
+        // Highlight based on current page (for pages like join.html, contact.html)
+        navLinksAll.forEach(link => {
             const linkPath = link.getAttribute('href').split('/').pop();
-            // Remove existing active class
-            link.classList.remove('active-link');
-
-            // Exact match or index.html as default
             if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
                 link.classList.add('active-link');
             }
         });
 
-        // On home page, also highlight based on scroll position for sections
+        // On home page, also highlight based on scroll position
         if (currentPath === 'index.html' || currentPath === '') {
             const sections = document.querySelectorAll('section[id]');
             const scrollPos = window.scrollY + 100;
@@ -76,42 +102,15 @@
                 const correspondingLink = document.querySelector(`.nav-links a[href="#${id}"]`);
 
                 if (correspondingLink && scrollPos >= top && scrollPos < top + height) {
-                    navItems.forEach(l => l.classList.remove('active-link'));
+                    navLinksAll.forEach(l => l.classList.remove('active-link'));
                     correspondingLink.classList.add('active-link');
                 }
             });
         }
     }
-
-    // Run on load and scroll (with throttle)
     window.addEventListener('load', setActiveNavLink);
     window.addEventListener('scroll', throttle(setActiveNavLink, 100));
     window.addEventListener('hashchange', setActiveNavLink);
-
-    /* ---------- 3. Smooth Scroll (internal # links only) ---------- */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Update URL hash without jump
-                history.pushState(null, null, targetId);
-            }
-        });
-    });
-
-    /* ---------- 4. Navbar Scroll Effect (throttled) ---------- */
-    function updateNavbarShadow() {
-        if (navbar) {
-            navbar.style.boxShadow = window.scrollY > 50
-                ? '0 4px 20px rgba(0,0,0,0.1)'
-                : 'none';
-        }
-    }
-    window.addEventListener('scroll', throttle(updateNavbarShadow, 100));
 
     /* ---------- 5. Scroll‑to‑Top Button ---------- */
     const scrollToTopBtn = document.createElement('button');
@@ -120,21 +119,23 @@
     scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
     document.body.appendChild(scrollToTopBtn);
 
-    window.addEventListener('scroll', throttle(() => {
+    function toggleScrollTopButton() {
         scrollToTopBtn.style.display = window.scrollY > 500 ? 'flex' : 'none';
-    }, 200));
+    }
+    window.addEventListener('scroll', throttle(toggleScrollTopButton, 200));
+    toggleScrollTopButton(); // initial check
 
     scrollToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    /* ---------- 6. Enhanced Form Feedback ---------- */
+    /* ---------- 6. Form submission feedback ---------- */
     document.querySelectorAll('form').forEach(form => {
         form.addEventListener('submit', function (e) {
             const btn = this.querySelector('button[type="submit"]');
             if (!btn) return;
 
-            // Basic validation (HTML5 will handle most, but we add a fallback)
+            // Use HTML5 validation first
             if (!this.checkValidity()) return;
 
             const originalText = btn.textContent;
@@ -142,45 +143,38 @@
             btn.disabled = true;
             btn.style.opacity = '0.7';
 
-            // Reset after 4 seconds if page doesn't redirect (Formspree typically redirects)
             const resetTimer = setTimeout(() => {
                 btn.textContent = originalText;
                 btn.disabled = false;
                 btn.style.opacity = '1';
             }, 4000);
 
-            // Store timer so we can clear if the page unloads
+            // Clean up timer if page unloads (e.g., Formspree redirects)
             btn._resetTimer = resetTimer;
         });
     });
 
-    // Clear timeout if the form submission navigates away
     window.addEventListener('beforeunload', () => {
         document.querySelectorAll('button[type="submit"]').forEach(btn => {
             if (btn._resetTimer) clearTimeout(btn._resetTimer);
         });
     });
 
-    /* ---------- 7. Staggered Scroll Animations ---------- */
+    /* ---------- 7. Scroll animations (staggered) ---------- */
     const animatedElements = document.querySelectorAll(
-        '.about-card, .service-card, .contact-item, .hero-content, .join-form-container'
+        '.about-card, .service-card, .process-step, .cta-card'
     );
 
     if ('IntersectionObserver' in window && animatedElements.length) {
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -30px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Add a slight delay based on the element's index within its parent
+                    // Add a staggered delay based on sibling index
                     const siblings = Array.from(entry.target.parentNode.children).filter(
-                        child => child.matches('.about-card, .service-card, .contact-item, .hero-content, .join-form-container')
+                        child => child.matches('.about-card, .service-card, .process-step, .cta-card')
                     );
                     const index = siblings.indexOf(entry.target);
-                    const delay = index > -1 ? index * 100 : 0; // 100ms stagger
+                    const delay = index > -1 ? index * 100 : 0;
 
                     entry.target.style.transitionDelay = `${delay}ms`;
                     entry.target.style.opacity = '1';
@@ -188,7 +182,10 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, observerOptions);
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -30px 0px'
+        });
 
         animatedElements.forEach(el => {
             el.style.opacity = '0';
@@ -197,14 +194,14 @@
             observer.observe(el);
         });
     } else {
-        // No observer support – show all immediately
+        // Fallback: show all immediately
         animatedElements.forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
         });
     }
 
-    /* ---------- Utility: Throttle function ---------- */
+    /* ---------- Utility: throttle ---------- */
     function throttle(fn, delay) {
         let lastTime = 0;
         return function (...args) {
@@ -215,5 +212,4 @@
             }
         };
     }
-
 })();
