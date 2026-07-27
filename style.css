@@ -1491,3 +1491,50 @@ body.dark-mode .mission-vision .card h4 {
 .mb-40 {
     margin-bottom: 40px;
 }
+/* ============================================================
+   WATERMARK LOGO (background on all pages)
+   ============================================================ */
+.watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 600px;
+    height: auto;
+    z-index: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.watermark svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Ensure content sits above watermark */
+body {
+    position: relative;
+}
+body > *:not(.watermark) {
+    position: relative;
+    z-index: 1;
+}
+
+/* Navbar needs to stay above everything */
+.navbar {
+    z-index: 1000 !important;
+}
+
+/* Lightbox needs to stay above watermark */
+.lightbox {
+    z-index: 9999 !important;
+}
+
+/* Dark mode adjustment - slightly more visible in dark mode */
+body.dark-mode .watermark {
+    opacity: 0.06;
+}
