@@ -4,871 +4,1075 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Services – Smart Zambia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- SEO & Security -->
+    <meta name="description" content="Smart Zambia offers comprehensive engineering services: Electrical, Mechanical, Civil, and IT. Reliable, innovative, and affordable solutions for Zambia." />
+    <meta name="theme-color" content="#0d4a2e" />
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
     <style>
         /* ============================================================
-           SAME STYLES AS INDEX (copied for standalone testing)
+           RESET & BASE
            ============================================================ */
-        :root {
-            --green-dark: #1B5E20;
-            --green-mid: #2E7D32;
-            --green-light: #4CAF50;
-            --orange-dark: #E65100;
-            --orange-mid: #F57C00;
-            --orange-light: #FFB74D;
-            --slate: #263238;
-            --steel: #546E7A;
-            --silver: #B0BEC5;
-            --bg-light: #F5F7FA;
-            --white: #FFFFFF;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-            --radius: 12px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --card-bg: #ffffff;
-            --text-primary: #263238;
-            --text-secondary: #546E7A;
-            --border-color: #B0BEC5;
-            --input-bg: #F5F7FA;
-        }
-        body.dark-mode {
-            --bg-light: #1a1a1a;
-            --white: #2d2d2d;
-            --slate: #e0e0e0;
-            --steel: #b0b0b0;
-            --silver: #555;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-            --card-bg: #333;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --border-color: #555;
-            --input-bg: #444;
-        }
-        * {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        :root {
+            --green-dark: #0d4a2e;
+            --green-mid: #1a6e3e;
+            --green-light: #2d8f54;
+            --copper: #c87a2e;
+            --copper-light: #e8a54b;
+            --copper-glow: rgba(200, 122, 46, 0.3);
+            --white: #ffffff;
+            --off-white: #f2f5f0;
+            --grey-100: #e9ece8;
+            --grey-800: #2c3a2f;
+            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+            --radius: 12px;
+            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
         html {
             scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-            background: var(--bg-light);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--off-white);
+            color: var(--grey-800);
             line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
         a {
             text-decoration: none;
             color: inherit;
         }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        ul {
+            list-style: none;
+        }
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-        .navbar {
-            background: var(--white);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 12px 0;
-            border-bottom: 3px solid var(--orange-mid);
-            transition: background 0.3s;
+
+        /* ============================================================
+           PRELOADER
+           ============================================================ */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--green-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 24px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-        .navbar .container {
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-icon {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: var(--copper-light);
+        }
+        .loader-icon .bolt {
+            color: var(--white);
+            font-size: 2.4rem;
+        }
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .loader-bar span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--copper), var(--copper-light));
+            border-radius: 4px;
+            animation: loadProgress 1.8s ease-in-out forwards;
+        }
+        @keyframes loadProgress {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        /* ============================================================
+           HEADER
+           ============================================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 74, 46, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
+        }
+        .header.scrolled {
+            background: rgba(13, 74, 46, 0.98);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+        .header__inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
+            height: 76px;
         }
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .logo svg {
-            width: 56px;
-            height: 56px;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
-        }
-        .logo-text {
+            font-weight: 800;
             font-size: 1.5rem;
-            font-weight: 700;
+            color: var(--white);
             letter-spacing: -0.5px;
         }
-        .logo-text span.green {
-            color: var(--green-dark);
-        }
-        .logo-text span.orange {
-            color: var(--orange-dark);
-        }
-        .logo-text small {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: var(--steel);
-            text-transform: uppercase;
-        }
-        .nav-links {
+        .logo__icon {
             display: flex;
-            gap: 28px;
-            list-style: none;
-            font-weight: 600;
+            align-items: center;
+            gap: 2px;
+            background: var(--copper);
+            padding: 6px 10px 6px 8px;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        .logo__icon .bolt {
+            color: #fff4d6;
             font-size: 1rem;
-            align-items: center;
         }
-        .nav-links a {
-            padding: 6px 0;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition);
-            color: var(--text-primary);
+        .logo__text span {
+            color: var(--copper-light);
         }
-        .nav-links a:hover,
-        .nav-links a.active {
-            border-bottom-color: var(--orange-mid);
-            color: var(--green-dark);
-        }
-        body.dark-mode .nav-links a:hover,
-        body.dark-mode .nav-links a.active {
-            color: var(--orange-light);
-        }
-        .nav-links .cta-nav {
-            background: var(--orange-dark);
-            color: var(--white) !important;
-            padding: 10px 22px;
-            border-radius: 40px;
-            border-bottom: none !important;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .nav-links .cta-nav:hover {
-            background: var(--green-dark);
-            transform: scale(1.04);
-        }
-        .dark-toggle {
-            background: var(--bg-light);
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
+        .nav__list {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
+            gap: 32px;
         }
-        .dark-toggle:hover {
-            border-color: var(--orange-mid);
-            transform: rotate(20deg);
+        .nav__list a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.75);
+            transition: var(--transition);
+            position: relative;
+            letter-spacing: 0.3px;
         }
-        .hamburger {
+        .nav__list a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--copper-light);
+            transition: var(--transition);
+        }
+        .nav__list a:hover,
+        .nav__list a.active {
+            color: var(--white);
+        }
+        .nav__list a:hover::after,
+        .nav__list a.active::after {
+            width: 100%;
+        }
+        .nav__toggle {
             display: none;
             flex-direction: column;
             gap: 5px;
-            cursor: pointer;
-            background: none;
+            background: transparent;
             border: none;
+            cursor: pointer;
+            padding: 4px;
         }
-        .hamburger span {
-            display: block;
+        .nav__toggle .bar {
             width: 28px;
-            height: 3px;
-            background: var(--text-primary);
+            height: 2.5px;
+            background: var(--white);
             border-radius: 4px;
             transition: var(--transition);
+            transform-origin: center;
         }
-        .section-title {
-            font-size: 2.4rem;
+        .nav__toggle.open .bar:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav__toggle.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav__toggle.open .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ============================================================
+           COMMON SECTION STYLES
+           ============================================================ */
+        .section {
+            padding: 80px 0;
+        }
+        .section__header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 56px;
+        }
+        .section__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-        .section-title .highlight {
-            color: var(--orange-dark);
-        }
-        .section-sub {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-        }
-        .section-pad {
-            padding: 70px 0;
-        }
-        .badge {
-            background: var(--orange-light);
-            color: var(--slate);
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 2px 12px;
-            border-radius: 40px;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
+            color: var(--copper);
+            background: rgba(200, 122, 46, 0.08);
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+        }
+        .section__title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            color: var(--green-dark);
+        }
+        .section__title span {
+            color: var(--copper);
+        }
+        .section__desc {
+            font-size: 1.1rem;
+            color: var(--grey-800);
+            opacity: 0.8;
+            margin-top: 12px;
+            line-height: 1.7;
         }
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 34px;
-            border-radius: 60px;
+            padding: 14px 32px;
+            border-radius: 50px;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: none;
             cursor: pointer;
             transition: var(--transition);
-            text-align: center;
+            text-decoration: none;
+            letter-spacing: 0.3px;
         }
-        .btn-primary {
-            background: var(--orange-mid);
+        .btn--primary {
+            background: var(--copper);
             color: var(--white);
-            box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);
+            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
         }
-        .btn-primary:hover {
-            background: var(--orange-dark);
+        .btn--primary:hover {
+            background: var(--copper-light);
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(245, 124, 0, 0.45);
+            box-shadow: 0 12px 32px rgba(200, 122, 46, 0.45);
         }
-        .btn-outline {
+        .btn--outline {
             background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-        }
-        .btn-outline:hover {
-            border-color: var(--orange-mid);
-            color: var(--orange-dark);
-        }
-        .search-bar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .search-bar input {
-            flex: 1;
-            min-width: 220px;
-            padding: 14px 20px;
-            border: 2px solid var(--border-color);
-            border-radius: 60px;
-            font-size: 1rem;
-            background: var(--input-bg);
-            color: var(--text-primary);
-            transition: var(--transition);
-        }
-        .search-bar input:focus {
-            border-color: var(--orange-mid);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(245, 124, 0, 0.12);
-        }
-        .search-bar input::placeholder {
-            color: var(--text-secondary);
-        }
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 40px;
-        }
-        .filter-btn {
-            background: var(--white);
-            border: 2px solid var(--border-color);
-            padding: 10px 28px;
-            border-radius: 60px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-primary);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-        }
-        .filter-btn:hover {
-            border-color: var(--orange-mid);
-            color: var(--orange-dark);
-        }
-        .filter-btn.active {
-            background: var(--green-dark);
-            border-color: var(--green-dark);
             color: var(--white);
-            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
-        body.dark-mode .filter-btn.active {
-            background: var(--orange-mid);
-            border-color: var(--orange-mid);
+        .btn--outline:hover {
+            border-color: var(--copper-light);
+            background: rgba(200, 122, 46, 0.15);
+            transform: translateY(-3px);
         }
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .service-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 30px 24px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-left: 6px solid var(--steel);
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 80px;
-            height: 80px;
-            background: radial-gradient(circle, rgba(27, 94, 32, 0.04) 0%, transparent 70%);
-            border-radius: 0 0 0 80px;
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-        }
-        .service-card .icon {
-            font-size: 2.6rem;
-            color: var(--orange-mid);
-            margin-bottom: 12px;
-        }
-        .service-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 6px;
-            color: var(--text-primary);
-        }
-        .service-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-        .service-card .tag {
-            display: inline-block;
-            margin-top: 14px;
-            background: var(--bg-light);
-            padding: 4px 16px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--green-mid);
-        }
-        body.dark-mode .service-card .tag {
-            background: #444;
-            color: var(--orange-light);
-        }
-        .service-card.electrical {
-            border-left-color: #F57C00;
-        }
-        .service-card.mechanical {
-            border-left-color: #546E7A;
-        }
-        .service-card.civil {
-            border-left-color: #4CAF50;
-        }
-        .service-card.it {
-            border-left-color: #1A237E;
-        }
-        .service-card .features {
-            margin-top: 12px;
-            list-style: none;
-        }
-        .service-card .features li {
-            padding: 4px 0;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        .service-card .features li i {
-            color: var(--orange-mid);
-            margin-right: 8px;
-            width: 18px;
-        }
-        .service-card .btn-sm {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 8px 20px;
-            background: var(--green-dark);
-            color: var(--white);
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .service-card .btn-sm:hover {
-            background: var(--orange-dark);
-        }
-        .footer {
-            background: var(--slate);
-            color: rgba(255, 255, 255, 0.75);
-            padding: 40px 0 20px;
-            margin-top: 40px;
-            border-top: 6px solid var(--orange-mid);
-        }
-        .footer .container {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-        .footer h4 {
-            color: var(--white);
-            margin-bottom: 16px;
+        .btn--large {
+            padding: 18px 44px;
             font-size: 1.1rem;
         }
-        .footer ul {
-            list-style: none;
+
+        /* ============================================================
+           PAGE HERO (Services)
+           ============================================================ */
+        .page-hero {
+            position: relative;
+            padding: 160px 0 80px;
+            background: var(--green-dark);
+            overflow: hidden;
+            text-align: center;
         }
-        .footer ul li {
-            margin-bottom: 10px;
+        .page-hero__bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 40%/cover no-repeat;
+            opacity: 0.12;
+            mix-blend-mode: overlay;
         }
-        .footer ul a:hover {
-            color: var(--orange-light);
+        .page-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(13, 74, 46, 0.9) 0%, rgba(13, 74, 46, 0.5) 100%);
+            z-index: 1;
         }
-        .footer .social-icons {
+        .page-hero__content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .page-hero__content h1 {
+            font-size: 3.6rem;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+        .page-hero__content h1 span {
+            color: var(--copper-light);
+        }
+        .page-hero__content p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .page-hero__breadcrumb {
             display: flex;
-            gap: 16px;
-            margin-top: 12px;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
         }
-        .footer .social-icons a {
-            background: rgba(255, 255, 255, 0.06);
+        .page-hero__breadcrumb a {
+            color: var(--copper-light);
+            transition: var(--transition);
+        }
+        .page-hero__breadcrumb a:hover {
+            color: var(--white);
+        }
+
+        /* ============================================================
+           SERVICE DETAIL (alternating layout)
+           ============================================================ */
+        .service-detail {
+            background: var(--white);
+        }
+        .service-detail:nth-child(even) {
+            background: var(--off-white);
+        }
+        .service-detail__inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .service-detail:nth-child(even) .service-detail__inner {
+            direction: rtl;
+        }
+        .service-detail:nth-child(even) .service-detail__inner>* {
+            direction: ltr;
+        }
+        .service-detail__image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .service-detail__image img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .service-detail__image:hover img {
+            transform: scale(1.03);
+        }
+        .service-detail__content .service-detail__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: var(--green-dark);
+            border-radius: 16px;
+            font-size: 2rem;
+            color: var(--copper-light);
+            margin-bottom: 16px;
+        }
+        .service-detail__content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            margin-bottom: 12px;
+        }
+        .service-detail__content p {
+            font-size: 1.05rem;
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .service-detail__features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            margin: 16px 0 24px;
+        }
+        .service-detail__features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .service-detail__features li i {
+            color: var(--copper);
+            font-size: 1.1rem;
+        }
+
+        /* ============================================================
+           PROCESS / HOW WE WORK
+           ============================================================ */
+        .process {
+            background: var(--off-white);
+        }
+        .process__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+            margin-top: 16px;
+        }
+        .process-step {
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border-top: 4px solid var(--copper);
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+        .process-step:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+        .process-step__number {
+            display: inline-block;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--copper);
+            opacity: 0.2;
+            line-height: 1;
+        }
+        .process-step h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin: 8px 0 4px;
+        }
+        .process-step p {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        /* ============================================================
+           CTA SECTION
+           ============================================================ */
+        .services-cta {
+            background: var(--green-dark);
+            color: var(--white);
+            text-align: center;
+        }
+        .services-cta .section__title {
+            color: var(--white);
+        }
+        .services-cta .section__title span {
+            color: var(--copper-light);
+        }
+        .services-cta p {
+            max-width: 560px;
+            margin: 16px auto 32px;
+            opacity: 0.8;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--green-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 24px;
+        }
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer__brand .logo {
+            margin-bottom: 16px;
+        }
+        .footer__tagline {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 320px;
+            opacity: 0.75;
+        }
+        .footer__social {
+            display: flex;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .footer__social a {
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
-            font-size: 1.2rem;
-        }
-        .footer .social-icons a:hover {
-            background: var(--orange-mid);
             color: var(--white);
-            transform: translateY(-3px);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .footer .copyright {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding-top: 24px;
+        .footer__social a:hover {
+            background: var(--copper);
+            transform: translateY(-4px);
+        }
+        .footer__links h4,
+        .footer__contact h4 {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            letter-spacing: 0.3px;
+        }
+        .footer__links ul,
+        .footer__contact ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer__links a,
+        .footer__contact a {
+            transition: var(--transition);
+            font-size: 0.92rem;
+        }
+        .footer__links a:hover,
+        .footer__contact a:hover {
+            color: var(--copper-light);
+        }
+        .footer__contact li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.92rem;
+        }
+        .footer__contact i {
+            width: 20px;
+            color: var(--copper-light);
+            font-size: 0.95rem;
+        }
+        .footer__bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.06);
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.6;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
         }
-        @media (max-width: 768px) {
-            .nav-links {
+        .footer__legal {
+            display: flex;
+            gap: 16px;
+        }
+        .footer__legal a {
+            transition: var(--transition);
+        }
+        .footer__legal a:hover {
+            color: var(--copper-light);
+        }
+
+        /* ============================================================
+           BACK TO TOP
+           ============================================================ */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 900;
+            width: 48px;
+            height: 48px;
+            background: var(--copper);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        #backToTop.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #backToTop:hover {
+            background: var(--copper-light);
+            transform: translateY(-4px);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 992px) {
+            .service-detail__inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .service-detail:nth-child(even) .service-detail__inner {
+                direction: ltr;
+            }
+            .service-detail__features {
+                grid-template-columns: 1fr;
+            }
+            .process__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .nav__list {
                 display: none;
-                width: 100%;
                 flex-direction: column;
-                padding: 20px 0 10px;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                right: 0;
+                background: var(--green-dark);
+                padding: 24px;
                 gap: 16px;
-                background: var(--white);
+                border-bottom: 2px solid var(--copper);
+                box-shadow: var(--shadow);
             }
-            .nav-links.open {
+            .nav__list.open {
                 display: flex;
             }
-            .hamburger {
+            .nav__toggle {
                 display: flex;
-            }
-            .footer .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer .social-icons {
-                justify-content: center;
-            }
-            .service-grid {
-                grid-template-columns: 1fr;
             }
         }
-        @media (max-width: 480px) {
-            .filters {
-                flex-direction: column;
+        @media (max-width: 640px) {
+            .page-hero__content h1 {
+                font-size: 2.4rem;
             }
-            .filter-btn {
-                width: 100%;
-                text-align: center;
+            .process__grid {
+                grid-template-columns: 1fr;
+            }
+            .footer__grid {
+                grid-template-columns: 1fr;
+            }
+            .section__title {
+                font-size: 2rem;
+            }
+            .service-detail__image img {
+                height: 200px;
+            }
+            .service-detail__content h3 {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <header class="navbar">
-        <div class="container">
-            <div class="logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#1B5E20">S</text>
-                    <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#E65100">Z</text>
-                    <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FFC107" stroke="#F57C00" stroke-width="2" />
-                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,183,77,0.15)" stroke-width="2" />
-                </svg>
-                <div class="logo-text">
-                    <span class="green">Smart</span><span class="orange">Zambia</span>
-                    <small>⚡ engineering · innovation</small>
+    <!-- ============================================================
+    PRELOADER
+    ============================================================ -->
+    <div id="preloader" aria-hidden="true">
+        <div class="loader-icon">
+            <span>SZ</span>
+            <span class="bolt"><i class="fas fa-bolt"></i></span>
+        </div>
+        <div class="loader-bar"><span></span></div>
+    </div>
+
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
+    <header class="header" id="header" role="banner">
+        <div class="container header__inner">
+            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
+                <div class="logo__icon">
+                    <span>SZ</span>
+                    <span class="bolt"><i class="fas fa-bolt"></i></span>
                 </div>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html" class="active">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="partner.html" class="cta-nav">Partner with us</a></li>
-            </ul>
-            <div style="display:flex; align-items:center; gap:12px;">
-                <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+                <span class="logo__text">Smart<span>Zambia</span></span>
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <ul class="nav__list" id="navList">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
+                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </header>
 
-    <!-- ===== SERVICES CONTENT ===== -->
-    <section class="section-pad">
-        <div class="container">
-            <h2 class="section-title">Our <span class="highlight">Services</span></h2>
-            <p class="section-sub">
-                Explore our full range of engineering solutions. Use the filters or search to find what you need.
-            </p>
-
-            <!-- Search Bar -->
-            <div class="search-bar">
-                <input type="text" id="serviceSearch" placeholder="🔍 Search services..." />
+    <!-- ============================================================
+    PAGE HERO
+    ============================================================ -->
+    <section class="page-hero" aria-label="Services header">
+        <div class="page-hero__bg"></div>
+        <div class="page-hero__overlay"></div>
+        <div class="container page-hero__content">
+            <div class="page-hero__breadcrumb">
+                <a href="index.html">Home</a> <span>/</span> <span>Services</span>
             </div>
-
-            <!-- Filters -->
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="electrical">⚡ Electrical</button>
-                <button class="filter-btn" data-filter="mechanical">⚙️ Mechanical</button>
-                <button class="filter-btn" data-filter="civil">🏗️ Civil</button>
-                <button class="filter-btn" data-filter="it">🖥️ IT</button>
-            </div>
-
-            <!-- Services Grid -->
-            <div class="service-grid" id="serviceGrid">
-
-                <!-- ===== ELECTRICAL SERVICES ===== -->
-                <div class="service-card electrical" data-category="electrical" data-name="house wiring renovation">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
-                    <h3>House Wiring &amp; Renovation</h3>
-                    <p>Safe, code-compliant rewiring, new installations, and lighting design for homes and offices.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Full rewiring &amp; upgrades</li>
-                        <li><i class="fas fa-check-circle"></i> Lighting design &amp; installation</li>
-                        <li><i class="fas fa-check-circle"></i> Safety inspections &amp; certification</li>
-                    </ul>
-                    <span class="tag">Electrical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card electrical" data-category="electrical" data-name="solar pv backup">
-                    <div class="icon"><i class="fas fa-solar-panel"></i></div>
-                    <h3>Solar PV &amp; Backup</h3>
-                    <p>Affordable solar systems, battery storage, and hybrid inverters to beat load shedding.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Grid-tied &amp; off-grid systems</li>
-                        <li><i class="fas fa-check-circle"></i> Battery storage solutions</li>
-                        <li><i class="fas fa-check-circle"></i> Installation &amp; maintenance</li>
-                    </ul>
-                    <span class="tag">Electrical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card electrical" data-category="electrical" data-name="generator installation">
-                    <div class="icon"><i class="fas fa-industry"></i></div>
-                    <h3>Generator Installation</h3>
-                    <p>Standby and prime power generator installation, wiring, and transfer switches for homes and businesses.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Automatic transfer switches</li>
-                        <li><i class="fas fa-check-circle"></i> Soundproof enclosures</li>
-                        <li><i class="fas fa-check-circle"></i> Maintenance contracts</li>
-                    </ul>
-                    <span class="tag">Electrical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <!-- ===== MECHANICAL SERVICES ===== -->
-                <div class="service-card mechanical" data-category="mechanical" data-name="hvac ventilation">
-                    <div class="icon"><i class="fas fa-fan"></i></div>
-                    <h3>HVAC &amp; Ventilation</h3>
-                    <p>Installation and maintenance of air conditioning, refrigeration, and ventilation systems.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> AC installation &amp; repair</li>
-                        <li><i class="fas fa-check-circle"></i> Refrigeration systems</li>
-                        <li><i class="fas fa-check-circle"></i> Ventilation &amp; air quality</li>
-                    </ul>
-                    <span class="tag">Mechanical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card mechanical" data-category="mechanical" data-name="industrial machinery repair">
-                    <div class="icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Industrial Machinery</h3>
-                    <p>Repair, overhaul, and preventive maintenance for pumps, compressors, and conveyors.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Pump &amp; compressor repair</li>
-                        <li><i class="fas fa-check-circle"></i> Conveyor systems</li>
-                        <li><i class="fas fa-check-circle"></i> Predictive maintenance</li>
-                    </ul>
-                    <span class="tag">Mechanical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card mechanical" data-category="mechanical" data-name="plumbing piping">
-                    <div class="icon"><i class="fas fa-wrench"></i></div>
-                    <h3>Plumbing &amp; Piping</h3>
-                    <p>Commercial and industrial plumbing, pipefitting, and water system design.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Pipe installation &amp; repair</li>
-                        <li><i class="fas fa-check-circle"></i> Water treatment systems</li>
-                        <li><i class="fas fa-check-circle"></i> Boiler &amp; heat exchanger</li>
-                    </ul>
-                    <span class="tag">Mechanical</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <!-- ===== CIVIL SERVICES ===== -->
-                <div class="service-card civil" data-category="civil" data-name="structural foundation concrete">
-                    <div class="icon"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Structural &amp; Foundation</h3>
-                    <p>Concrete works, foundation design, retaining walls, and structural assessments.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Foundation design &amp; excavation</li>
-                        <li><i class="fas fa-check-circle"></i> Reinforced concrete</li>
-                        <li><i class="fas fa-check-circle"></i> Structural inspections</li>
-                    </ul>
-                    <span class="tag">Civil</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card civil" data-category="civil" data-name="plumbing drainage water">
-                    <div class="icon"><i class="fas fa-water"></i></div>
-                    <h3>Plumbing &amp; Drainage</h3>
-                    <p>Water supply, sewerage, stormwater drainage, and borehole installations.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Water supply systems</li>
-                        <li><i class="fas fa-check-circle"></i> Sewerage &amp; septic tanks</li>
-                        <li><i class="fas fa-check-circle"></i> Borehole drilling &amp; pumps</li>
-                    </ul>
-                    <span class="tag">Civil</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card civil" data-category="civil" data-name="road earthworks">
-                    <div class="icon"><i class="fas fa-road"></i></div>
-                    <h3>Roads &amp; Earthworks</h3>
-                    <p>Gravel roads, site preparation, earthmoving, and drainage structures.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Site clearing &amp; grading</li>
-                        <li><i class="fas fa-check-circle"></i> Gravel road construction</li>
-                        <li><i class="fas fa-check-circle"></i> Culverts &amp; drainage</li>
-                    </ul>
-                    <span class="tag">Civil</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <!-- ===== IT SERVICES ===== -->
-                <div class="service-card it" data-category="it" data-name="network cabling fibre">
-                    <div class="icon"><i class="fas fa-network-wired"></i></div>
-                    <h3>Network &amp; Cabling</h3>
-                    <p>Structured cabling, Wi‑Fi deployment, and fibre optic installations for businesses.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Structured cabling (Cat6, fibre)</li>
-                        <li><i class="fas fa-check-circle"></i> Wi‑Fi site surveys &amp; deployment</li>
-                        <li><i class="fas fa-check-circle"></i> Fibre optic splicing &amp; testing</li>
-                    </ul>
-                    <span class="tag">IT</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card it" data-category="it" data-name="smart home automation iot">
-                    <div class="icon"><i class="fas fa-microchip"></i></div>
-                    <h3>Smart Home Automation</h3>
-                    <p>IoT sensors, lighting control, security cameras, and voice‑activated systems.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Smart lighting &amp; energy management</li>
-                        <li><i class="fas fa-check-circle"></i> Security &amp; CCTV systems</li>
-                        <li><i class="fas fa-check-circle"></i> Voice control (Alexa, Google)</li>
-                    </ul>
-                    <span class="tag">IT</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card it" data-category="it" data-name="software development">
-                    <div class="icon"><i class="fas fa-code"></i></div>
-                    <h3>Software &amp; Web Solutions</h3>
-                    <p>Custom software, mobile apps, and web platforms for businesses and government.</p>
-                    <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Custom web &amp; mobile apps</li>
-                        <li><i class="fas fa-check-circle"></i> Database &amp; cloud solutions</li>
-                        <li><i class="fas fa-check-circle"></i> IoT &amp; data analytics</li>
-                    </ul>
-                    <span class="tag">IT</span>
-                    <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
-                </div>
-
-            </div>
-
-            <!-- Fallback if no services found -->
-            <div id="noResults" style="display:none; text-align:center; padding:40px 0; color:var(--text-secondary);">
-                <i class="fas fa-search" style="font-size:3rem; opacity:0.3; display:block; margin-bottom:16px;"></i>
-                <p style="font-size:1.2rem;">No services found matching your search.</p>
-                <p>Try adjusting your filters or search terms.</p>
-            </div>
-
+            <h1>Our <span>Engineering Services</span></h1>
+            <p>Comprehensive solutions across electrical, mechanical, civil, and IT — designed to meet Zambia's evolving needs.</p>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
+    <!-- ============================================================
+    SERVICE: ELECTRICAL
+    ============================================================ -->
+    <section class="service-detail section" id="electrical" aria-label="Electrical services">
         <div class="container">
-            <div>
-                <h4>📍 Smart Zambia</h4>
-                <p style="max-width:280px;">
-                    Affordable, fast, and professional engineering services for homes,
-                    businesses, and national infrastructure.
-                </p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+            <div class="service-detail__inner">
+                <div class="service-detail__image">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Electrical installation" loading="lazy" />
+                </div>
+                <div class="service-detail__content">
+                    <div class="service-detail__icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Electrical Engineering</h3>
+                    <p>
+                        From residential wiring to large‑scale solar installations, our electrical
+                        team delivers safe, efficient, and code‑compliant solutions. We specialise
+                        in power distribution, backup systems, and smart home automation.
+                    </p>
+                    <ul class="service-detail__features">
+                        <li><i class="fas fa-check-circle"></i> Solar PV system design &amp; installation</li>
+                        <li><i class="fas fa-check-circle"></i> Backup power &amp; generator integration</li>
+                        <li><i class="fas fa-check-circle"></i> Smart home lighting &amp; control</li>
+                        <li><i class="fas fa-check-circle"></i> Commercial &amp; industrial wiring</li>
+                        <li><i class="fas fa-check-circle"></i> Energy efficiency audits</li>
+                        <li><i class="fas fa-check-circle"></i> Fire alarm &amp; security systems</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--primary">
+                        <i class="fas fa-arrow-right"></i> Get a Quote
+                    </a>
                 </div>
             </div>
-            <div>
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="services.html">Electrical</a></li>
-                    <li><a href="services.html">Mechanical</a></li>
-                    <li><a href="services.html">Civil</a></li>
-                    <li><a href="services.html">IT &amp; Automation</a></li>
-                </ul>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SERVICE: MECHANICAL
+    ============================================================ -->
+    <section class="service-detail section" id="mechanical" aria-label="Mechanical services">
+        <div class="container">
+            <div class="service-detail__inner">
+                <div class="service-detail__image">
+                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mechanical engineering" loading="lazy" />
+                </div>
+                <div class="service-detail__content">
+                    <div class="service-detail__icon"><i class="fas fa-cogs"></i></div>
+                    <h3>Mechanical Engineering</h3>
+                    <p>
+                        We design, install, and maintain mechanical systems that keep your
+                        facilities comfortable, efficient, and reliable. Our expertise spans
+                        HVAC, plumbing, and industrial machinery.
+                    </p>
+                    <ul class="service-detail__features">
+                        <li><i class="fas fa-check-circle"></i> HVAC system design &amp; installation</li>
+                        <li><i class="fas fa-check-circle"></i> Plumbing &amp; water supply systems</li>
+                        <li><i class="fas fa-check-circle"></i> Industrial equipment installation</li>
+                        <li><i class="fas fa-check-circle"></i> Preventative maintenance programmes</li>
+                        <li><i class="fas fa-check-circle"></i> Piping &amp; ductwork fabrication</li>
+                        <li><i class="fas fa-check-circle"></i> Energy‑efficient mechanical upgrades</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--primary">
+                        <i class="fas fa-arrow-right"></i> Get a Quote
+                    </a>
+                </div>
             </div>
-            <div>
-                <h4>Quick links</h4>
-                <ul>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="partner.html">Partners</a></li>
-                    <li><a href="index.html#galleryGrid">Projects</a></li>
-                </ul>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SERVICE: CIVIL
+    ============================================================ -->
+    <section class="service-detail section" id="civil" aria-label="Civil engineering services">
+        <div class="container">
+            <div class="service-detail__inner">
+                <div class="service-detail__image">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Civil construction" loading="lazy" />
+                </div>
+                <div class="service-detail__content">
+                    <div class="service-detail__icon"><i class="fas fa-building"></i></div>
+                    <h3>Civil Engineering</h3>
+                    <p>
+                        From foundations to finishing, our civil engineering team provides
+                        end‑to‑end solutions for residential, commercial, and infrastructure
+                        projects. We prioritise durability, safety, and cost‑effectiveness.
+                    </p>
+                    <ul class="service-detail__features">
+                        <li><i class="fas fa-check-circle"></i> Structural design &amp; analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Site surveying &amp; preparation</li>
+                        <li><i class="fas fa-check-circle"></i> Foundation &amp; earthworks</li>
+                        <li><i class="fas fa-check-circle"></i> Road &amp; drainage infrastructure</li>
+                        <li><i class="fas fa-check-circle"></i> Commercial &amp; residential construction</li>
+                        <li><i class="fas fa-check-circle"></i> Project management &amp; supervision</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--primary">
+                        <i class="fas fa-arrow-right"></i> Get a Quote
+                    </a>
+                </div>
             </div>
-            <div>
-                <h4>Contact</h4>
-                <ul>
-                    <li><i class="fas fa-phone" style="width:20px;"></i> +260 958 752 821</li>
-                    <li><i class="fas fa-envelope"></i> info@smartzambia.co.zm</li>
-                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                    <li><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</li>
-                </ul>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    SERVICE: IT
+    ============================================================ -->
+    <section class="service-detail section" id="it" aria-label="IT services">
+        <div class="container">
+            <div class="service-detail__inner">
+                <div class="service-detail__image">
+                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IT services" loading="lazy" />
+                </div>
+                <div class="service-detail__content">
+                    <div class="service-detail__icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>IT &amp; Smart Solutions</h3>
+                    <p>
+                        We bring the future to your doorstep with integrated IT services and
+                        smart building technologies. From network infrastructure to full
+                        home automation, we make technology work for you.
+                    </p>
+                    <ul class="service-detail__features">
+                        <li><i class="fas fa-check-circle"></i> Network design &amp; security</li>
+                        <li><i class="fas fa-check-circle"></i> Smart home automation (lighting, security, climate)</li>
+                        <li><i class="fas fa-check-circle"></i> CCTV &amp; access control</li>
+                        <li><i class="fas fa-check-circle"></i> Software &amp; app integration</li>
+                        <li><i class="fas fa-check-circle"></i> IT consulting &amp; support</li>
+                        <li><i class="fas fa-check-circle"></i> IoT &amp; energy management</li>
+                    </ul>
+                    <a href="contact.html" class="btn btn--primary">
+                        <i class="fas fa-arrow-right"></i> Get a Quote
+                    </a>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#E65100;"></i> for a smarter nation.
+        </div>
+    </section>
+
+    <!-- ============================================================
+    HOW WE WORK (PROCESS)
+    ============================================================ -->
+    <section class="process section" aria-label="Our process">
+        <div class="container">
+            <div class="section__header">
+                <span class="section__tag"><i class="fas fa-route"></i> Our Process</span>
+                <h2 class="section__title">How We <span>Deliver</span></h2>
+                <p class="section__desc">A simple, transparent approach that ensures quality at every step.</p>
+            </div>
+            <div class="process__grid">
+                <div class="process-step">
+                    <div class="process-step__number">01</div>
+                    <h4>Consultation</h4>
+                    <p>We listen to your needs, assess your site, and understand your goals.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">02</div>
+                    <h4>Design &amp; Planning</h4>
+                    <p>Our engineers create detailed designs, budgets, and timelines tailored to you.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">03</div>
+                    <h4>Execution</h4>
+                    <p>We implement with precision, using quality materials and skilled labour.</p>
+                </div>
+                <div class="process-step">
+                    <div class="process-step__number">04</div>
+                    <h4>Support &amp; Maintenance</h4>
+                    <p>We stand by our work with reliable after‑sales service and warranties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CTA SECTION
+    ============================================================ -->
+    <section class="services-cta section" aria-label="Call to action">
+        <div class="container">
+            <span class="section__tag" style="background:rgba(200,122,46,0.2);color:var(--copper-light);">
+                <i class="fas fa-handshake"></i> Start Your Project
+            </span>
+            <h2 class="section__title">Ready to Bring Your <span>Vision to Life?</span></h2>
+            <p>Contact us today for a free consultation and quote. Let's build something extraordinary together.</p>
+            <a href="contact.html" class="btn btn--primary btn--large">
+                <i class="fas fa-arrow-right"></i> Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo__icon">
+                            <span>SZ</span>
+                            <span class="bolt"><i class="fas fa-bolt"></i></span>
+                        </div>
+                        <span class="logo__text">Smart<span>Zambia</span></span>
+                    </a>
+                    <p class="footer__tagline">
+                        Engineering solutions through innovation and implementation.
+                        Building a smarter Zambia, one project at a time.
+                    </p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer__links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="partner.html">Partner</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#electrical">Electrical</a></li>
+                        <li><a href="services.html#mechanical">Mechanical</a></li>
+                        <li><a href="services.html#civil">Civil</a></li>
+                        <li><a href="services.html#it">IT Services</a></li>
+                        <li><a href="contact.html">Smart House</a></li>
+                    </ul>
+                </div>
+                <div class="footer__contact">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Lusaka, Zambia</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
+                <p class="footer__legal">
+                    <a href="#">Privacy Policy</a> &bull;
+                    <a href="#">Terms of Service</a>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ============================================================
+    BACK TO TOP
+    ============================================================ -->
+    <button id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
     <script>
         (function() {
             'use strict';
 
-            // ---- Mobile menu ----
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function() {
-                    navLinks.classList.toggle('open');
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.classList.add('hidden');
+            });
+
+            // Mobile nav
+            const toggle = document.getElementById('navToggle');
+            const navList = document.getElementById('navList');
+            toggle.addEventListener('click', () => {
+                const open = toggle.classList.toggle('open');
+                navList.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', open);
+            });
+            document.querySelectorAll('.nav__list a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggle.classList.remove('open');
+                    navList.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
                 });
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('open');
-                    });
-                });
-            }
+            });
 
-            // ---- Dark mode ----
-            const darkToggle = document.getElementById('darkToggle');
-            const body = document.body;
-            if (darkToggle) {
-                const icon = darkToggle.querySelector('i');
-                if (localStorage.getItem('darkMode') === 'true') {
-                    body.classList.add('dark-mode');
-                    if (icon) icon.classList.replace('fa-moon', 'fa-sun');
-                }
-                darkToggle.addEventListener('click', function() {
-                    body.classList.toggle('dark-mode');
-                    const isDark = body.classList.contains('dark-mode');
-                    localStorage.setItem('darkMode', isDark);
-                    if (icon) {
-                        if (isDark) icon.classList.replace('fa-moon', 'fa-sun');
-                        else icon.classList.replace('fa-sun', 'fa-moon');
-                    }
-                });
-            }
+            // Header shadow
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                header.classList.toggle('scrolled', y > 60);
+                const btn = document.getElementById('backToTop');
+                btn.classList.toggle('visible', y > 500);
+            });
 
-            // ---- Filter + Search ----
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const serviceCards = document.querySelectorAll('.service-card');
-            const searchInput = document.getElementById('serviceSearch');
-            const noResults = document.getElementById('noResults');
-
-            function filterServices() {
-                const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                let visibleCount = 0;
-
-                serviceCards.forEach(card => {
-                    const category = card.dataset.category;
-                    const name = (card.dataset.name || '').toLowerCase();
-                    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-                    const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
-                    const features = card.querySelector('.features')?.textContent.toLowerCase() || '';
-
-                    const matchesFilter = (activeFilter === 'all' || category === activeFilter);
-                    const matchesSearch = name.includes(searchTerm) ||
-                        title.includes(searchTerm) ||
-                        desc.includes(searchTerm) ||
-                        features.includes(searchTerm);
-
-                    if (matchesFilter && matchesSearch) {
-                        card.style.display = 'block';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                // Show/hide "no results" message
-                if (noResults) {
-                    noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
-                }
-            }
-
-            if (filterBtns.length) {
-                filterBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        filterBtns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        filterServices();
-                    });
-                });
-            }
-            if (searchInput) {
-                searchInput.addEventListener('input', filterServices);
-            }
-
-            // ---- Active nav link ----
-            const currentPath = window.location.pathname.split('/').pop() || 'services.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (linkHref === currentPath) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
+            // Back to top
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
         })();
