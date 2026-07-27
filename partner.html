@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Partner with Us – Smart Zambia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ============================================================
+           SAME STYLES AS PREVIOUS PAGES
+           ============================================================ */
+        :root {
+            --green-dark: #1B5E20;
+            --green-mid: #2E7D32;
+            --green-light: #4CAF50;
+            --orange-dark: #E65100;
+            --orange-mid: #F57C00;
+            --orange-light: #FFB74D;
+            --slate: #263238;
+            --steel: #546E7A;
+            --silver: #B0BEC5;
+            --bg-light: #F5F7FA;
+            --white: #FFFFFF;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --card-bg: #ffffff;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            --border-color: #B0BEC5;
+            --input-bg: #F5F7FA;
+        }
+        body.dark-mode {
+            --bg-light: #1a1a1a;
+            --white: #2d2d2d;
+            --slate: #e0e0e0;
+            --steel: #b0b0b0;
+            --silver: #555;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            --card-bg: #333;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-color: #555;
+            --input-bg: #444;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+            border-bottom: 3px solid var(--orange-mid);
+            transition: background 0.3s;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo svg {
+            width: 56px;
+            height: 56px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo-text span.green {
+            color: var(--green-dark);
+        }
+        .logo-text span.orange {
+            color: var(--orange-dark);
+        }
+        .logo-text small {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--steel);
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-weight: 600;
+            font-size: 1rem;
+            align-items: center;
+        }
+        .nav-links a {
+            padding: 6px 0;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            border-bottom-color: var(--orange-mid);
+            color: var(--green-dark);
+        }
+        body.dark-mode .nav-links a:hover,
+        body.dark-mode .nav-links a.active {
+            color: var(--orange-light);
+        }
+        .nav-links .cta-nav {
+            background: var(--orange-dark);
+            color: var(--white) !important;
+            padding: 10px 22px;
+            border-radius: 40px;
+            border-bottom: none !important;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .nav-links .cta-nav:hover {
+            background: var(--green-dark);
+            transform: scale(1.04);
+        }
+        .dark-toggle {
+            background: var(--bg-light);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+        .dark-toggle:hover {
+            border-color: var(--orange-mid);
+            transform: rotate(20deg);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .section-title .highlight {
+            color: var(--orange-dark);
+        }
+        .section-sub {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+        .section-pad {
+            padding: 70px 0;
+        }
+        .badge {
+            background: var(--orange-light);
+            color: var(--slate);
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn-primary {
+            background: var(--orange-mid);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);
+        }
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(245, 124, 0, 0.45);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+        }
+        .btn-outline:hover {
+            border-color: var(--orange-mid);
+            color: var(--orange-dark);
+        }
+        .partner-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .partner-benefits .benefit {
+            background: var(--card-bg);
+            padding: 30px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border-top: 6px solid var(--orange-mid);
+            transition: var(--transition);
+        }
+        .partner-benefits .benefit:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        }
+        .partner-benefits .benefit i {
+            font-size: 2.6rem;
+            color: var(--orange-mid);
+            margin-bottom: 12px;
+        }
+        .partner-benefits .benefit h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .partner-benefits .benefit p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .partner-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .partner-form h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+            background: var(--input-bg);
+            color: var(--text-primary);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green-mid);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-group .validation-error {
+            color: #d32f2f;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+        .form-group .validation-error.visible {
+            display: block;
+        }
+        .form-group .validation-success {
+            color: #2E7D32;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+        .form-group .validation-success.visible {
+            display: block;
+        }
+        .form-group input.error {
+            border-color: #d32f2f;
+            background: #ffebee;
+        }
+        body.dark-mode .form-group input.error {
+            background: #3d1a1a;
+            border-color: #ef5350;
+        }
+        .honeypot {
+            display: none !important;
+        }
+        .captcha-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .captcha-row input {
+            flex: 0 0 120px;
+        }
+        .footer {
+            background: var(--slate);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 40px 0 20px;
+            margin-top: 40px;
+            border-top: 6px solid var(--orange-mid);
+        }
+        .footer .container {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer h4 {
+            color: var(--white);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+        .footer ul {
+            list-style: none;
+        }
+        .footer ul li {
+            margin-bottom: 10px;
+        }
+        .footer ul a:hover {
+            color: var(--orange-light);
+        }
+        .footer .social-icons {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .footer .social-icons a {
+            background: rgba(255, 255, 255, 0.06);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        .footer .social-icons a:hover {
+            background: var(--orange-mid);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        .footer .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                padding: 20px 0 10px;
+                gap: 16px;
+                background: var(--white);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .partner-benefits {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer .social-icons {
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .partner-benefits {
+                grid-template-columns: 1fr;
+            }
+            .partner-form {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#1B5E20">S</text>
+                    <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#E65100">Z</text>
+                    <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FFC107" stroke="#F57C00" stroke-width="2" />
+                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,183,77,0.15)" stroke-width="2" />
+                </svg>
+                <div class="logo-text">
+                    <span class="green">Smart</span><span class="orange">Zambia</span>
+                    <small>⚡ engineering · innovation</small>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="partner.html" class="cta-nav active">Partner with us</a></li>
+            </ul>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PARTNER CONTENT ===== -->
+    <section class="section-pad">
+        <div class="container">
+            <h2 class="section-title">🤝 Partner with <span class="highlight">Smart Zambia</span></h2>
+            <p class="section-sub">
+                Join us in building a smarter, more connected Zambia. We're looking for passionate partners who share our vision.
+            </p>
+
+            <!-- Benefits -->
+            <div class="partner-benefits">
+                <div class="benefit">
+                    <i class="fas fa-handshake"></i>
+                    <h4>Collaborative Growth</h4>
+                    <p>Work alongside a growing team on impactful projects across the country.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-tools"></i>
+                    <h4>Access to Resources</h4>
+                    <p>Get access to equipment, training, and technical support to deliver excellence.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-bullhorn"></i>
+                    <h4>Marketing Support</h4>
+                    <p>We promote your work through our channels and help you reach new clients.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-users"></i>
+                    <h4>Community Impact</h4>
+                    <p>Be part of initiatives that improve lives and create sustainable development.</p>
+                </div>
+            </div>
+
+            <!-- Partnership Form -->
+            <div class="partner-form">
+                <h3>📝 Express your interest</h3>
+                <form id="partnerForm" novalidate>
+                    <div class="form-group">
+                        <label for="partnerName">Full name</label>
+                        <input type="text" id="partnerName" placeholder="e.g. Mary Mwamba" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerEmail">Email address</label>
+                        <input type="email" id="partnerEmail" placeholder="e.g. mary@company.com" required />
+                        <div class="validation-error" id="partnerEmailError">Please enter a valid email address.</div>
+                        <div class="validation-success" id="partnerEmailSuccess">✓ Valid email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerPhone">Phone number</label>
+                        <input type="text" id="partnerPhone" placeholder="e.g. +260 97 123 4567" />
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerCompany">Company / Organisation name</label>
+                        <input type="text" id="partnerCompany" placeholder="e.g. Mwamba Construction" />
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerRole">Your role / title</label>
+                        <input type="text" id="partnerRole" placeholder="e.g. Director, Project Manager" />
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerInterest">What interests you?</label>
+                        <select id="partnerInterest">
+                            <option value="">Select an option...</option>
+                            <option value="contractor">Contractor / Subcontractor</option>
+                            <option value="supplier">Supplier of materials / equipment</option>
+                            <option value="consultant">Consultant / Designer</option>
+                            <option value="innovator">Innovator / Tech partner</option>
+                            <option value="investor">Investor / Sponsor</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="partnerMessage">Tell us more about yourself and what you can bring</label>
+                        <textarea id="partnerMessage" placeholder="Describe your experience, skills, and how you'd like to collaborate..." required></textarea>
+                    </div>
+
+                    <!-- ===== SECURITY: Honeypot ===== -->
+                    <div class="form-group honeypot">
+                        <label for="partnerWebsite">Website (leave empty)</label>
+                        <input type="text" id="partnerWebsite" name="website" placeholder="Leave empty" />
+                    </div>
+
+                    <!-- ===== SECURITY: Math CAPTCHA ===== -->
+                    <div class="form-group captcha-row">
+                        <label style="font-weight:600;" id="captchaLabel">What is 5 + 3?</label>
+                        <input type="number" id="captchaAnswer" placeholder="Your answer" style="flex:0 0 120px;" />
+                        <span style="font-size:0.85rem;color:var(--text-secondary);">(anti-bot check)</span>
+                    </div>
+
+                    <!-- ===== SECURITY: Timestamp ===== -->
+                    <input type="hidden" id="formTimestamp" value="" />
+
+                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                        <i class="fas fa-paper-plane"></i> Submit interest
+                    </button>
+                    <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);text-align:center;">
+                        <i class="fas fa-lock"></i> We'll get back to you within 48 hours.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <h4>📍 Smart Zambia</h4>
+                <p style="max-width:280px;">
+                    Affordable, fast, and professional engineering services for homes,
+                    businesses, and national infrastructure.
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="services.html">Electrical</a></li>
+                    <li><a href="services.html">Mechanical</a></li>
+                    <li><a href="services.html">Civil</a></li>
+                    <li><a href="services.html">IT &amp; Automation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Quick links</h4>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="partner.html">Partners</a></li>
+                    <li><a href="index.html#galleryGrid">Projects</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-phone" style="width:20px;"></i> +260 958 752 821</li>
+                    <li><i class="fas fa-envelope"></i> info@smartzambia.co.zm</li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</li>
+                </ul>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#E65100;"></i> for a smarter nation.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---- Mobile menu ----
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                });
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('open');
+                    });
+                });
+            }
+
+            // ---- Dark mode ----
+            const darkToggle = document.getElementById('darkToggle');
+            const body = document.body;
+            if (darkToggle) {
+                const icon = darkToggle.querySelector('i');
+                if (localStorage.getItem('darkMode') === 'true') {
+                    body.classList.add('dark-mode');
+                    if (icon) icon.classList.replace('fa-moon', 'fa-sun');
+                }
+                darkToggle.addEventListener('click', function() {
+                    body.classList.toggle('dark-mode');
+                    const isDark = body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDark);
+                    if (icon) {
+                        if (isDark) icon.classList.replace('fa-moon', 'fa-sun');
+                        else icon.classList.replace('fa-sun', 'fa-moon');
+                    }
+                });
+            }
+
+            // ---- Email validation ----
+            const emailInput = document.getElementById('partnerEmail');
+            const emailError = document.getElementById('partnerEmailError');
+            const emailSuccess = document.getElementById('partnerEmailSuccess');
+
+            if (emailInput) {
+                emailInput.addEventListener('input', function() {
+                    const value = this.value.trim();
+                    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                    if (value === '') {
+                        this.classList.remove('error');
+                        if (emailError) emailError.classList.remove('visible');
+                        if (emailSuccess) emailSuccess.classList.remove('visible');
+                        return;
+                    }
+                    if (isValid) {
+                        this.classList.remove('error');
+                        if (emailError) emailError.classList.remove('visible');
+                        if (emailSuccess) emailSuccess.classList.add('visible');
+                    } else {
+                        this.classList.add('error');
+                        if (emailError) emailError.classList.add('visible');
+                        if (emailSuccess) emailSuccess.classList.remove('visible');
+                    }
+                });
+            }
+
+            // ---- Timestamp ----
+            const timestampField = document.getElementById('formTimestamp');
+            if (timestampField) {
+                timestampField.value = Date.now();
+            }
+
+            // ---- Rate limiting ----
+            function checkRateLimit() {
+                const now = Date.now();
+                const key = 'smartZambiaPartnerSubmissions';
+                let submissions = JSON.parse(localStorage.getItem(key) || '[]');
+                submissions = submissions.filter(t => now - t < 300000);
+                if (submissions.length >= 3) {
+                    alert('⚠️ Too many submissions. Please wait a few minutes and try again.');
+                    return false;
+                }
+                submissions.push(now);
+                localStorage.setItem(key, JSON.stringify(submissions));
+                return true;
+            }
+
+            // ---- CAPTCHA rotation ----
+            const captchaLabel = document.getElementById('captchaLabel');
+            if (captchaLabel) {
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                captchaLabel.textContent = `What is ${num1} + ${num2}?`;
+                captchaLabel.dataset.num1 = num1;
+                captchaLabel.dataset.num2 = num2;
+            }
+
+            // ---- Form submission ----
+            const form = document.getElementById('partnerForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Honeypot
+                    const honeypot = document.getElementById('partnerWebsite');
+                    if (honeypot && honeypot.value.trim() !== '') {
+                        alert('⚠️ Bot detected. Your submission has been blocked.');
+                        return;
+                    }
+
+                    // CAPTCHA
+                    const captchaAnswer = document.getElementById('captchaAnswer');
+                    if (captchaAnswer) {
+                        const num1 = parseInt(captchaLabel.dataset.num1);
+                        const num2 = parseInt(captchaLabel.dataset.num2);
+                        if (parseInt(captchaAnswer.value) !== (num1 + num2)) {
+                            alert('⚠️ Incorrect CAPTCHA answer. Please try again.');
+                            captchaAnswer.classList.add('error');
+                            return;
+                        }
+                        captchaAnswer.classList.remove('error');
+                    }
+
+                    // Timestamp
+                    const timestamp = document.getElementById('formTimestamp');
+                    if (timestamp) {
+                        const elapsed = (Date.now() - parseInt(timestamp.value)) / 1000;
+                        if (elapsed < 5) {
+                            alert('⚠️ Form submitted too quickly. Please take your time.');
+                            return;
+                        }
+                    }
+
+                    // Rate limit
+                    if (!checkRateLimit()) {
+                        return;
+                    }
+
+                    // Validate email
+                    const email = emailInput.value.trim();
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                        emailInput.classList.add('error');
+                        if (emailError) emailError.classList.add('visible');
+                        if (emailSuccess) emailSuccess.classList.remove('visible');
+                        alert('⚠️ Please enter a valid email address.');
+                        return;
+                    }
+
+                    // Build message
+                    const name = document.getElementById('partnerName').value.trim();
+                    const phone = document.getElementById('partnerPhone').value.trim();
+                    const company = document.getElementById('partnerCompany').value.trim();
+                    const role = document.getElementById('partnerRole').value.trim();
+                    const interest = document.getElementById('partnerInterest').value || 'Not specified';
+                    const message = document.getElementById('partnerMessage').value.trim();
+
+                    let fullMessage = '🤝 Smart Zambia Partnership Enquiry\n';
+                    fullMessage += `📅 ${new Date().toLocaleString()}\n`;
+                    if (name) fullMessage += `👤 Name: ${name}\n`;
+                    if (email) fullMessage += `📧 Email: ${email}\n`;
+                    if (phone) fullMessage += `📞 Phone: ${phone}\n`;
+                    if (company) fullMessage += `🏢 Company: ${company}\n`;
+                    if (role) fullMessage += `💼 Role: ${role}\n`;
+                    fullMessage += `📌 Interest: ${interest}\n`;
+                    fullMessage += `\n📝 Message:\n${message || '(No message provided)'}`;
+
+                    alert('✅ Thank you! We will contact you soon.\n\n' + fullMessage);
+
+                    // WhatsApp redirect
+                    const waNumber = '260958752821';
+                    const waMsg = encodeURIComponent(fullMessage);
+                    window.open(`https://wa.me/${waNumber}?text=${waMsg}`, '_blank');
+                });
+            }
+
+            // ---- Active nav link ----
+            const currentPath = window.location.pathname.split('/').pop() || 'partner.html';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                const linkHref = link.getAttribute('href');
+                if (linkHref === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
