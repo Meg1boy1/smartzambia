@@ -4,12 +4,738 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Smart Zambia – Future of Engineering</title>
-    <meta name="description" content="Smart Zambia – Futuristic engineering solutions for homes and nation. Electrical, Mechanical, Civil, IT." />
+    <meta name="description" content="Smart Zambia – Next‑generation engineering solutions for a smarter Zambia." />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <style>
+        /* ============================================================
+           ULTIMATE FUTURISTIC – Homepage‑only enhancements
+           ============================================================ */
+
+        /* ---- Animated Background ---- */
+        .futuristic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .futuristic-bg .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+
+        .futuristic-bg .orb:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            top: -10%;
+            left: -5%;
+            background: radial-gradient(circle, #0070e0, transparent);
+            animation-delay: 0s;
+        }
+
+        .futuristic-bg .orb:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            bottom: -20%;
+            right: -10%;
+            background: radial-gradient(circle, #7b2ffc, transparent);
+            animation-delay: -8s;
+        }
+
+        .futuristic-bg .orb:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, #00d4ff, transparent);
+            animation-delay: -15s;
+        }
+
+        .futuristic-bg .orb:nth-child(4) {
+            width: 200px;
+            height: 200px;
+            top: 20%;
+            right: 15%;
+            background: radial-gradient(circle, #ff6b6b, transparent);
+            animation-delay: -5s;
+        }
+
+        .futuristic-bg .orb:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            bottom: 30%;
+            left: 10%;
+            background: radial-gradient(circle, #ffd93d, transparent);
+            animation-delay: -12s;
+        }
+
+        @keyframes orbFloat {
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(60px, -40px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 50px) scale(0.9);
+            }
+            75% {
+                transform: translate(40px, -30px) scale(1.05);
+            }
+        }
+
+        /* ---- Grid Overlay ---- */
+        .futuristic-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* ---- Hero with Futuristic Enhancements ---- */
+        .hero-premium {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+
+        .hero-premium::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.03), transparent 60%);
+            animation: rotateGlow 40s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-premium .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---- Glowing Badge ---- */
+        .hero-premium .badge-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 212, 255, 0.06);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #00d4ff;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            backdrop-filter: blur(10px);
+            margin-bottom: 24px;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+
+        .hero-premium .badge-glow i {
+            font-size: 0.9rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%,
+            100% {
+                border-color: rgba(0, 212, 255, 0.15);
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.05);
+            }
+            50% {
+                border-color: rgba(0, 212, 255, 0.3);
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+            }
+        }
+
+        @keyframes iconPulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        /* ---- Futuristic Hero Title ---- */
+        .hero-premium h1 {
+            font-size: 4.6rem;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 30%, #00d4ff 60%, #7b2ffc 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: none;
+            filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.1));
+            animation: textGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%,
+            100% {
+                filter: drop-shadow(0 0 60px rgba(0, 212, 255, 0.1));
+            }
+            50% {
+                filter: drop-shadow(0 0 80px rgba(0, 212, 255, 0.2));
+            }
+        }
+
+        .hero-premium h1 .highlight {
+            -webkit-text-fill-color: transparent;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* ---- Futuristic Hero Paragraph ---- */
+        .hero-premium p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 540px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-weight: 300;
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ---- Futuristic Buttons ---- */
+        .hero-premium .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0070e0);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .hero-premium .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00d4ff, #7b2ffc, #00d4ff);
+            background-size: 400% 400%;
+            border-radius: 8px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes borderGlow {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-premium .btn-primary:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.4);
+        }
+
+        .hero-premium .btn-outline-light {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .hero-premium .btn-outline-light:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.08);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .hero-premium .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .hero-premium .btn-whatsapp:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 0 50px rgba(37, 211, 102, 0.4);
+        }
+
+        /* ---- Futuristic Stats ---- */
+        .hero-premium .hero-stats {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px 28px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-premium .hero-stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.03), transparent);
+            animation: shimmer 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%,
+            100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+
+        .hero-premium .hero-stats .stat {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-premium .hero-stats .stat-icon {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            display: block;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.15));
+        }
+
+        .hero-premium .hero-stats .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-premium .hero-stats .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 4px;
+        }
+
+        /* ---- Futuristic Why Cards ---- */
+        .why-card.futuristic {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px 28px;
+            text-align: left;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card.futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .why-card.futuristic:hover::before {
+            opacity: 1;
+        }
+
+        .why-card.futuristic:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .why-card.futuristic i {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .why-card.futuristic h4 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .why-card.futuristic p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ---- Futuristic Service Cards ---- */
+        .service-card.futuristic {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px 28px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card.futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.02), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card.futuristic:hover::before {
+            opacity: 1;
+        }
+
+        .service-card.futuristic:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card.futuristic .icon {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .service-card.futuristic h3 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .service-card.futuristic p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .service-card.futuristic .tag {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(0, 212, 255, 0.06);
+            color: #00d4ff;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .service-card.futuristic .btn-sm {
+            margin-top: 14px;
+            background: transparent;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border-radius: 8px;
+            padding: 6px 18px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .service-card.futuristic .btn-sm:hover {
+            background: linear-gradient(135deg, #00d4ff, #0070e0);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .service-card.futuristic.electrical {
+            border-left: 3px solid #00d4ff;
+        }
+        .service-card.futuristic.mechanical {
+            border-left: 3px solid #6c757d;
+        }
+        .service-card.futuristic.civil {
+            border-left: 3px solid #28a745;
+        }
+        .service-card.futuristic.it {
+            border-left: 3px solid #7b2ffc;
+        }
+
+        /* ---- Futuristic Quote Banner ---- */
+        .quote-banner.futuristic {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 48px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-banner.futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.03), transparent);
+            animation: shimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .quote-banner.futuristic h3 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .quote-banner.futuristic p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .quote-banner.futuristic .btn {
+            background: linear-gradient(135deg, #00d4ff, #0070e0);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 36px;
+            font-weight: 600;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.15);
+            transition: all 0.4s ease;
+        }
+
+        .quote-banner.futuristic .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 0 60px rgba(0, 212, 255, 0.3);
+        }
+
+        /* ---- Futuristic Partner Section ---- */
+        .partner-section.futuristic {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 48px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-section.futuristic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(123, 47, 252, 0.03), transparent);
+            animation: shimmer 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .partner-section.futuristic h2 {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .partner-section.futuristic p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .partner-section.futuristic .btn {
+            background: transparent;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border-radius: 8px;
+            padding: 14px 36px;
+            font-weight: 600;
+            transition: all 0.4s ease;
+        }
+
+        .partner-section.futuristic .btn:hover {
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 992px) {
+            .hero-premium h1 {
+                font-size: 3.2rem;
+            }
+            .hero-premium .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-premium h1 {
+                font-size: 2.6rem;
+            }
+            .hero-premium p {
+                font-size: 1.1rem;
+            }
+            .hero-premium .hero-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                padding: 24px 20px;
+            }
+            .hero-premium .hero-stats .stat-number {
+                font-size: 2.2rem;
+            }
+            .quote-banner.futuristic,
+            .partner-section.futuristic {
+                flex-direction: column;
+                text-align: center;
+                padding: 32px 24px;
+            }
+            .futuristic-bg .orb {
+                opacity: 0.08;
+            }
+            .futuristic-bg .orb:nth-child(1) {
+                width: 200px;
+                height: 200px;
+            }
+            .futuristic-bg .orb:nth-child(2) {
+                width: 250px;
+                height: 250px;
+            }
+            .futuristic-bg .orb:nth-child(3) {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-premium h1 {
+                font-size: 2rem;
+            }
+            .hero-premium .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            .hero-premium .hero-buttons {
+                flex-direction: column;
+            }
+            .hero-premium .hero-buttons .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero-premium .badge-glow {
+                font-size: 0.65rem;
+                padding: 6px 14px;
+            }
+            .futuristic-bg .orb {
+                opacity: 0.05;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="premium">
+
+    <!-- ===== WATERMARK ===== -->
+    <div class="watermark" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#1B5E20">S</text>
+            <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#E65100">Z</text>
+            <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FFC107" stroke="#F57C00" stroke-width="2" />
+            <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,183,77,0.15)" stroke-width="2" />
+        </svg>
+    </div>
+
+    <!-- ===== FUTURISTIC BACKGROUND ===== -->
+    <div class="futuristic-bg" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+    <div class="futuristic-grid" aria-hidden="true"></div>
 
     <!-- ===== NAVIGATION ===== -->
     <header class="navbar">
@@ -44,18 +770,17 @@
         </div>
     </header>
 
-    <!-- ===== FUTURISTIC HERO ===== -->
-    <section class="hero futuristic" id="home">
+    <!-- ===== HERO (Ultimate Futuristic) ===== -->
+    <section class="hero-premium" id="home">
         <div class="container">
             <div>
-                <div class="hero-badge futuristic">
+                <div class="badge-glow">
                     <i class="fas fa-bolt"></i>
-                    <span>Next-Gen Engineering · Since 2026</span>
+                    <span>Next‑Gen Engineering · Since 2026</span>
                 </div>
                 <h1>
-                    Engineering the <br />
-                    <span class="highlight">Future</span> of
-                    <span class="highlight">Zambia</span>
+                    Engineering the<br />
+                    <span class="highlight">Future of Zambia</span>
                 </h1>
                 <p>
                     Electrical · Mechanical · Civil · IT — we deliver <strong>cheap, fast</strong>
@@ -73,22 +798,22 @@
                         <i class="fas fa-envelope"></i> Contact us
                     </a>
                 </div>
-            </div>
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-icon"><i class="fas fa-project-diagram"></i></span>
-                    <div class="stat-number" data-target="120">120+</div>
-                    <div class="stat-label">Projects completed</div>
-                </div>
-                <div class="stat">
-                    <span class="stat-icon"><i class="fas fa-star"></i></span>
-                    <div class="stat-number" data-target="98">98%</div>
-                    <div class="stat-label">Client satisfaction</div>
-                </div>
-                <div class="stat">
-                    <span class="stat-icon"><i class="fas fa-clock"></i></span>
-                    <div class="stat-number" data-target="24">24/7</div>
-                    <div class="stat-label">Technical support</div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-icon"><i class="fas fa-project-diagram"></i></span>
+                        <div class="stat-number" data-target="120">120+</div>
+                        <div class="stat-label">Projects completed</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon"><i class="fas fa-star"></i></span>
+                        <div class="stat-number" data-target="98">98%</div>
+                        <div class="stat-label">Client satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon"><i class="fas fa-clock"></i></span>
+                        <div class="stat-number" data-target="24">24/7</div>
+                        <div class="stat-label">Technical support</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,7 +826,7 @@
                 Why <span class="highlight">Smart Zambia</span>
             </h2>
             <p class="section-sub fade-in delay-1">
-                We combine cutting-edge expertise, speed, and affordability to deliver exceptional results.
+                We combine cutting‑edge expertise, speed, and affordability to deliver exceptional results.
             </p>
             <div class="why-grid">
                 <div class="why-card futuristic fade-in delay-1">
@@ -128,7 +853,7 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES SECTION ===== -->
+    <!-- ===== SERVICES (Futuristic) ===== -->
     <section class="section-pad" style="padding-top:0;" id="services">
         <div class="container">
             <h2 class="section-title fade-in">
@@ -148,11 +873,11 @@
                 <button class="filter-btn" data-filter="it">🖥️ IT</button>
             </div>
             <div class="service-grid" id="serviceGrid">
-                <!-- Electrical -->
+                <!-- 8 futuristic service cards -->
                 <div class="service-card futuristic electrical" data-category="electrical" data-name="house wiring renovation">
                     <div class="icon"><i class="fas fa-bolt"></i></div>
                     <h3>House Wiring &amp; Renovation</h3>
-                    <p>Safe, code-compliant rewiring, new installations, and lighting design.</p>
+                    <p>Safe, code‑compliant rewiring, new installations, and lighting design.</p>
                     <span class="tag">Electrical</span>
                     <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
                 </div>
@@ -163,7 +888,6 @@
                     <span class="tag">Electrical</span>
                     <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <!-- Mechanical -->
                 <div class="service-card futuristic mechanical" data-category="mechanical" data-name="hvac ventilation">
                     <div class="icon"><i class="fas fa-fan"></i></div>
                     <h3>HVAC &amp; Ventilation</h3>
@@ -178,7 +902,6 @@
                     <span class="tag">Mechanical</span>
                     <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <!-- Civil -->
                 <div class="service-card futuristic civil" data-category="civil" data-name="structural foundation concrete">
                     <div class="icon"><i class="fas fa-hard-hat"></i></div>
                     <h3>Structural &amp; Foundation</h3>
@@ -193,7 +916,6 @@
                     <span class="tag">Civil</span>
                     <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <!-- IT -->
                 <div class="service-card futuristic it" data-category="it" data-name="network cabling fibre">
                     <div class="icon"><i class="fas fa-network-wired"></i></div>
                     <h3>Network &amp; Cabling</h3>
@@ -209,7 +931,7 @@
                     <a href="contact.html" class="btn-sm">Get a quote <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div id="noResults" style="display:none; text-align:center; padding:40px 0; color:var(--text-secondary);">
+            <div id="noResults" style="display:none; text-align:center; padding:40px 0; color:rgba(255,255,255,0.3);">
                 <i class="fas fa-search" style="font-size:3rem; opacity:0.3; display:block; margin-bottom:16px;"></i>
                 <p style="font-size:1.2rem;">No services found matching your search.</p>
             </div>
@@ -231,13 +953,13 @@
         </div>
     </section>
 
-    <!-- ===== PARTNER SECTION (Futuristic) ===== -->
+    <!-- ===== PARTNER (Futuristic) ===== -->
     <section class="section-pad" style="padding-top:0;" id="partner">
         <div class="container">
             <div class="partner-section futuristic">
                 <div>
-                    <h2>🤝 Partner with <span style="color:var(--orange-light);">Smart Zambia</span></h2>
-                    <p>Are you a local contractor, supplier, or innovator? Let's join forces to build a smarter nation.</p>
+                    <h2>🤝 Partner with <span style="color: #00d4ff;">Smart Zambia</span></h2>
+                    <p style="color:rgba(255,255,255,0.5);">Are you a local contractor, supplier, or innovator? Let's join forces to build a smarter nation.</p>
                 </div>
                 <a href="partner.html" class="btn">
                     <i class="fas fa-handshake"></i> Become a partner
@@ -282,7 +1004,7 @@
                     <li>
                         <i class="fas fa-phone" style="width:20px;"></i>
                         <a href="tel:+260958752821">+260 958 752 821</a>
-                        <span style="font-size:0.75rem;color:var(--text-secondary);display:block;padding-left:20px;">
+                        <span style="font-size:0.75rem;color:rgba(255,255,255,0.3);display:block;padding-left:20px;">
                             <i class="fas fa-phone-alt"></i> Call &nbsp;·&nbsp; <i class="fab fa-whatsapp"></i> WhatsApp
                         </span>
                     </li>
@@ -291,12 +1013,12 @@
                 </ul>
             </div>
             <div class="copyright">
-                &copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#E65100;"></i> for a smarter nation.
+                &copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#00d4ff;"></i> for a smarter nation.
             </div>
         </div>
     </footer>
 
-    <!-- ===== LIGHTBOX (kept for any future use) ===== -->
+    <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
         <button class="close" id="lightboxClose" aria-label="Close lightbox">&times;</button>
         <img id="lightboxImg" src="" alt="Enlarged project" />
