@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Zambia | Integrated Engineering Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <svg class="logo-svg" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer hexagon frame -->
+                    <path d="M27.5 2L50.5 15.5V42.5L27.5 56L4.5 42.5V15.5L27.5 2Z" stroke="#1b5e20" stroke-width="2.5" fill="none"/>
+                    <!-- Inner hexagon -->
+                    <path d="M27.5 10L44.5 20V40L27.5 50L10.5 40V20L27.5 10Z" stroke="#2e7d32" stroke-width="1.5" fill="none"/>
+                    <!-- Circuit lines -->
+                    <line x1="27.5" y1="10" x2="27.5" y2="50" stroke="#4caf50" stroke-width="1" opacity="0.6"/>
+                    <line x1="10.5" y1="20" x2="44.5" y2="40" stroke="#4caf50" stroke-width="1" opacity="0.6"/>
+                    <line x1="44.5" y1="20" x2="10.5" y2="40" stroke="#4caf50" stroke-width="1" opacity="0.6"/>
+                    <!-- Lightning bolt through SZ -->
+                    <path class="lightning" d="M20 16L24 16L21 24L26 24L19 38L22 28L17 28L20 16Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
+                    <!-- SZ letters -->
+                    <text x="27.5" y="32" text-anchor="middle" font-family="Rajdhani" font-size="14" font-weight="700" fill="#1b5e20" letter-spacing="1">SZ</text>
+                    <!-- Glow nodes -->
+                    <circle cx="27.5" cy="10" r="2" fill="#4caf50">
+                        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="44.5" cy="40" r="2" fill="#4caf50">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="10.5" cy="40" r="2" fill="#4caf50">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+                <div class="logo-text">
+                    <span class="logo-main">SMART</span>
+                    <span class="logo-sub">ZAMBIA</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#join">Join Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <svg class="grid-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(76,175,80,0.08)" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100" height="100" fill="url(#grid)"/>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Engineering Integration Specialists</span>
+                </div>
+                <h1>Integrated Engineering<br>Solutions for Zambia</h1>
+                <p class="hero-subtitle">Civil · Mechanical · Electrical · IT — Delivered as One</p>
+                <p class="hero-desc">We bring together specialized engineering disciplines to deliver reliable, efficient, and smart solutions for construction and infrastructure projects across Zambia.</p>
+                <div class="hero-cta">
+                    <a href="#services" class="btn btn-primary">Our Services</a>
+                    <a href="#contact" class="btn btn-secondary">Get a Quote</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="engineering-diagram">
+                    <div class="center-hub">
+                        <svg width="40" height="40" viewBox="0 0 55 55">
+                            <path d="M27.5 2L50.5 15.5V42.5L27.5 56L4.5 42.5V15.5L27.5 2Z" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <path d="M20 16L24 16L21 24L26 24L19 38L22 28L17 28L20 16Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
+                            <text x="27.5" y="32" text-anchor="middle" font-family="Rajdhani" font-size="14" font-weight="700" fill="#1b5e20">SZ</text>
+                        </svg>
+                    </div>
+                    <div class="orbit-node node-civil">
+                        <div class="node-icon">🏗️</div>
+                        <span>Civil</span>
+                    </div>
+                    <div class="orbit-node node-mech">
+                        <div class="node-icon">⚙️</div>
+                        <span>Mechanical</span>
+                    </div>
+                    <div class="orbit-node node-elec">
+                        <div class="node-icon">⚡</div>
+                        <span>Electrical</span>
+                    </div>
+                    <div class="orbit-node node-it">
+                        <div class="node-icon">💻</div>
+                        <span>IT</span>
+                    </div>
+                    <svg class="orbit-lines" viewBox="0 0 300 300">
+                        <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(76,175,80,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
+                        <line x1="150" y1="150" x2="150" y2="50" stroke="rgba(76,175,80,0.4)" stroke-width="1"/>
+                        <line x1="150" y1="150" x2="250" y2="150" stroke="rgba(76,175,80,0.4)" stroke-width="1"/>
+                        <line x1="150" y1="150" x2="50" y2="150" stroke="rgba(76,175,80,0.4)" stroke-width="1"/>
+                        <line x1="150" y1="150" x2="150" y2="250" stroke="rgba(76,175,80,0.4)" stroke-width="1"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">ABOUT US</span>
+                <h2>Engineering Integration,<br>Done Right</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-number">01</div>
+                    <h3>Our Mission</h3>
+                    <p>To simplify complex engineering projects by integrating civil, mechanical, electrical, and IT solutions under one reliable partner. We make multi-disciplinary projects seamless.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-number">02</div>
+                    <h3>Our Approach</h3>
+                    <p>We don't just build — we integrate. Every project is managed with cross-disciplinary coordination, ensuring all systems work together from day one.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-number">03</div>
+                    <h3>Our Focus</h3>
+                    <p>Reliable delivery of engineering solutions for contracts and projects. We handle the complexity so our clients can focus on their business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">WHAT WE DO</span>
+                <h2>Integrated Services</h2>
+                <p>Four disciplines. One coordinated delivery.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="5" y="15" width="30" height="20" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <path d="M10 15V10H30V15" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <line x1="20" y1="5" x2="20" y2="10" stroke="#4caf50" stroke-width="2"/>
+                            <line x1="15" y1="7" x2="25" y2="7" stroke="#4caf50" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Civil Engineering</h3>
+                    <ul>
+                        <li>Structural design & analysis</li>
+                        <li>Site development & grading</li>
+                        <li>Foundation works</li>
+                        <li>Concrete & masonry structures</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="12" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="6" stroke="#4caf50" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="20" r="2" fill="#1b5e20"/>
+                            <line x1="20" y1="2" x2="20" y2="8" stroke="#1b5e20" stroke-width="2"/>
+                            <line x1="20" y1="32" x2="20" y2="38" stroke="#1b5e20" stroke-width="2"/>
+                            <line x1="2" y1="20" x2="8" y2="20" stroke="#1b5e20" stroke-width="2"/>
+                            <line x1="32" y1="20" x2="38" y2="20" stroke="#1b5e20" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Mechanical Systems</h3>
+                    <ul>
+                        <li>HVAC design & installation</li>
+                        <li>Plumbing & drainage</li>
+                        <li>Fire suppression systems</li>
+                        <li>Industrial piping</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <path d="M8 30V15L20 8L32 15V30" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <circle cx="20" cy="22" r="5" stroke="#4caf50" stroke-width="2" fill="none"/>
+                            <line x1="20" y1="2" x2="20" y2="8" stroke="#4caf50" stroke-width="2"/>
+                            <circle cx="20" cy="2" r="2" fill="#4caf50"/>
+                        </svg>
+                    </div>
+                    <h3>Electrical Engineering</h3>
+                    <ul>
+                        <li>Power distribution</li>
+                        <li>Lighting systems</li>
+                        <li>Low voltage systems</li>
+                        <li>Generator & backup power</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                            <rect x="5" y="8" width="30" height="20" rx="2" stroke="#1b5e20" stroke-width="2" fill="none"/>
+                            <line x1="12" y1="32" x2="28" y2="32" stroke="#1b5e20" stroke-width="2"/>
+                            <line x1="15" y1="28" x2="15" y2="32" stroke="#1b5e20" stroke-width="2"/>
+                            <line x1="25" y1="28" x2="25" y2="32" stroke="#1b5e20" stroke-width="2"/>
+                            <rect x="12" y="13" width="6" height="4" fill="#4caf50" opacity="0.7"/>
+                            <rect x="22" y="13" width="6" height="4" fill="#4caf50" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <h3>IT & Smart Systems</h3>
+                    <ul>
+                        <li>Network infrastructure</li>
+                        <li>CCTV & security systems</li>
+                        <li>Building automation (BMS)</li>
+                        <li>Data center setup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section id="join" class="join">
+        <div class="container">
+            <div class="join-content">
+                <div class="join-text">
+                    <span class="section-tag">PARTNERSHIP</span>
+                    <h2>Are You a Startup Company?<br>Join Us.</h2>
+                    <p>Smart Zambia is building a network of specialized engineering firms. If you run a company in civil, mechanical, electrical, or IT services, partner with us to access larger contracts and integrated project opportunities.</p>
+                    <div class="join-benefits">
+                        <div class="benefit">
+                            <span class="benefit-check">✓</span>
+                            <span>Access to multi-disciplinary contracts</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-check">✓</span>
+                            <span>Shared project management & resources</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-check">✓</span>
+                            <span>Collaborative bidding on large projects</span>
+                        </div>
+                        <div class="benefit">
+                            <span class="benefit-check">✓</span>
+                            <span>Technical support & knowledge sharing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="join-form-container">
+                    <h3>Express Interest</h3>
+                    <form class="join-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" name="company" placeholder="Your company name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" name="name" placeholder="Full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="email@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" name="phone" placeholder="+260 ...">
+                        </div>
+                        <div class="form-group">
+                            <label>Specialization</label>
+                            <select name="specialization" required>
+                                <option value="">Select your field</option>
+                                <option value="civil">Civil / Construction</option>
+                                <option value="mechanical">Mechanical</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="it">IT / Technology</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message (Optional)</label>
+                            <textarea name="message" rows="3" placeholder="Tell us about your company..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Submit Interest</button>
+                        <p class="form-note">We'll get back to you within 48 hours.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">GET IN TOUCH</span>
+                <h2>Start Your Project</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@smartzambia.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+260 XXX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Lusaka, Zambia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Mon - Fri: 08:00 - 17:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <h3>Send a Message</h3>
+                    <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" placeholder="Your email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" name="subject" placeholder="Project inquiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea name="message" rows="5" placeholder="Describe your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <svg width="40" height="40" viewBox="0 0 55 55" fill="none">
+                            <path d="M27.5 2L50.5 15.5V42.5L27.5 56L4.5 42.5V15.5L27.5 2Z" stroke="#fff" stroke-width="2" fill="none" opacity="0.8"/>
+                            <path d="M20 16L24 16L21 24L26 24L19 38L22 28L17 28L20 16Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
+                            <text x="27.5" y="32" text-anchor="middle" font-family="Rajdhani" font-size="14" font-weight="700" fill="#fff">SZ</text>
+                        </svg>
+                        <div class="logo-text">
+                            <span class="logo-main">SMART</span>
+                            <span class="logo-sub">ZAMBIA</span>
+                        </div>
+                    </div>
+                    <p>Integrated engineering solutions for Zambia's built environment.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#join">Join Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Civil Engineering</a></li>
+                        <li><a href="#services">Mechanical</a></li>
+                        <li><a href="#services">Electrical</a></li>
+                        <li><a href="#services">IT Systems</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Smart Zambia. All rights reserved.</p>
+                <p class="footer-tag">Engineering Integration Specialists</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
