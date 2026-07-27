@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Services – Smart Zambia</title>
+    <title>Partner with Smart Zambia</title>
 
     <!-- SEO & Security -->
-    <meta name="description" content="Smart Zambia offers comprehensive engineering services: Electrical, Mechanical, Civil, and IT. Reliable, innovative, and affordable solutions for Zambia." />
+    <meta name="description" content="Partner with Smart Zambia. Register your company to collaborate on engineering projects across Zambia. Electrical, mechanical, civil, and IT partnerships welcome." />
     <meta name="theme-color" content="#0d4a2e" />
 
     <!-- Fonts & Icons -->
@@ -318,7 +318,7 @@
         }
 
         /* ============================================================
-           PAGE HERO (Services)
+           PAGE HERO (Partner)
            ============================================================ */
         .page-hero {
             position: relative;
@@ -330,7 +330,7 @@
         .page-hero__bg {
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 40%/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 30%/cover no-repeat;
             opacity: 0.12;
             mix-blend-mode: overlay;
         }
@@ -381,147 +381,177 @@
         }
 
         /* ============================================================
-           SERVICE DETAIL (alternating layout)
+           PARTNER BENEFITS
            ============================================================ */
-        .service-detail {
+        .partner-benefits {
             background: var(--white);
         }
-        .service-detail:nth-child(even) {
+        .partner-benefits__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .benefit-card {
+            text-align: center;
+            padding: 32px 20px;
+            background: var(--off-white);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border-bottom: 4px solid transparent;
+        }
+        .benefit-card:hover {
+            transform: translateY(-6px);
+            border-bottom-color: var(--copper);
+            box-shadow: var(--shadow);
+        }
+        .benefit-card__icon {
+            font-size: 2.6rem;
+            color: var(--copper);
+            margin-bottom: 12px;
+        }
+        .benefit-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--green-dark);
+            margin-bottom: 6px;
+        }
+        .benefit-card p {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           PARTNER FORM
+           ============================================================ */
+        .partner-form-section {
             background: var(--off-white);
         }
-        .service-detail__inner {
+        .partner-form__wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: center;
+            align-items: start;
         }
-        .service-detail:nth-child(even) .service-detail__inner {
-            direction: rtl;
-        }
-        .service-detail:nth-child(even) .service-detail__inner>* {
-            direction: ltr;
-        }
-        .service-detail__image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .service-detail__image img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        .service-detail__image:hover img {
-            transform: scale(1.03);
-        }
-        .service-detail__content .service-detail__icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: var(--green-dark);
-            border-radius: 16px;
-            font-size: 2rem;
-            color: var(--copper-light);
-            margin-bottom: 16px;
-        }
-        .service-detail__content h3 {
+        .partner-form__info h2 {
             font-size: 2rem;
             font-weight: 800;
             color: var(--green-dark);
             margin-bottom: 12px;
         }
-        .service-detail__content p {
+        .partner-form__info h2 span {
+            color: var(--copper);
+        }
+        .partner-form__info p {
             font-size: 1.05rem;
             opacity: 0.8;
-            line-height: 1.8;
-            margin-bottom: 16px;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
-        .service-detail__features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 20px;
-            margin: 16px 0 24px;
+        .partner-form__info ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        .service-detail__features li {
+        .partner-form__info ul li {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
             font-weight: 500;
-            font-size: 0.95rem;
         }
-        .service-detail__features li i {
+        .partner-form__info ul li i {
             color: var(--copper);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
         }
 
-        /* ============================================================
-           PROCESS / HOW WE WORK
-           ============================================================ */
-        .process {
-            background: var(--off-white);
-        }
-        .process__grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-            margin-top: 16px;
-        }
-        .process-step {
-            text-align: center;
-            padding: 28px 16px;
+        .partner-form__form {
             background: var(--white);
+            padding: 40px 32px;
             border-radius: var(--radius);
-            border-top: 4px solid var(--copper);
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-        }
-        .process-step:hover {
-            transform: translateY(-6px);
             box-shadow: var(--shadow);
         }
-        .process-step__number {
-            display: inline-block;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--copper);
-            opacity: 0.2;
-            line-height: 1;
+        .partner-form__form .form-group {
+            margin-bottom: 20px;
         }
-        .process-step h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
+        .partner-form__form label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
             color: var(--green-dark);
-            margin: 8px 0 4px;
+            margin-bottom: 4px;
         }
-        .process-step p {
-            font-size: 0.95rem;
-            opacity: 0.7;
-            line-height: 1.5;
+        .partner-form__form label .required {
+            color: #c0392b;
+            margin-left: 2px;
+        }
+        .partner-form__form input,
+        .partner-form__form select,
+        .partner-form__form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--grey-100);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--off-white);
+            color: var(--grey-800);
+        }
+        .partner-form__form input:focus,
+        .partner-form__form select:focus,
+        .partner-form__form textarea:focus {
+            outline: none;
+            border-color: var(--copper);
+            box-shadow: 0 0 0 4px var(--copper-glow);
+            background: var(--white);
+        }
+        .partner-form__form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .partner-form__form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .partner-form__form .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .partner-form__form .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .partner-form__form .checkbox-group input[type="checkbox"] {
+            width: auto;
+            accent-color: var(--copper);
+            width: 18px;
+            height: 18px;
+        }
+        .partner-form__form .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+            font-size: 1rem;
         }
 
-        /* ============================================================
-           CTA SECTION
-           ============================================================ */
-        .services-cta {
-            background: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-        }
-        .services-cta .section__title {
-            color: var(--white);
-        }
-        .services-cta .section__title span {
-            color: var(--copper-light);
-        }
-        .services-cta p {
-            max-width: 560px;
-            margin: 16px auto 32px;
-            opacity: 0.8;
-            font-size: 1.1rem;
-            line-height: 1.7;
+        /* Honeypot field (hidden) */
+        .hp-field {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            opacity: 0;
+            pointer-events: none;
+            height: 0;
+            width: 0;
         }
 
         /* ============================================================
@@ -659,17 +689,11 @@
            RESPONSIVE
            ============================================================ */
         @media (max-width: 992px) {
-            .service-detail__inner {
+            .partner-form__wrapper {
                 grid-template-columns: 1fr;
-                gap: 32px;
+                gap: 40px;
             }
-            .service-detail:nth-child(even) .service-detail__inner {
-                direction: ltr;
-            }
-            .service-detail__features {
-                grid-template-columns: 1fr;
-            }
-            .process__grid {
+            .partner-benefits__grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .footer__grid {
@@ -699,7 +723,7 @@
             .page-hero__content h1 {
                 font-size: 2.4rem;
             }
-            .process__grid {
+            .partner-benefits__grid {
                 grid-template-columns: 1fr;
             }
             .footer__grid {
@@ -708,11 +732,11 @@
             .section__title {
                 font-size: 2rem;
             }
-            .service-detail__image img {
-                height: 200px;
+            .partner-form__form .form-row {
+                grid-template-columns: 1fr;
             }
-            .service-detail__content h3 {
-                font-size: 1.6rem;
+            .partner-form__form {
+                padding: 24px 16px;
             }
         }
     </style>
@@ -748,8 +772,8 @@
                 <ul class="nav__list" id="navList">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="services.html" class="active">Services</a></li>
-                    <li><a href="partner.html">Partner</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="partner.html" class="active">Partner</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -765,198 +789,146 @@
     <!-- ============================================================
     PAGE HERO
     ============================================================ -->
-    <section class="page-hero" aria-label="Services header">
+    <section class="page-hero" aria-label="Partner page header">
         <div class="page-hero__bg"></div>
         <div class="page-hero__overlay"></div>
         <div class="container page-hero__content">
             <div class="page-hero__breadcrumb">
-                <a href="index.html">Home</a> <span>/</span> <span>Services</span>
+                <a href="index.html">Home</a> <span>/</span> <span>Partner</span>
             </div>
-            <h1>Our <span>Engineering Services</span></h1>
-            <p>Comprehensive solutions across electrical, mechanical, civil, and IT — designed to meet Zambia's evolving needs.</p>
+            <h1>Partner <span>with Us</span></h1>
+            <p>Join forces with Smart Zambia to deliver world‑class engineering solutions across Zambia. Let's grow together.</p>
         </div>
     </section>
 
     <!-- ============================================================
-    SERVICE: ELECTRICAL
+    PARTNER BENEFITS
     ============================================================ -->
-    <section class="service-detail section" id="electrical" aria-label="Electrical services">
-        <div class="container">
-            <div class="service-detail__inner">
-                <div class="service-detail__image">
-                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Electrical installation" loading="lazy" />
-                </div>
-                <div class="service-detail__content">
-                    <div class="service-detail__icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Electrical Engineering</h3>
-                    <p>
-                        From residential wiring to large‑scale solar installations, our electrical
-                        team delivers safe, efficient, and code‑compliant solutions. We specialise
-                        in power distribution, backup systems, and smart home automation.
-                    </p>
-                    <ul class="service-detail__features">
-                        <li><i class="fas fa-check-circle"></i> Solar PV system design &amp; installation</li>
-                        <li><i class="fas fa-check-circle"></i> Backup power &amp; generator integration</li>
-                        <li><i class="fas fa-check-circle"></i> Smart home lighting &amp; control</li>
-                        <li><i class="fas fa-check-circle"></i> Commercial &amp; industrial wiring</li>
-                        <li><i class="fas fa-check-circle"></i> Energy efficiency audits</li>
-                        <li><i class="fas fa-check-circle"></i> Fire alarm &amp; security systems</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn--primary">
-                        <i class="fas fa-arrow-right"></i> Get a Quote
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    SERVICE: MECHANICAL
-    ============================================================ -->
-    <section class="service-detail section" id="mechanical" aria-label="Mechanical services">
-        <div class="container">
-            <div class="service-detail__inner">
-                <div class="service-detail__image">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mechanical engineering" loading="lazy" />
-                </div>
-                <div class="service-detail__content">
-                    <div class="service-detail__icon"><i class="fas fa-cogs"></i></div>
-                    <h3>Mechanical Engineering</h3>
-                    <p>
-                        We design, install, and maintain mechanical systems that keep your
-                        facilities comfortable, efficient, and reliable. Our expertise spans
-                        HVAC, plumbing, and industrial machinery.
-                    </p>
-                    <ul class="service-detail__features">
-                        <li><i class="fas fa-check-circle"></i> HVAC system design &amp; installation</li>
-                        <li><i class="fas fa-check-circle"></i> Plumbing &amp; water supply systems</li>
-                        <li><i class="fas fa-check-circle"></i> Industrial equipment installation</li>
-                        <li><i class="fas fa-check-circle"></i> Preventative maintenance programmes</li>
-                        <li><i class="fas fa-check-circle"></i> Piping &amp; ductwork fabrication</li>
-                        <li><i class="fas fa-check-circle"></i> Energy‑efficient mechanical upgrades</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn--primary">
-                        <i class="fas fa-arrow-right"></i> Get a Quote
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    SERVICE: CIVIL
-    ============================================================ -->
-    <section class="service-detail section" id="civil" aria-label="Civil engineering services">
-        <div class="container">
-            <div class="service-detail__inner">
-                <div class="service-detail__image">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Civil construction" loading="lazy" />
-                </div>
-                <div class="service-detail__content">
-                    <div class="service-detail__icon"><i class="fas fa-building"></i></div>
-                    <h3>Civil Engineering</h3>
-                    <p>
-                        From foundations to finishing, our civil engineering team provides
-                        end‑to‑end solutions for residential, commercial, and infrastructure
-                        projects. We prioritise durability, safety, and cost‑effectiveness.
-                    </p>
-                    <ul class="service-detail__features">
-                        <li><i class="fas fa-check-circle"></i> Structural design &amp; analysis</li>
-                        <li><i class="fas fa-check-circle"></i> Site surveying &amp; preparation</li>
-                        <li><i class="fas fa-check-circle"></i> Foundation &amp; earthworks</li>
-                        <li><i class="fas fa-check-circle"></i> Road &amp; drainage infrastructure</li>
-                        <li><i class="fas fa-check-circle"></i> Commercial &amp; residential construction</li>
-                        <li><i class="fas fa-check-circle"></i> Project management &amp; supervision</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn--primary">
-                        <i class="fas fa-arrow-right"></i> Get a Quote
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    SERVICE: IT
-    ============================================================ -->
-    <section class="service-detail section" id="it" aria-label="IT services">
-        <div class="container">
-            <div class="service-detail__inner">
-                <div class="service-detail__image">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IT services" loading="lazy" />
-                </div>
-                <div class="service-detail__content">
-                    <div class="service-detail__icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3>IT &amp; Smart Solutions</h3>
-                    <p>
-                        We bring the future to your doorstep with integrated IT services and
-                        smart building technologies. From network infrastructure to full
-                        home automation, we make technology work for you.
-                    </p>
-                    <ul class="service-detail__features">
-                        <li><i class="fas fa-check-circle"></i> Network design &amp; security</li>
-                        <li><i class="fas fa-check-circle"></i> Smart home automation (lighting, security, climate)</li>
-                        <li><i class="fas fa-check-circle"></i> CCTV &amp; access control</li>
-                        <li><i class="fas fa-check-circle"></i> Software &amp; app integration</li>
-                        <li><i class="fas fa-check-circle"></i> IT consulting &amp; support</li>
-                        <li><i class="fas fa-check-circle"></i> IoT &amp; energy management</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn--primary">
-                        <i class="fas fa-arrow-right"></i> Get a Quote
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    HOW WE WORK (PROCESS)
-    ============================================================ -->
-    <section class="process section" aria-label="Our process">
+    <section class="partner-benefits section" aria-label="Partner benefits">
         <div class="container">
             <div class="section__header">
-                <span class="section__tag"><i class="fas fa-route"></i> Our Process</span>
-                <h2 class="section__title">How We <span>Deliver</span></h2>
-                <p class="section__desc">A simple, transparent approach that ensures quality at every step.</p>
+                <span class="section__tag"><i class="fas fa-handshake"></i> Why Partner</span>
+                <h2 class="section__title">Benefits of <span>Collaboration</span></h2>
+                <p class="section__desc">We believe in building strong, mutually beneficial relationships with our partners.</p>
             </div>
-            <div class="process__grid">
-                <div class="process-step">
-                    <div class="process-step__number">01</div>
-                    <h4>Consultation</h4>
-                    <p>We listen to your needs, assess your site, and understand your goals.</p>
+            <div class="partner-benefits__grid">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-expand"></i></div>
+                    <h4>Wider Reach</h4>
+                    <p>Tap into Smart Zambia's growing network across all 10 provinces of Zambia.</p>
                 </div>
-                <div class="process-step">
-                    <div class="process-step__number">02</div>
-                    <h4>Design &amp; Planning</h4>
-                    <p>Our engineers create detailed designs, budgets, and timelines tailored to you.</p>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Shared Expertise</h4>
+                    <p>Exchange knowledge and best practices with our team of experienced engineers.</p>
                 </div>
-                <div class="process-step">
-                    <div class="process-step__number">03</div>
-                    <h4>Execution</h4>
-                    <p>We implement with precision, using quality materials and skilled labour.</p>
-                </div>
-                <div class="process-step">
-                    <div class="process-step__number">04</div>
-                    <h4>Support &amp; Maintenance</h4>
-                    <p>We stand by our work with reliable after‑sales service and warranties.</p>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Growth Opportunities</h4>
+                    <p>Access larger projects, joint ventures, and long‑term contracts with reputable clients.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-    CTA SECTION
+    PARTNER REGISTRATION FORM
     ============================================================ -->
-    <section class="services-cta section" aria-label="Call to action">
+    <section class="partner-form-section section" aria-label="Partner registration form">
         <div class="container">
-            <span class="section__tag" style="background:rgba(200,122,46,0.2);color:var(--copper-light);">
-                <i class="fas fa-handshake"></i> Start Your Project
-            </span>
-            <h2 class="section__title">Ready to Bring Your <span>Vision to Life?</span></h2>
-            <p>Contact us today for a free consultation and quote. Let's build something extraordinary together.</p>
-            <a href="contact.html" class="btn btn--primary btn--large">
-                <i class="fas fa-arrow-right"></i> Get in Touch
-            </a>
+            <div class="partner-form__wrapper">
+                <div class="partner-form__info">
+                    <span class="section__tag" style="margin-bottom:12px;"><i class="fas fa-file-signature"></i> Registration</span>
+                    <h2>Tell Us About <span>Your Company</span></h2>
+                    <p>
+                        Fill in the form below to register your interest in partnering with
+                        Smart Zambia. We'll review your details and get back to you within
+                        48 hours.
+                    </p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> All fields marked with <span style="color:#c0392b;">*</span> are required</li>
+                        <li><i class="fas fa-check-circle"></i> We respect your data and will never share it with third parties</li>
+                        <li><i class="fas fa-check-circle"></i> You'll receive a confirmation email after submission</li>
+                    </ul>
+                    <div style="margin-top:24px;padding:16px 20px;background:var(--off-white);border-radius:8px;border-left:4px solid var(--copper);">
+                        <p style="font-weight:600;font-size:0.9rem;">
+                            <i class="fas fa-phone" style="color:var(--copper);margin-right:8px;"></i>
+                            Questions? Call us on <a href="tel:+260958752821" style="color:var(--copper);font-weight:700;">+260 958 752 821</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="partner-form__form">
+                    <form id="partnerForm" action="#" method="POST" novalidate>
+                        <!-- Honeypot field (anti‑bot) -->
+                        <input type="text" class="hp-field" name="hp_website" tabindex="-1" autocomplete="off" />
+
+                        <div class="form-group">
+                            <label for="companyName">Company Name <span class="required">*</span></label>
+                            <input type="text" id="companyName" name="companyName" required placeholder="e.g. Zambian Engineering Ltd" />
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactPerson">Contact Person <span class="required">*</span></label>
+                                <input type="text" id="contactPerson" name="contactPerson" required placeholder="Full name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="position">Position / Title <span class="required">*</span></label>
+                                <input type="text" id="position" name="position" required placeholder="e.g. Managing Director" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="company@example.com" />
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="+260 9XX XXX XXX" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="years">Years in Business <span class="required">*</span></label>
+                            <select id="years" name="years" required>
+                                <option value="">Select years</option>
+                                <option value="0-1">Less than 1 year</option>
+                                <option value="1-3">1 – 3 years</option>
+                                <option value="3-5">3 – 5 years</option>
+                                <option value="5-10">5 – 10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Areas of Expertise <span class="required">*</span> (select all that apply)</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="expertise" value="electrical" /> Electrical</label>
+                                <label><input type="checkbox" name="expertise" value="mechanical" /> Mechanical</label>
+                                <label><input type="checkbox" name="expertise" value="civil" /> Civil</label>
+                                <label><input type="checkbox" name="expertise" value="it" /> IT / Smart Solutions</label>
+                                <label><input type="checkbox" name="expertise" value="other" /> Other</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Company Description <span class="required">*</span></label>
+                            <textarea id="description" name="description" required placeholder="Tell us about your company, your team, key projects, and what you can bring to a partnership..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referral">How did you hear about us?</label>
+                            <input type="text" id="referral" name="referral" placeholder="e.g. Google, LinkedIn, Word of mouth" />
+                        </div>
+
+                        <button type="submit" class="btn btn--primary">
+                            <i class="fas fa-paper-plane"></i> Submit Registration
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1073,6 +1045,71 @@
             // Back to top
             document.getElementById('backToTop').addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Form validation & honeypot
+            const form = document.getElementById('partnerForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Honeypot check
+                const hp = this.querySelector('input[name="hp_website"]');
+                if (hp && hp.value.trim() !== '') {
+                    alert('Bot detected. Submission blocked.');
+                    return;
+                }
+
+                // Basic validation (HTML5 does most, but we double‑check)
+                const requiredFields = this.querySelectorAll('[required]');
+                let valid = true;
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#c0392b';
+                        valid = false;
+                    } else {
+                        field.style.borderColor = '';
+                    }
+                });
+
+                if (!valid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                // Check at least one expertise box is checked
+                const checkboxes = this.querySelectorAll('input[name="expertise"]:checked');
+                if (checkboxes.length === 0) {
+                    alert('Please select at least one area of expertise.');
+                    return;
+                }
+
+                // Simulate submission
+                const btn = this.querySelector('.btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+                btn.disabled = true;
+
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Submitted Successfully!';
+                    btn.style.background = '#2d8f54';
+                    btn.style.boxShadow = '0 8px 24px rgba(45,143,84,0.35)';
+
+                    // Reset after 4 seconds
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                        btn.style.boxShadow = '';
+                        btn.disabled = false;
+                        form.reset();
+                    }, 4000);
+                }, 1800);
+            });
+
+            // Remove error border on input
+            document.querySelectorAll('#partnerForm input, #partnerForm select, #partnerForm textarea').forEach(el => {
+                el.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                });
             });
 
         })();
