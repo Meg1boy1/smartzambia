@@ -11,7 +11,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
                 <svg class="logo-svg" width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <!-- Outer hexagon frame -->
                     <path d="M27.5 2L50.5 15.5V42.5L27.5 56L4.5 42.5V15.5L27.5 2Z" stroke="#1b5e20" stroke-width="2.5" fill="none"/>
@@ -40,15 +40,15 @@
                     <span class="logo-main">SMART</span>
                     <span class="logo-sub">ZAMBIA</span>
                 </div>
-            </div>
+            </a>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#join">Join Us</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="join.html">Partner With Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" aria-label="Toggle navigation menu" tabindex="0">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -78,8 +78,8 @@
                 <p class="hero-subtitle">Civil · Mechanical · Electrical · IT — Delivered as One</p>
                 <p class="hero-desc">We bring together specialized engineering disciplines to deliver reliable, efficient, and smart solutions for construction and infrastructure projects across Zambia.</p>
                 <div class="hero-cta">
-                    <a href="#services" class="btn btn-primary">Our Services</a>
-                    <a href="#contact" class="btn btn-secondary">Get a Quote</a>
+                    <a href="index.html#services" class="btn btn-primary">Our Services</a>
+                    <a href="contact.html" class="btn btn-secondary">Get a Quote</a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -119,7 +119,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Preview Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-header">
@@ -142,6 +142,9 @@
                     <h3>Our Focus</h3>
                     <p>Reliable delivery of engineering solutions for contracts and projects. We handle the complexity so our clients can focus on their business.</p>
                 </div>
+            </div>
+            <div class="section-cta">
+                <a href="about.html" class="btn btn-outline">Learn More About Us →</a>
             </div>
         </div>
     </section>
@@ -232,13 +235,13 @@
         </div>
     </section>
 
-    <!-- Join Us Section -->
+    <!-- Join Preview Section -->
     <section id="join" class="join">
         <div class="container">
             <div class="join-content">
                 <div class="join-text">
                     <span class="section-tag">PARTNERSHIP</span>
-                    <h2>Are You a Startup Company?<br>Join Us.</h2>
+                    <h2>Are You a Startup Company?<br>Join Our Network.</h2>
                     <p>Smart Zambia is building a network of specialized engineering firms. If you run a company in civil, mechanical, electrical, or IT services, partner with us to access larger contracts and integrated project opportunities.</p>
                     <div class="join-benefits">
                         <div class="benefit">
@@ -258,9 +261,12 @@
                             <span>Technical support & knowledge sharing</span>
                         </div>
                     </div>
+                    <div class="section-cta" style="margin-top: 1.5rem;">
+                        <a href="join.html" class="btn btn-primary">Apply to Join →</a>
+                    </div>
                 </div>
                 <div class="join-form-container">
-                    <h3>Express Interest</h3>
+                    <h3>Quick Interest</h3>
                     <form class="join-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                         <div class="form-group">
                             <label>Company Name</label>
@@ -301,7 +307,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Preview Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-header">
@@ -362,6 +368,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">Send Message</button>
                     </form>
+                    <div class="section-cta" style="margin-top: 1rem;">
+                        <a href="contact.html" class="btn btn-outline btn-sm">Go to Full Contact Page →</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -372,7 +381,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <div class="logo">
+                    <a href="index.html" class="logo" style="text-decoration: none;">
                         <svg width="40" height="40" viewBox="0 0 55 55" fill="none">
                             <path d="M27.5 2L50.5 15.5V42.5L27.5 56L4.5 42.5V15.5L27.5 2Z" stroke="#fff" stroke-width="2" fill="none" opacity="0.8"/>
                             <path d="M20 16L24 16L21 24L26 24L19 38L22 28L17 28L20 16Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
@@ -382,25 +391,26 @@
                             <span class="logo-main">SMART</span>
                             <span class="logo-sub">ZAMBIA</span>
                         </div>
-                    </div>
+                    </a>
                     <p>Integrated engineering solutions for Zambia's built environment.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#join">Join Us</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="join.html">Partner With Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#services">Civil Engineering</a></li>
-                        <li><a href="#services">Mechanical</a></li>
-                        <li><a href="#services">Electrical</a></li>
-                        <li><a href="#services">IT Systems</a></li>
+                        <li><a href="index.html#services">Civil Engineering</a></li>
+                        <li><a href="index.html#services">Mechanical</a></li>
+                        <li><a href="index.html#services">Electrical</a></li>
+                        <li><a href="index.html#services">IT Systems</a></li>
                     </ul>
                 </div>
             </div>
