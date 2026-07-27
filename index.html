@@ -8,7 +8,6 @@
     <!-- SEO & Security -->
     <meta name="description" content="Smart Zambia provides electrical, mechanical, civil, and IT engineering solutions. Innovative, reliable, and affordable for Zambian communities." />
     <meta name="theme-color" content="#0d4a2e" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -157,30 +156,76 @@
             height: 76px;
         }
 
-        /* Logo */
+        /* ============================================================
+           NEW LOGO: SZ crossing with lightning
+           ============================================================ */
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: 800;
             font-size: 1.5rem;
             color: var(--white);
             letter-spacing: -0.5px;
+            text-decoration: none;
         }
-        .logo__icon {
+
+        .logo__mark {
+            position: relative;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
-            gap: 2px;
+            justify-content: center;
             background: var(--copper);
-            padding: 6px 10px 6px 8px;
-            border-radius: 8px;
+            border-radius: 10px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(200, 122, 46, 0.3);
+        }
+
+        .logo__mark .sz-letters {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.6rem;
             color: var(--white);
-            font-size: 1.1rem;
             line-height: 1;
         }
-        .logo__icon .bolt {
+
+        /* S and Z overlapping */
+        .logo__mark .sz-letters span {
+            position: absolute;
+            font-weight: 900;
+            color: var(--white);
+        }
+        .logo__mark .sz-letters .s {
+            transform: rotate(-10deg) translateX(-2px);
+            font-size: 1.7rem;
+        }
+        .logo__mark .sz-letters .z {
+            transform: rotate(10deg) translateX(2px);
+            font-size: 1.7rem;
+            opacity: 0.85;
+        }
+
+        /* Lightning bolt crossing through */
+        .logo__mark .lightning-bolt {
+            position: absolute;
+            font-size: 1.2rem;
             color: #fff4d6;
-            font-size: 1rem;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+            transform: rotate(15deg) scaleX(-1);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .logo__text {
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
         }
         .logo__text span {
             color: var(--copper-light);
@@ -248,7 +293,7 @@
         }
 
         /* ============================================================
-           HERO
+           HERO (unchanged)
            ============================================================ */
         .hero {
             position: relative;
@@ -494,7 +539,7 @@
         }
 
         /* ============================================================
-           SERVICES PREVIEW
+           SERVICES PREVIEW (unchanged)
            ============================================================ */
         .services-preview {
             background: var(--white);
@@ -574,7 +619,7 @@
         }
 
         /* ============================================================
-           WHY US
+           WHY US (unchanged)
            ============================================================ */
         .why-us {
             background: var(--off-white);
@@ -640,7 +685,7 @@
         }
 
         /* ============================================================
-           PROJECTS
+           PROJECTS (with your images)
            ============================================================ */
         .projects {
             background: var(--white);
@@ -693,7 +738,7 @@
         }
 
         /* ============================================================
-           SMART HOUSE CTA
+           SMART HOUSE CTA (unchanged)
            ============================================================ */
         .smart-cta {
             background: var(--green-dark);
@@ -779,7 +824,7 @@
         }
 
         /* ============================================================
-           TESTIMONIALS
+           TESTIMONIALS (unchanged)
            ============================================================ */
         .testimonials {
             background: var(--off-white);
@@ -824,7 +869,7 @@
         }
 
         /* ============================================================
-           PARTNER CTA
+           PARTNER CTA (unchanged)
            ============================================================ */
         .partner-cta {
             background: var(--white);
@@ -855,7 +900,7 @@
         }
 
         /* ============================================================
-           FOOTER
+           FOOTER (unchanged)
            ============================================================ */
         .footer {
             background: var(--green-dark);
@@ -1086,9 +1131,24 @@
                 height: 4px;
                 bottom: 2px;
             }
+            /* Logo smaller on mobile */
+            .logo__mark {
+                width: 38px;
+                height: 38px;
+            }
+            .logo__mark .sz-letters .s,
+            .logo__mark .sz-letters .z {
+                font-size: 1.2rem;
+            }
+            .logo__mark .lightning-bolt {
+                font-size: 0.9rem;
+            }
+            .logo__text {
+                font-size: 1rem;
+            }
         }
 
-        /* Anti-bot hidden field (used in contact section if present) */
+        /* Anti-bot hidden field */
         .hp-field {
             position: absolute;
             left: -9999px;
@@ -1120,9 +1180,13 @@
     <header class="header" id="header" role="banner">
         <div class="container header__inner">
             <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <div class="logo__icon">
-                    <span>SZ</span>
-                    <span class="bolt"><i class="fas fa-bolt"></i></span>
+                <!-- New logo: SZ crossing + lightning -->
+                <div class="logo__mark">
+                    <div class="sz-letters">
+                        <span class="s">S</span>
+                        <span class="z">Z</span>
+                    </div>
+                    <i class="fas fa-bolt lightning-bolt"></i>
                 </div>
                 <span class="logo__text">Smart<span>Zambia</span></span>
             </a>
@@ -1149,7 +1213,8 @@
     HERO
     ============================================================ -->
     <section class="hero" id="home" aria-label="Hero banner">
-        <div class="hero__bg" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+        <!-- YOUR IMAGE: civil-site-01 -->
+        <div class="hero__bg" style="background-image: url('civil-site-01');"></div>
         <div class="hero__overlay"></div>
         <div class="container hero__content">
             <div class="hero__text">
@@ -1243,7 +1308,8 @@
         <div class="container">
             <div class="why-us__grid">
                 <div class="why-us__image">
-                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Engineering team on site" loading="lazy" />
+                    <!-- YOUR IMAGE: civil-site-01 (1) -->
+                    <img src="civil-site-01%20(1)" alt="Civil construction works" loading="lazy" />
                     <div class="why-us__badge">
                         <i class="fas fa-shield-alt"></i> 16+ Years Trusted
                     </div>
@@ -1272,7 +1338,7 @@
     </section>
 
     <!-- ============================================================
-    PROJECTS
+    PROJECTS (with your construction images)
     ============================================================ -->
     <section class="projects section" aria-label="Featured projects">
         <div class="container">
@@ -1283,23 +1349,26 @@
             </div>
             <div class="projects__grid">
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Solar installation" loading="lazy" />
+                    <!-- YOUR IMAGE: civil-site-01 (2) -->
+                    <img src="civil-site-01%20(2)" alt="Residential construction" loading="lazy" />
                     <div class="project-card__overlay">
-                        <h4>Solar PV Installation</h4>
+                        <h4>Modern Residential Development</h4>
                         <span>Lusaka, 2025</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Residential construction" loading="lazy" />
+                    <!-- YOUR IMAGE: civil-site-01 (3) -->
+                    <img src="civil-site-01%20(3)" alt="Commercial construction" loading="lazy" />
                     <div class="project-card__overlay">
-                        <h4>Modern Smart Home</h4>
+                        <h4>Commercial Complex</h4>
                         <span>Kitwe, 2024</span>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Commercial building" loading="lazy" />
+                    <!-- YOUR IMAGE: civil-site-01 (4) -->
+                    <img src="civil-site-01%20(4)" alt="Smart house prototype" loading="lazy" />
                     <div class="project-card__overlay">
-                        <h4>Commercial Complex</h4>
+                        <h4>Smart House Prototype</h4>
                         <span>Ndola, 2025</span>
                     </div>
                 </div>
@@ -1424,9 +1493,12 @@
             <div class="footer__grid">
                 <div class="footer__brand">
                     <a href="index.html" class="logo">
-                        <div class="logo__icon">
-                            <span>SZ</span>
-                            <span class="bolt"><i class="fas fa-bolt"></i></span>
+                        <div class="logo__mark">
+                            <div class="sz-letters">
+                                <span class="s">S</span>
+                                <span class="z">Z</span>
+                            </div>
+                            <i class="fas fa-bolt lightning-bolt"></i>
                         </div>
                         <span class="logo__text">Smart<span>Zambia</span></span>
                     </a>
@@ -1499,7 +1571,6 @@
             const preloader = document.getElementById('preloader');
             window.addEventListener('load', () => {
                 preloader.classList.add('hidden');
-                // Start counter animation after preloader hides
                 setTimeout(animateCounters, 400);
             });
 
@@ -1511,8 +1582,6 @@
                 navList.classList.toggle('open');
                 toggle.setAttribute('aria-expanded', open);
             });
-
-            // Close nav on link click (mobile)
             document.querySelectorAll('.nav__list a').forEach(link => {
                 link.addEventListener('click', () => {
                     toggle.classList.remove('open');
@@ -1523,7 +1592,6 @@
 
             // ─── HEADER SCROLL SHADOW ───
             const header = document.getElementById('header');
-            let lastScroll = 0;
             window.addEventListener('scroll', () => {
                 const y = window.scrollY;
                 if (y > 60) {
@@ -1531,9 +1599,6 @@
                 } else {
                     header.classList.remove('scrolled');
                 }
-                lastScroll = y;
-
-                // Back to top button
                 const btn = document.getElementById('backToTop');
                 if (y > 500) {
                     btn.classList.add('visible');
@@ -1567,7 +1632,7 @@
                 });
             }
 
-            // ─── SMOOTH SCROLL FOR NAV LINKS (if any internal #) ───
+            // ─── SMOOTH SCROLL FOR NAV LINKS ───
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     const href = this.getAttribute('href');
@@ -1579,10 +1644,6 @@
                     }
                 });
             });
-
-            // ─── INTERSECTION OBSERVER FOR STATS (fallback) ───
-            // Already triggered on load, but we can also re-trigger if needed.
-            // We'll just keep it simple.
 
         })();
     </script>
