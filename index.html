@@ -3,57 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Zambia | Integrated Engineering Solutions</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Smart Zambia | One Engineering Partner for Every Stage of Your Project</title>
+    <meta name="description" content="Smart Zambia integrates civil, mechanical, electrical, and IT engineering into one seamless delivery. We deliver on time, every time – making a Smart Zambia.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://smartzambia.com/">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Smart Zambia – Integrated Engineering Solutions">
+    <meta property="og:description" content="Civil, Mechanical, Electrical, IT – Delivered Together. One partner for your entire project.">
+    <meta property="og:image" content="https://smartzambia.com/og-image.png">
+    <meta property="og:url" content="https://smartzambia.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Smart Zambia – Integrated Engineering">
+    <meta name="twitter:description" content="One engineering partner for every stage of your project. On-time delivery, every time.">
+    <meta name="twitter:image" content="https://smartzambia.com/og-image.png">
+
+    <!-- Favicon (inline SVG) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><text x='30' y='40' text-anchor='middle' font-family='Rajdhani' font-weight='700' font-size='38' fill='%231b5e20'>S</text><text x='40' y='30' text-anchor='middle' font-family='Rajdhani' font-weight='700' font-size='38' fill='%232e7d32'>Z</text><path d='M22 46L30 30L25 27L32 12L28 26L34 28L26 46Z' fill='%23ffeb3b' stroke='%23ffc107' stroke-width='0.8'/></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Smart Zambia",
+        "url": "https://smartzambia.com",
+        "logo": "https://smartzambia.com/logo.png",
+        "description": "Integrated engineering solutions for Zambia's built environment – civil, mechanical, electrical, and IT.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+260 XXX XXX XXX",
+            "contactType": "sales",
+            "availableLanguage": "en"
+        },
+        "sameAs": [
+            "https://linkedin.com/company/smart-zambia",
+            "https://facebook.com/smartzambia"
+        ]
+    }
+    </script>
 </head>
 <body>
+    <!-- Hidden SVG sprite for reusable icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Logo symbol (hexagon + overlapping SZ + lightning) -->
+        <symbol id="logo-sz" viewBox="0 0 60 60">
+            <!-- Outer hexagon frame -->
+            <path d="M30 3L55 16V44L30 57L5 44V16L30 3Z" stroke="#1b5e20" stroke-width="2.5" fill="none"/>
+            <!-- Inner hexagon hint -->
+            <path d="M30 10L46 20V40L30 50L14 40V20L30 10Z" stroke="#2e7d32" stroke-width="1" fill="none"/>
+            <!-- Overlapping S and Z -->
+            <text x="28" y="40" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="30" fill="#1b5e20">S</text>
+            <text x="38" y="32" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="30" fill="#2e7d32">Z</text>
+            <!-- Lightning bolt -->
+            <path d="M21 45L28 30L24 27L32 13L28 27L33 28L25 45Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.8" stroke-linejoin="round"/>
+            <!-- Animated nodes -->
+            <circle cx="30" cy="10" r="2" fill="#4caf50">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="46" cy="40" r="2" fill="#4caf50">
+                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+            </circle>
+        </symbol>
+
+        <!-- Service icons (replacing emojis) -->
+        <symbol id="icon-civil" viewBox="0 0 24 24">
+            <rect x="4" y="10" width="16" height="11" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <path d="M7 10V7H17V10" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <line x1="12" y1="4" x2="12" y2="7" stroke="#4caf50" stroke-width="2"/>
+            <line x1="9" y1="5" x2="15" y2="5" stroke="#4caf50" stroke-width="2"/>
+        </symbol>
+        <symbol id="icon-mech" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="4" stroke="#4caf50" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="1.5" fill="#1b5e20"/>
+            <line x1="12" y1="2" x2="12" y2="4" stroke="#1b5e20" stroke-width="2"/>
+            <line x1="12" y1="20" x2="12" y2="22" stroke="#1b5e20" stroke-width="2"/>
+            <line x1="2" y1="12" x2="4" y2="12" stroke="#1b5e20" stroke-width="2"/>
+            <line x1="20" y1="12" x2="22" y2="12" stroke="#1b5e20" stroke-width="2"/>
+        </symbol>
+        <symbol id="icon-elec" viewBox="0 0 24 24">
+            <path d="M5 18V9L12 5L19 9V18" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="13" r="3" stroke="#4caf50" stroke-width="2" fill="none"/>
+            <line x1="12" y1="2" x2="12" y2="5" stroke="#4caf50" stroke-width="2"/>
+            <circle cx="12" cy="2" r="1" fill="#4caf50"/>
+        </symbol>
+        <symbol id="icon-it" viewBox="0 0 24 24">
+            <rect x="3" y="5" width="18" height="12" rx="2" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <line x1="7" y1="19" x2="17" y2="19" stroke="#1b5e20" stroke-width="2"/>
+            <line x1="9" y1="17" x2="9" y2="19" stroke="#1b5e20" stroke-width="2"/>
+            <line x1="15" y1="17" x2="15" y2="19" stroke="#1b5e20" stroke-width="2"/>
+            <rect x="7" y="8" width="3.5" height="2.5" fill="#4caf50" opacity="0.7"/>
+            <rect x="13.5" y="8" width="3.5" height="2.5" fill="#4caf50" opacity="0.7"/>
+        </symbol>
+
+        <!-- CTA icons -->
+        <symbol id="icon-partner" viewBox="0 0 24 24">
+            <path d="M16 7C16 9.2 14.2 11 12 11C9.8 11 8 9.2 8 7C8 4.8 9.8 3 12 3C14.2 3 16 4.8 16 7Z" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <path d="M12 14C8.7 14 6 16.7 6 20V21H18V20C18 16.7 15.3 14 12 14Z" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <line x1="3" y1="3" x2="8" y2="3" stroke="#2e7d32" stroke-width="2"/>
+            <line x1="3" y1="3" x2="3" y2="8" stroke="#2e7d32" stroke-width="2"/>
+            <line x1="21" y1="21" x2="16" y2="21" stroke="#2e7d32" stroke-width="2"/>
+            <line x1="21" y1="21" x2="21" y2="16" stroke="#2e7d32" stroke-width="2"/>
+        </symbol>
+        <symbol id="icon-contact" viewBox="0 0 24 24">
+            <path d="M22 16.9V20C22 20.6 21.6 21 21 21C20.4 21 20 20.6 20 20V16.9C20 16.4 20.3 15.9 20.8 15.7L22 15.2C22.3 15.1 22.7 15.3 22.8 15.7C22.9 16 22.9 16.5 22 16.9Z" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <path d="M2 16.9V20C2 20.6 2.4 21 3 21C3.6 21 4 20.6 4 20V16.9C4 16.4 3.7 15.9 3.2 15.7L2 15.2C1.7 15.1 1.3 15.3 1.2 15.7C1.1 16 1.1 16.5 2 16.9Z" stroke="#1b5e20" stroke-width="2" fill="none"/>
+            <path d="M12 2V6" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M12 18V22" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M4.9 4.9L7.7 7.7" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M16.3 16.3L19.1 19.1" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M2 12H6" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M18 12H22" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M4.9 19.1L7.7 16.3" stroke="#1b5e20" stroke-width="2"/>
+            <path d="M16.3 7.7L19.1 4.9" stroke="#1b5e20" stroke-width="2"/>
+            <circle cx="12" cy="12" r="3" fill="#4caf50" opacity="0.6"/>
+        </symbol>
+    </svg>
+
     <!-- ========== NAVIGATION ========== -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <!-- New Logo: S and Z crossing with lightning -->
-                <svg class="logo-svg" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- S letter -->
-                    <text x="30" y="40" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="38" fill="#1b5e20" letter-spacing="3">S</text>
-                    <!-- Z letter overlapping -->
-                    <text x="40" y="30" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="38" fill="#2e7d32" letter-spacing="3">Z</text>
-                    <!-- Lightning bolt passing through the letters -->
-                    <path d="M22 46L30 30L25 27L32 12L28 26L34 28L26 46Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.8" stroke-linejoin="round"/>
-                    <!-- Glowing circuit nodes -->
-                    <circle cx="18" cy="18" r="2.5" fill="#4caf50" opacity="0.8">
-                        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="44" cy="44" r="2.5" fill="#4caf50" opacity="0.8">
-                        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
-                    </circle>
-                    <circle cx="16" cy="44" r="1.5" fill="#81c784" opacity="0.6">
-                        <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
-                    </circle>
-                </svg>
+                <svg class="logo-svg" width="60" height="60"><use href="#logo-sz"/></svg>
                 <div class="logo-text">
                     <span class="logo-main">SMART</span>
                     <span class="logo-sub">ZAMBIA</span>
                 </div>
             </a>
-            <ul class="nav-links">
+            <button class="hamburger" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul id="nav-menu" class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="join.html">Partner With Us</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="hamburger" aria-label="Toggle navigation menu" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
 
-    <!-- ========== HERO SECTION ========== -->
+    <!-- ========== HERO ========== -->
     <section id="home" class="hero">
-        <!-- Animated background pattern -->
         <div class="hero-bg">
             <svg class="grid-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <defs>
@@ -64,37 +167,41 @@
                 <rect width="100" height="100" fill="url(#grid)"/>
             </svg>
         </div>
-
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="badge-dot"></span>
                     <span>We Deliver On Time</span>
                 </div>
-                <h1>Integrated Engineering<br>for a Smart Zambia</h1>
-                <p class="hero-subtitle">Civil · Mechanical · Electrical · IT — Unified Delivery</p>
-                <p class="hero-desc">
-                    With Zambia’s infrastructure sector projected to grow over 8% annually, Smart Zambia unites specialized engineering disciplines to deliver coordinated, on-time solutions for construction, industrial, and technology projects.
-                </p>
+                <h1>One Engineering Partner for Every Stage of Your Project</h1>
+                <p class="hero-subtitle">Civil. Mechanical. Electrical. IT. Delivered Together.</p>
+                <p class="hero-desc">From foundation to fiber optics, we unify all disciplines so your project moves faster, costs less, and hits every milestone – on time, every time.</p>
                 <div class="hero-cta">
                     <a href="#services" class="btn btn-primary">Explore Services</a>
                     <a href="contact.html" class="btn btn-secondary">Get a Quote</a>
                 </div>
             </div>
             <div class="hero-visual">
-                <!-- Orbiting engineering diagram -->
                 <div class="engineering-diagram">
                     <div class="center-hub">
-                        <svg width="50" height="50" viewBox="0 0 60 60">
-                            <text x="30" y="40" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="24" fill="#1b5e20">S</text>
-                            <text x="40" y="30" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="24" fill="#2e7d32">Z</text>
-                            <path d="M22 46L30 30L25 27L32 12L28 26L34 28L26 46Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
-                        </svg>
+                        <svg width="50" height="50"><use href="#logo-sz"/></svg>
                     </div>
-                    <div class="orbit-node node-civil"><div class="node-icon">🏗️</div><span>Civil</span></div>
-                    <div class="orbit-node node-mech"><div class="node-icon">⚙️</div><span>Mechanical</span></div>
-                    <div class="orbit-node node-elec"><div class="node-icon">⚡</div><span>Electrical</span></div>
-                    <div class="orbit-node node-it"><div class="node-icon">💻</div><span>IT</span></div>
+                    <div class="orbit-node node-civil">
+                        <svg class="node-icon" width="24" height="24"><use href="#icon-civil"/></svg>
+                        <span>Civil</span>
+                    </div>
+                    <div class="orbit-node node-mech">
+                        <svg class="node-icon" width="24" height="24"><use href="#icon-mech"/></svg>
+                        <span>Mechanical</span>
+                    </div>
+                    <div class="orbit-node node-elec">
+                        <svg class="node-icon" width="24" height="24"><use href="#icon-elec"/></svg>
+                        <span>Electrical</span>
+                    </div>
+                    <div class="orbit-node node-it">
+                        <svg class="node-icon" width="24" height="24"><use href="#icon-it"/></svg>
+                        <span>IT</span>
+                    </div>
                     <svg class="orbit-lines" viewBox="0 0 300 300">
                         <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(76,175,80,0.3)" stroke-width="1" stroke-dasharray="5,5"/>
                         <line x1="150" y1="150" x2="150" y2="50" stroke="rgba(76,175,80,0.4)" stroke-width="1"/>
@@ -107,23 +214,19 @@
         </div>
     </section>
 
-    <!-- ========== ABOUT SECTION (directly below hero) ========== -->
+    <!-- ========== ABOUT (directly below hero) ========== -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">WHO WE ARE</span>
-                <h2>Engineering Integration,<br>Delivered with Precision</h2>
-                <p class="section-intro">
-                    Smart Zambia was born to close the gap between ambitious infrastructure goals and fragmented project execution. We fuse civil, mechanical, electrical, and IT capabilities into one seamless workflow — so your project arrives on time, every time.
-                </p>
+                <h2>Engineering Integration, Delivered with Precision</h2>
+                <p class="section-intro">We replace fragmented contractors with a single, coordinated team – so your project stays on schedule and your vision becomes reality.</p>
             </div>
-
-            <!-- Three core pillars -->
             <div class="about-grid">
                 <div class="about-card">
                     <div class="card-number">01</div>
                     <h3>Our Mission</h3>
-                    <p>To transform Zambia's construction and technology landscape by offering fully integrated engineering services that remove coordination headaches and deliver predictable results.</p>
+                    <p>Make a Smart Zambia by unifying civil, mechanical, electrical, and IT expertise – delivering projects that are smarter, faster, and more reliable.</p>
                     <div class="card-divider"></div>
                     <ul class="card-details">
                         <li>One point of accountability</li>
@@ -134,7 +237,7 @@
                 <div class="about-card">
                     <div class="card-number">02</div>
                     <h3>Our Approach</h3>
-                    <p>We begin every project with a unified design charrette — all four disciplines at the table from day one. This early integration eliminates clashes, reduces cost overruns, and accelerates schedules.</p>
+                    <p>All four disciplines co‑design from day one. That means fewer clashes, fewer delays, and a seamless handover.</p>
                     <div class="card-divider"></div>
                     <ul class="card-details">
                         <li>Simultaneous engineering</li>
@@ -145,60 +248,37 @@
                 <div class="about-card">
                     <div class="card-number">03</div>
                     <h3>Our Promise</h3>
-                    <p><strong>We deliver on time.</strong> Our track record speaks through completed projects and satisfied clients. We embed rigorous project controls and transparent reporting into every phase.</p>
+                    <p><strong>We deliver on time.</strong> Every contract includes a clear schedule and rigorous controls – because your deadline is our commitment.</p>
                     <div class="card-divider"></div>
                     <ul class="card-details">
                         <li>Zambia‑focused expertise</li>
                         <li>Commitment to local content</li>
-                        <li>Reliable, measurable outcomes</li>
+                        <li>Measurable results, every time</li>
                     </ul>
                 </div>
             </div>
-
-            <!-- Stats bar with real‑world numbers -->
             <div class="stats-bar">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Projects Completed</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Integrated Disciplines</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">8+</span>
-                    <span class="stat-label">Years Combined Experience</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">On‑Time Delivery Focus</span>
-                </div>
+                <div class="stat-item"><span class="stat-number">50+</span><span class="stat-label">Projects Completed</span></div>
+                <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Integrated Disciplines</span></div>
+                <div class="stat-item"><span class="stat-number">8+</span><span class="stat-label">Years Combined Experience</span></div>
+                <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">On‑Time Focus</span></div>
             </div>
         </div>
     </section>
 
-    <!-- ========== SERVICES SECTION ========== -->
+    <!-- ========== SERVICES ========== -->
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">WHAT WE DO</span>
                 <h2>Integrated Services for Every Project</h2>
-                <p class="section-intro">From foundation to fiber optics, we cover the full spectrum.</p>
+                <p class="section-intro">From foundation to fiber optics – one team, every trade.</p>
             </div>
-
             <div class="services-grid">
-                <!-- Civil Engineering -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <rect x="5" y="15" width="30" height="20" stroke="#1b5e20" stroke-width="2" fill="none"/>
-                            <path d="M10 15V10H30V15" stroke="#1b5e20" stroke-width="2" fill="none"/>
-                            <line x1="20" y1="5" x2="20" y2="10" stroke="#4caf50" stroke-width="2"/>
-                            <line x1="15" y1="7" x2="25" y2="7" stroke="#4caf50" stroke-width="2"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon"><svg width="40" height="40"><use href="#icon-civil"/></svg></div>
                     <h3>Civil Engineering</h3>
-                    <p>We deliver robust structural and site solutions that form the backbone of every project.</p>
+                    <p>Robust structural and site solutions that form the backbone of every build.</p>
                     <ul>
                         <li>Structural design & analysis</li>
                         <li>Site development & grading</li>
@@ -206,22 +286,10 @@
                         <li>Concrete & masonry structures</li>
                     </ul>
                 </div>
-
-                <!-- Mechanical Systems -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <circle cx="20" cy="20" r="12" stroke="#1b5e20" stroke-width="2" fill="none"/>
-                            <circle cx="20" cy="20" r="6" stroke="#4caf50" stroke-width="2" fill="none"/>
-                            <circle cx="20" cy="20" r="2" fill="#1b5e20"/>
-                            <line x1="20" y1="2" x2="20" y2="8" stroke="#1b5e20" stroke-width="2"/>
-                            <line x1="20" y1="32" x2="20" y2="38" stroke="#1b5e20" stroke-width="2"/>
-                            <line x1="2" y1="20" x2="8" y2="20" stroke="#1b5e20" stroke-width="2"/>
-                            <line x1="32" y1="20" x2="38" y2="20" stroke="#1b5e20" stroke-width="2"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon"><svg width="40" height="40"><use href="#icon-mech"/></svg></div>
                     <h3>Mechanical Systems</h3>
-                    <p>Ensuring comfort, safety, and efficiency through reliable mechanical installations.</p>
+                    <p>Comfort, safety, and efficiency through reliable installations.</p>
                     <ul>
                         <li>HVAC design & installation</li>
                         <li>Plumbing & drainage</li>
@@ -229,19 +297,10 @@
                         <li>Industrial piping & utilities</li>
                     </ul>
                 </div>
-
-                <!-- Electrical Engineering -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M8 30V15L20 8L32 15V30" stroke="#1b5e20" stroke-width="2" fill="none"/>
-                            <circle cx="20" cy="22" r="5" stroke="#4caf50" stroke-width="2" fill="none"/>
-                            <line x1="20" y1="2" x2="20" y2="8" stroke="#4caf50" stroke-width="2"/>
-                            <circle cx="20" cy="2" r="2" fill="#4caf50"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon"><svg width="40" height="40"><use href="#icon-elec"/></svg></div>
                     <h3>Electrical Engineering</h3>
-                    <p>Powering progress with safe, efficient electrical and backup solutions.</p>
+                    <p>Safe, efficient power solutions for modern infrastructure.</p>
                     <ul>
                         <li>Power distribution & panels</li>
                         <li>Lighting & control systems</li>
@@ -249,21 +308,10 @@
                         <li>Generator & renewable backup</li>
                     </ul>
                 </div>
-
-                <!-- IT & Smart Systems -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <rect x="5" y="8" width="30" height="20" rx="2" stroke="#1b5e20" stroke-width="2" fill="none"/>
-                            <line x1="12" y1="32" x2="28" y2="32" stroke="#1b5e20" stroke-width="2"/>
-                            <line x1="15" y1="28" x2="15" y2="32" stroke="#1b5e20" stroke-width="2"/>
-                            <line x1="25" y1="28" x2="25" y2="32" stroke="#1b5e20" stroke-width="2"/>
-                            <rect x="12" y="13" width="6" height="4" fill="#4caf50" opacity="0.7"/>
-                            <rect x="22" y="13" width="6" height="4" fill="#4caf50" opacity="0.7"/>
-                        </svg>
-                    </div>
+                    <div class="service-icon"><svg width="40" height="40"><use href="#icon-it"/></svg></div>
                     <h3>IT & Smart Systems</h3>
-                    <p>Building the digital backbone for modern, intelligent buildings and infrastructure.</p>
+                    <p>The digital backbone for intelligent buildings.</p>
                     <ul>
                         <li>Structured cabling & networks</li>
                         <li>CCTV & access control</li>
@@ -275,7 +323,7 @@
         </div>
     </section>
 
-    <!-- ========== HOW WE WORK (extra content for depth) ========== -->
+    <!-- ========== HOW WE WORK ========== -->
     <section id="how-we-work" class="how-we-work">
         <div class="container">
             <div class="section-header">
@@ -283,39 +331,27 @@
                 <h2>From Blueprint to Handover</h2>
             </div>
             <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">1</div>
-                    <h4>Integrated Planning</h4>
-                    <p>All four disciplines collaborate to align designs before ground is broken, saving time and money.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">2</div>
-                    <h4>Coordinated Execution</h4>
-                    <p>Our project managers synchronize civil, mechanical, electrical, and IT trades so nothing falls through the cracks.</p>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">3</div>
-                    <h4>On‑Time Delivery</h4>
-                    <p>With rigorous scheduling and quality control, we hand over a fully functional, integrated facility on schedule.</p>
-                </div>
+                <div class="process-step"><div class="step-number">1</div><h4>Integrated Planning</h4><p>All disciplines align before ground is broken, cutting costs and surprises.</p></div>
+                <div class="process-step"><div class="step-number">2</div><h4>Coordinated Execution</h4><p>Our managers synchronize civil, mechanical, electrical, and IT so nothing falls through the cracks.</p></div>
+                <div class="process-step"><div class="step-number">3</div><h4>On‑Time Delivery</h4><p>We hand over a fully integrated facility – on schedule, as promised.</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ========== PARTNERSHIP & CONTACT CTA (split into two cards) ========== -->
+    <!-- ========== CTA SECTION (Partner / Contact) ========== -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-grid">
                 <div class="cta-card">
-                    <div class="cta-icon">🤝</div>
+                    <div class="cta-icon"><svg width="40" height="40"><use href="#icon-partner"/></svg></div>
                     <h3>Become a Partner</h3>
-                    <p>Are you a startup or established engineering firm? Join our network and unlock access to large‑scale, multi‑disciplinary contracts.</p>
+                    <p>Are you a startup or established engineering firm? Join our network and unlock large‑scale, multi‑disciplinary contracts.</p>
                     <a href="join.html" class="btn btn-primary">Apply to Partner</a>
                 </div>
                 <div class="cta-card">
-                    <div class="cta-icon">📞</div>
+                    <div class="cta-icon"><svg width="40" height="40"><use href="#icon-contact"/></svg></div>
                     <h3>Start Your Project</h3>
-                    <p>Need a reliable, integrated team for your next build? Let’s talk about your requirements and timeline.</p>
+                    <p>Need a reliable, integrated team for your next build? Let’s discuss your requirements and timeline.</p>
                     <a href="contact.html" class="btn btn-secondary">Contact Us</a>
                 </div>
             </div>
@@ -327,18 +363,15 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo" style="text-decoration: none;">
-                        <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
-                            <text x="30" y="40" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="24" fill="#fff">S</text>
-                            <text x="38" y="30" text-anchor="middle" font-family="Rajdhani" font-weight="700" font-size="24" fill="#fff" opacity="0.9">Z</text>
-                            <path d="M22 46L30 30L25 27L32 12L28 26L34 28L26 46Z" fill="#ffeb3b" stroke="#ffc107" stroke-width="0.5"/>
-                        </svg>
+                    <a href="index.html" class="logo" aria-label="Smart Zambia Home">
+                        <svg width="40" height="40"><use href="#logo-sz"/></svg>
                         <div class="logo-text">
                             <span class="logo-main">SMART</span>
                             <span class="logo-sub">ZAMBIA</span>
                         </div>
                     </a>
                     <p>Integrated engineering solutions for Zambia’s built environment.</p>
+                    <p class="company-reg">Reg. No: ZMB/ENG/2026/001</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
@@ -348,6 +381,8 @@
                         <li><a href="#services">Services</a></li>
                         <li><a href="join.html">Partner With Us</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
@@ -359,13 +394,16 @@
                         <li><a href="#services">IT & Smart Systems</a></li>
                     </ul>
                 </div>
-                <div class="footer-newsletter">
-                    <h4>Stay Updated</h4>
-                    <p>Subscribe for insights on Zambia's engineering landscape.</p>
-                    <form class="newsletter-form" action="#" method="post">
-                        <input type="email" placeholder="Your email" required>
-                        <button type="submit" class="btn btn-sm">→</button>
-                    </form>
+                <div class="footer-social">
+                    <h4>Connect</h4>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com/company/smart-zambia" aria-label="LinkedIn" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                        <a href="https://facebook.com/smartzambia" aria-label="Facebook" target="_blank" rel="noopener">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
