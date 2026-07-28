@@ -1,1153 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact – Smart Zambia</title>
-
-    <!-- SEO & Security -->
-    <meta name="description" content="Get in touch with Smart Zambia. Call, WhatsApp, email, or use our contact form. We're here to help with all your engineering needs." />
-    <meta name="theme-color" content="#0d4a2e" />
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Smart Zambia</title>
     <style>
-        /* ============================================================
-           RESET & BASE (same as all pages)
-           ============================================================ */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* =========================================
+           1. CSS VARIABLES & THEME ENGINE
+           ========================================= */
         :root {
-            --green-dark: #0d4a2e;
-            --green-mid: #1a6e3e;
-            --green-light: #2d8f54;
-            --copper: #c87a2e;
-            --copper-light: #e8a54b;
-            --copper-glow: rgba(200, 122, 46, 0.3);
-            --white: #ffffff;
-            --off-white: #f2f5f0;
-            --grey-100: #e9ece8;
-            --grey-800: #2c3a2f;
-            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
-            --radius: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Core Colors - Dark Mode (Default) */
+            --bg-body: #0b0d11;
+            --bg-card: #14171e;
+            --bg-nav: rgba(11, 13, 17, 0.92);
+            --text-primary: #f0f4f8;
+            --text-secondary: #9aa3b5;
+            --border-color: #252a36;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            
+            /* Brand Accents */
+            --accent-lime: #9dff00;
+            --accent-cyan: #00faff;
+            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+            
+            /* Glow Effects */
+            --glow-lime: rgba(157, 255, 0, 0.3);
+            --glow-cyan: rgba(0, 250, 255, 0.3);
         }
-        html {
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
+
+        /* Light Mode Overrides */
+        body.theme-light {
+            --bg-body: #f2f6fc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(242, 246, 252, 0.95);
+            --text-primary: #131a26;
+            --text-secondary: #516077;
+            --border-color: #dce3ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
         }
+
+        /* =========================================
+           2. RESET & ENGINEERED TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--off-white);
-            color: var(--grey-800);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
         }
 
-        /* ============================================================
-           PRELOADER
-           ============================================================ */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: var(--green-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 24px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+        /* Custom Advanced Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+
+        /* =========================================
+           3. NAVIGATION BAR (Sticky Glassmorphism)
+           ========================================= */
+        .navbar {
+            position: sticky; top: 0; z-index: 999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: var(--bg-nav);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease, border 0.3s ease;
         }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
+            color: var(--accent-lime); letter-spacing: -0.5px;
         }
-        .loader-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--copper-light);
+        .nav-brand img { height: 40px; width: auto; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+        .nav-links a {
+            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
+            position: relative; transition: color 0.3s;
         }
-        .loader-icon .bolt {
-            color: var(--white);
-            font-size: 2.4rem;
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-gradient); transition: width 0.3s ease;
         }
-        .loader-bar {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Active Page Highlight */
+        .nav-links a.active { color: var(--text-primary); }
+        .nav-links a.active::after { width: 100%; background: var(--accent-cyan); }
+        
+        /* Dark/Light Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .loader-bar span {
-            display: block;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--copper), var(--copper-light));
-            border-radius: 4px;
-            animation: loadProgress 1.8s ease-in-out forwards;
+        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
+
+        /* =========================================
+           4. CONTACT HERO (Watermark & Glow)
+           ========================================= */
+        .contact-hero {
+            min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 5%; position: relative; overflow: hidden;
         }
-        @keyframes loadProgress {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
+        /* The Logo Watermark Engine */
+        .contact-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/logo.png'); background-size: 50%; background-repeat: no-repeat;
+            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
+            animation: slowFloat 20s infinite alternate ease-in-out;
+        }
+        @keyframes slowFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
+        }
+        .hero-content {
+            position: relative; z-index: 1; max-width: 800px;
+            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .contact-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .contact-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .contact-hero p {
+            font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
+            -webkit-text-fill-color: var(--text-secondary);
         }
 
-        /* ============================================================
-           HEADER
-           ============================================================ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(13, 74, 46, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: var(--transition);
-        }
-        .header.scrolled {
-            background: rgba(13, 74, 46, 0.98);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        }
-        .header__inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 76px;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-        .logo__icon {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            background: var(--copper);
-            padding: 6px 10px 6px 8px;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1.1rem;
-            line-height: 1;
-        }
-        .logo__icon .bolt {
-            color: #fff4d6;
-            font-size: 1rem;
-        }
-        .logo__text span {
-            color: var(--copper-light);
-        }
-        .nav__list {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nav__list a {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.75);
-            transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.3px;
-        }
-        .nav__list a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--copper-light);
-            transition: var(--transition);
-        }
-        .nav__list a:hover,
-        .nav__list a.active {
-            color: var(--white);
-        }
-        .nav__list a:hover::after,
-        .nav__list a.active::after {
-            width: 100%;
-        }
-        .nav__toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .nav__toggle .bar {
-            width: 28px;
-            height: 2.5px;
-            background: var(--white);
-            border-radius: 4px;
-            transition: var(--transition);
-            transform-origin: center;
-        }
-        .nav__toggle.open .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .nav__toggle.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .nav__toggle.open .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* ============================================================
-           COMMON SECTION STYLES
-           ============================================================ */
-        .section {
-            padding: 80px 0;
-        }
-        .section__header {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 56px;
-        }
-        .section__tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--copper);
-            background: rgba(200, 122, 46, 0.08);
-            padding: 6px 16px;
-            border-radius: 50px;
-            margin-bottom: 16px;
-        }
-        .section__title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            color: var(--green-dark);
-        }
-        .section__title span {
-            color: var(--copper);
-        }
-        .section__desc {
-            font-size: 1.1rem;
-            color: var(--grey-800);
-            opacity: 0.8;
-            margin-top: 12px;
-            line-height: 1.7;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-        .btn--primary {
-            background: var(--copper);
-            color: var(--white);
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-        }
-        .btn--primary:hover {
-            background: var(--copper-light);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(200, 122, 46, 0.45);
-        }
-        .btn--outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .btn--outline:hover {
-            border-color: var(--copper-light);
-            background: rgba(200, 122, 46, 0.15);
-            transform: translateY(-3px);
-        }
-        .btn--large {
-            padding: 18px 44px;
-            font-size: 1.1rem;
-        }
-
-        /* ============================================================
-           PAGE HERO (Contact)
-           ============================================================ */
-        .page-hero {
-            position: relative;
-            padding: 160px 0 80px;
-            background: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
-        }
-        .page-hero__bg {
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 30%/cover no-repeat;
-            opacity: 0.12;
-            mix-blend-mode: overlay;
-        }
-        .page-hero__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13, 74, 46, 0.9) 0%, rgba(13, 74, 46, 0.5) 100%);
-            z-index: 1;
-        }
-        .page-hero__content {
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .page-hero__content h1 {
-            font-size: 3.6rem;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-        }
-        .page-hero__content h1 span {
-            color: var(--copper-light);
-        }
-        .page-hero__content p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-        .page-hero__breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .page-hero__breadcrumb a {
-            color: var(--copper-light);
-            transition: var(--transition);
-        }
-        .page-hero__breadcrumb a:hover {
-            color: var(--white);
-        }
-
-        /* ============================================================
-           CONTACT SECTION
-           ============================================================ */
+        /* =========================================
+           5. CONTACT INFORMATION & FORM SECTION
+           ========================================= */
         .contact-section {
-            background: var(--white);
+            padding: 5rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
-        .contact__wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        /* Contact Info */
-        .contact-info h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--green-dark);
-            margin-bottom: 12px;
-        }
-        .contact-info h2 span {
-            color: var(--copper);
-        }
-        .contact-info>p {
-            font-size: 1.05rem;
-            opacity: 0.8;
-            line-height: 1.7;
-            margin-bottom: 28px;
-        }
-        .contact-info__item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding: 16px 20px;
-            background: var(--off-white);
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-        .contact-info__item:hover {
-            transform: translateX(6px);
-            box-shadow: var(--shadow);
-        }
-        .contact-info__item .icon {
-            width: 48px;
-            height: 48px;
-            background: var(--green-dark);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--copper-light);
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        .contact-info__item .details h4 {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--green-dark);
-            margin-bottom: 2px;
-        }
-        .contact-info__item .details p,
-        .contact-info__item .details a {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-        .contact-info__item .details a:hover {
-            color: var(--copper);
+        .contact-grid {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem;
+            max-width: 1200px; margin: 0 auto;
         }
 
-        /* Social links in contact info */
-        .contact-social {
-            display: flex;
-            gap: 14px;
-            margin-top: 16px;
+        /* Left: Contact Info */
+        .contact-info-wrapper {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2.5rem; border-radius: 20px;
         }
-        .contact-social a {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--off-white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--green-dark);
-            font-size: 1.3rem;
-            transition: var(--transition);
-            border: 1px solid var(--grey-100);
-        }
-        .contact-social a:hover {
-            background: var(--copper);
-            color: var(--white);
-            transform: translateY(-4px);
-            border-color: var(--copper);
-        }
+        .contact-info-wrapper h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .contact-info-wrapper h3 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .contact-info-wrapper > p { color: var(--text-secondary); margin-bottom: 2rem; }
 
-        /* Contact Form */
-        .contact-form {
-            background: var(--off-white);
-            padding: 40px 32px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+        .contact-item {
+            display: flex; align-items: flex-start; gap: 15px; margin-bottom: 1.8rem;
         }
-        .contact-form .form-group {
-            margin-bottom: 20px;
+        .contact-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; background: var(--bg-body);
+            border: 1px solid var(--border-color); border-radius: 12px;
+            font-size: 1.5rem; flex-shrink: 0;
         }
-        .contact-form label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--green-dark);
-            margin-bottom: 4px;
-        }
-        .contact-form label .required {
-            color: #c0392b;
-            margin-left: 2px;
-        }
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--grey-100);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--white);
-            color: var(--grey-800);
-        }
-        .contact-form input:focus,
-        .contact-form select:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--copper);
-            box-shadow: 0 0 0 4px var(--copper-glow);
-        }
-        .contact-form textarea {
-            min-height: 140px;
-            resize: vertical;
-        }
-        .contact-form .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .contact-form .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 16px;
-            font-size: 1rem;
-        }
+        .contact-item h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.1rem; }
+        .contact-item p, .contact-item a { color: var(--text-secondary); transition: color 0.3s; }
+        .contact-item a:hover { color: var(--accent-cyan); }
 
-        /* Honeypot field */
-        .hp-field {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            opacity: 0;
-            pointer-events: none;
-            height: 0;
-            width: 0;
+        /* Right: Contact Form */
+        .contact-form-wrapper {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2.5rem; border-radius: 20px;
         }
+        .contact-form-wrapper h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .contact-form-wrapper h3 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* ============================================================
-           MAP PLACEHOLDER
-           ============================================================ */
-        .map-section {
-            background: var(--off-white);
-            padding-bottom: 80px;
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.95rem; }
+        .form-control {
+            width: 100%; padding: 14px; background: var(--bg-body);
+            border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary);
+            font-size: 1rem; outline: none; font-family: inherit;
+            transition: all 0.3s;
         }
-        .map-placeholder {
-            width: 100%;
-            height: 360px;
-            background: var(--grey-100);
-            border-radius: var(--radius);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: var(--grey-800);
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        .map-placeholder i {
-            font-size: 4rem;
-            color: var(--copper);
-            opacity: 0.4;
-        }
-        .map-placeholder .map-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13, 74, 46, 0.05), rgba(200, 122, 46, 0.05));
-            pointer-events: none;
-        }
-        .map-placeholder a {
-            color: var(--copper);
-            font-weight: 700;
-            text-decoration: underline;
-            transition: var(--transition);
-        }
-        .map-placeholder a:hover {
-            color: var(--copper-light);
-        }
+        .form-control:focus { border-color: var(--accent-lime); box-shadow: 0 0 0 3px var(--glow-lime); }
+        body.theme-light .form-control { background: #f2f6fc; }
+        textarea.form-control { min-height: 140px; resize: vertical; }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
-        .footer {
-            background: var(--green-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 0 24px;
+        .btn-submit {
+            width: 100%; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 0 20px var(--glow-cyan);
         }
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer__brand .logo {
-            margin-bottom: 16px;
-        }
-        .footer__tagline {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 320px;
-            opacity: 0.75;
-        }
-        .footer__social {
-            display: flex;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .footer__social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .footer__social a:hover {
-            background: var(--copper);
-            transform: translateY(-4px);
-        }
-        .footer__links h4,
-        .footer__contact h4 {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 16px;
-            letter-spacing: 0.3px;
-        }
-        .footer__links ul,
-        .footer__contact ul {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer__links a,
-        .footer__contact a {
-            transition: var(--transition);
-            font-size: 0.92rem;
-        }
-        .footer__links a:hover,
-        .footer__contact a:hover {
-            color: var(--copper-light);
-        }
-        .footer__contact li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.92rem;
-        }
-        .footer__contact i {
-            width: 20px;
-            color: var(--copper-light);
-            font-size: 0.95rem;
-        }
-        .footer__bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.85rem;
-        }
-        .footer__legal {
-            display: flex;
-            gap: 16px;
-        }
-        .footer__legal a {
-            transition: var(--transition);
-        }
-        .footer__legal a:hover {
-            color: var(--copper-light);
-        }
+        .btn-submit:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime); }
 
-        /* ============================================================
-           BACK TO TOP
-           ============================================================ */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 900;
-            width: 48px;
-            height: 48px;
-            background: var(--copper);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
+        /* =========================================
+           6. ENGINEERED FOOTER
+           ========================================= */
+        footer {
+            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
+            text-align: center; transition: background 0.3s;
         }
-        #backToTop.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #backToTop:hover {
-            background: var(--copper-light);
-            transform: translateY(-4px);
-        }
+        body.theme-light footer { background: #e2e8f0; }
+        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
+        .footer-content a:hover { color: var(--accent-lime); }
+        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
+        body.theme-light .copyright { color: #94a3b8; }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 992px) {
-            .contact__wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .nav__list {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 76px;
-                left: 0;
-                right: 0;
-                background: var(--green-dark);
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 2px solid var(--copper);
-                box-shadow: var(--shadow);
-            }
-            .nav__list.open {
-                display: flex;
-            }
-            .nav__toggle {
-                display: flex;
-            }
+        /* =========================================
+           7. RESPONSIVE ENGINEERING
+           ========================================= */
+        @media (max-width: 992px) { .nav-links { gap: 1.5rem; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; } .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .nav-brand { font-size: 1.1rem; gap: 8px; } .nav-brand img { height: 30px; }
+            .contact-hero h1 { font-size: 2.8rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
         }
-        @media (max-width: 640px) {
-            .page-hero__content h1 {
-                font-size: 2.4rem;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr;
-            }
-            .section__title {
-                font-size: 2rem;
-            }
-            .contact-form .form-row {
-                grid-template-columns: 1fr;
-            }
-            .contact-form {
-                padding: 24px 16px;
-            }
-            .contact-info__item {
-                padding: 12px 16px;
-            }
-            .map-placeholder {
-                height: 240px;
-            }
+        @media (max-width: 480px) {
+            .nav-links { display: none; }
+            .contact-hero h1 { font-size: 2.2rem; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- ============================================================
-    PRELOADER
-    ============================================================ -->
-    <div id="preloader" aria-hidden="true">
-        <div class="loader-icon">
-            <span>SZ</span>
-            <span class="bolt"><i class="fas fa-bolt"></i></span>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Smart Zambia Logo"> 
+            SMART ZAMBIA
         </div>
-        <div class="loader-bar"><span></span></div>
-    </div>
-
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
-    <header class="header" id="header" role="banner">
-        <div class="container header__inner">
-            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <div class="logo__icon">
-                    <span>SZ</span>
-                    <span class="bolt"><i class="fas fa-bolt"></i></span>
-                </div>
-                <span class="logo__text">Smart<span>Zambia</span></span>
-            </a>
-
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav__list" id="navList">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="partner.html">Partner</a></li>
-                    <li><a href="contact.html" class="active">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="partner.html">Partner</a>
+            <a href="contact.html" class="active">Contact</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
         </div>
-    </header>
+    </nav>
 
-    <!-- ============================================================
-    PAGE HERO
-    ============================================================ -->
-    <section class="page-hero" aria-label="Contact page header">
-        <div class="page-hero__bg"></div>
-        <div class="page-hero__overlay"></div>
-        <div class="container page-hero__content">
-            <div class="page-hero__breadcrumb">
-                <a href="index.html">Home</a> <span>/</span> <span>Contact</span>
-            </div>
-            <h1>Get in <span>Touch</span></h1>
-            <p>We're here to answer your questions, discuss your project, or explore partnership opportunities. Reach out any time.</p>
+    <!-- HERO -->
+    <section class="contact-hero">
+        <div class="hero-content">
+            <h1>Get In <span>Touch</span></h1>
+            <p>Have a question, need a quote, or want to collaborate? Reach out to our expert team today—we are always ready to serve.</p>
         </div>
     </section>
 
-    <!-- ============================================================
-    CONTACT SECTION
-    ============================================================ -->
-    <section class="contact-section section" aria-label="Contact information and form">
-        <div class="container">
-            <div class="contact__wrapper">
-                <!-- Left: Contact Info -->
-                <div class="contact-info">
-                    <h2>Let's <span>Connect</span></h2>
-                    <p>
-                        Whether you need a smart home, a commercial installation, or
-                        want to partner with us — we'd love to hear from you. Reach out
-                        through any of the channels below.
-                    </p>
-
-                    <div class="contact-info__item">
-                        <div class="icon"><i class="fas fa-phone"></i></div>
-                        <div class="details">
-                            <h4>Call Us</h4>
-                            <a href="tel:+260958752821">+260 958 752 821</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-info__item">
-                        <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                        <div class="details">
-                            <h4>WhatsApp</h4>
-                            <a href="https://wa.me/260958752821" target="_blank">+260 958 752 821</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-info__item">
-                        <div class="icon"><i class="fas fa-envelope"></i></div>
-                        <div class="details">
-                            <h4>Email Us</h4>
-                            <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-info__item">
-                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="details">
-                            <h4>Our Office</h4>
-                            <p>Lusaka, Zambia<br />(By appointment only)</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    <!-- CONTACT GRID -->
+    <section class="contact-section">
+        <div class="contact-grid">
+            
+            <!-- Information -->
+            <div class="contact-info-wrapper">
+                <h3>Our <span>Contact</span> Details</h3>
+                <p>Find the best ways to get in touch with Smart Zambia. We respond to all inquiries within 24 hours.</p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>WhatsApp / Call</h4>
+                        <a href="https://wa.me/260958752821">+260 95 875 2821</a>
                     </div>
                 </div>
 
-                <!-- Right: Contact Form -->
-                <div class="contact-form">
-                    <form id="contactForm" action="#" method="POST" novalidate>
-                        <!-- Honeypot anti‑bot field -->
-                        <input type="text" class="hp-field" name="hp_website" tabindex="-1" autocomplete="off" />
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email Address</h4>
+                        <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a>
+                    </div>
+                </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="fullName">Full Name <span class="required">*</span></label>
-                                <input type="text" id="fullName" name="fullName" required placeholder="Your full name" />
-                            </div>
-                            <div class="form-group">
-                                <label for="contactEmail">Email Address <span class="required">*</span></label>
-                                <input type="email" id="contactEmail" name="contactEmail" required placeholder="you@example.com" />
-                            </div>
-                        </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Service Area</h4>
+                        <p>Zambia - Serving all domestic residential locations</p>
+                    </div>
+                </div>
 
-                        <div class="form-group">
-                            <label for="contactPhone">Phone Number <span class="required">*</span></label>
-                            <input type="tel" id="contactPhone" name="contactPhone" required placeholder="+260 9XX XXX XXX" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subject">Subject <span class="required">*</span></label>
-                            <select id="subject" name="subject" required>
-                                <option value="">Select a subject</option>
-                                <option value="general">General Enquiry</option>
-                                <option value="smart-house">Smart House / Home Automation</option>
-                                <option value="electrical">Electrical Services</option>
-                                <option value="mechanical">Mechanical Services</option>
-                                <option value="civil">Civil Engineering</option>
-                                <option value="it">IT &amp; Smart Solutions</option>
-                                <option value="partnership">Partnership Interest</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Message <span class="required">*</span></label>
-                            <textarea id="message" name="message" required placeholder="Tell us about your project, question, or idea..."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn--primary">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4>Working Hours</h4>
+                        <p>Mon - Fri: 8:00 AM - 5:00 PM<br>Sat: 9:00 AM - 1:00 PM</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-wrapper">
+                <h3>Send a <span>Message</span></h3>
+                <form id="contactForm" onsubmit="handleContactFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="contactName">Full Name</label>
+                        <input type="text" id="contactName" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address</label>
+                        <input type="email" id="contactEmail" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" class="form-control" placeholder="Inquiry about a project..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Your Message</label>
+                        <textarea id="contactMessage" class="form-control" placeholder="Tell us about your domestic project or inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Send Message Now</button>
+                </form>
+            </div>
+
         </div>
     </section>
 
-    <!-- ============================================================
-    MAP PLACEHOLDER
-    ============================================================ -->
-    <section class="map-section" aria-label="Location map">
-        <div class="container">
-            <div class="section__header" style="margin-bottom:32px;">
-                <span class="section__tag"><i class="fas fa-map-pin"></i> Find Us</span>
-                <h2 class="section__title">Our <span>Location</span></h2>
-            </div>
-            <div class="map-placeholder">
-                <div class="map-overlay"></div>
-                <i class="fas fa-map-marked-alt"></i>
-                <p>
-                    <strong>Smart Zambia</strong><br />
-                    Lusaka, Zambia
-                </p>
-                <p style="font-size:0.9rem;opacity:0.7;">
-                    <i class="fas fa-phone" style="margin-right:6px;"></i>
-                    <a href="tel:+260958752821">+260 958 752 821</a>
-                </p>
-                <p style="font-size:0.9rem;opacity:0.7;">
-                    <i class="fas fa-envelope" style="margin-right:6px;"></i>
-                    <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a>
-                </p>
-                <p style="font-size:0.85rem;opacity:0.5;margin-top:8px;">
-                    <i class="fas fa-info-circle"></i>
-                    Interactive map coming soon – for now, please contact us directly.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo__icon">
-                            <span>SZ</span>
-                            <span class="bolt"><i class="fas fa-bolt"></i></span>
-                        </div>
-                        <span class="logo__text">Smart<span>Zambia</span></span>
-                    </a>
-                    <p class="footer__tagline">
-                        Engineering solutions through innovation and implementation.
-                        Building a smarter Zambia, one project at a time.
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer__links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="partner.html">Partner</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="services.html#electrical">Electrical</a></li>
-                        <li><a href="services.html#mechanical">Mechanical</a></li>
-                        <li><a href="services.html#civil">Civil</a></li>
-                        <li><a href="services.html#it">IT Services</a></li>
-                        <li><a href="contact.html">Smart House</a></li>
-                    </ul>
-                </div>
-                <div class="footer__contact">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Lusaka, Zambia</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
-                <p class="footer__legal">
-                    <a href="#">Privacy Policy</a> &bull;
-                    <a href="#">Terms of Service</a>
-                </p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Green & Better Zambia</h3>
+            <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
+            <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
+            <div class="copyright">
+                &copy; 2026 Smart Zambia. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- ============================================================
-    BACK TO TOP
-    ============================================================ -->
-    <button id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
+    <!-- ENGINEERED JAVASCRIPT FOR THEME & FORM SIMULATION -->
     <script>
-        (function() {
-            'use strict';
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // Preloader
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => {
-                preloader.classList.add('hidden');
-            });
+        // 1. Load preferred theme from LocalStorage
+        if(localStorage.getItem('siteTheme') === 'light') {
+            body.classList.add('theme-light');
+            toggleBtn.textContent = '☀️';
+        } else {
+            toggleBtn.textContent = '🌙';
+        }
 
-            // Mobile nav
-            const toggle = document.getElementById('navToggle');
-            const navList = document.getElementById('navList');
-            toggle.addEventListener('click', () => {
-                const open = toggle.classList.toggle('open');
-                navList.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', open);
-            });
-            document.querySelectorAll('.nav__list a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggle.classList.remove('open');
-                    navList.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
+        // 2. Handle theme toggle
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('theme-light');
+            if(body.classList.contains('theme-light')) {
+                localStorage.setItem('siteTheme', 'light');
+                toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('siteTheme', 'dark');
+                toggleBtn.textContent = '🌙';
+            }
+        });
 
-            // Header shadow
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                header.classList.toggle('scrolled', y > 60);
-                const btn = document.getElementById('backToTop');
-                btn.classList.toggle('visible', y > 500);
-            });
-
-            // Back to top
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Contact form submission with honeypot and validation
-            const form = document.getElementById('contactForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Honeypot check
-                const hp = this.querySelector('input[name="hp_website"]');
-                if (hp && hp.value.trim() !== '') {
-                    alert('Bot detected. Submission blocked.');
-                    return;
-                }
-
-                // Basic validation
-                const requiredFields = this.querySelectorAll('[required]');
-                let valid = true;
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        field.style.borderColor = '#c0392b';
-                        valid = false;
-                    } else {
-                        field.style.borderColor = '';
-                    }
-                });
-
-                if (!valid) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-
-                // Simulate submission
-                const btn = this.querySelector('.btn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                btn.disabled = true;
-
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                    btn.style.background = '#2d8f54';
-                    btn.style.boxShadow = '0 8px 24px rgba(45,143,84,0.35)';
-
-                    // Reset after 4 seconds
-                    setTimeout(() => {
-                        btn.innerHTML = originalText;
-                        btn.style.background = '';
-                        btn.style.boxShadow = '';
-                        btn.disabled = false;
-                        form.reset();
-                    }, 4000);
-                }, 1800);
-            });
-
-            // Remove error border on input
-            document.querySelectorAll('#contactForm input, #contactForm select, #contactForm textarea').forEach(el => {
-                el.addEventListener('input', function() {
-                    this.style.borderColor = '';
-                });
-            });
-
-        })();
+        // 3. Contact Form Simulation
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            
+            alert(`Thank you, ${name}!\n\nYour message regarding "${subject}" has been successfully sent to smartzambia@proton.me.\n\nWe will get back to you via ${email} within 24 hours.`);
+            
+            // Reset the form
+            document.getElementById('contactForm').reset();
+        }
     </script>
-
 </body>
 </html>
