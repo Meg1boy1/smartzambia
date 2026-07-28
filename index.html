@@ -4,233 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Zambia | Engineering the Future</title>
-    <style>
-        /* =========================================
-           1. CSS VARIABLES & THEME ENGINE
-           ========================================= */
-        :root {
-            /* Core Colors - Dark Mode (Default) */
-            --bg-body: #0b0d11;
-            --bg-card: #14171e;
-            --bg-nav: rgba(11, 13, 17, 0.92);
-            --text-primary: #f0f4f8;
-            --text-secondary: #9aa3b5;
-            --border-color: #252a36;
-            --shadow-color: rgba(0, 0, 0, 0.6);
-            
-            /* Brand Accents */
-            --accent-lime: #9dff00;
-            --accent-cyan: #00faff;
-            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
-            
-            /* Glow Effects */
-            --glow-lime: rgba(157, 255, 0, 0.3);
-            --glow-cyan: rgba(0, 250, 255, 0.3);
-        }
-
-        /* Light Mode Overrides */
-        body.theme-light {
-            --bg-body: #f2f6fc;
-            --bg-card: #ffffff;
-            --bg-nav: rgba(242, 246, 252, 0.95);
-            --text-primary: #131a26;
-            --text-secondary: #516077;
-            --border-color: #dce3ed;
-            --shadow-color: rgba(0, 0, 0, 0.05);
-        }
-
-        /* =========================================
-           2. RESET & ENGINEERED TYPOGRAPHY
-           ========================================= */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            line-height: 1.6;
-            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
-        }
-
-        /* Custom Advanced Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
-
-        a { text-decoration: none; color: inherit; transition: color 0.3s; }
-        ul { list-style: none; }
-
-        /* =========================================
-           3. NAVIGATION BAR (Sticky Glassmorphism)
-           ========================================= */
-        .navbar {
-            position: sticky; top: 0; z-index: 999;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1.2rem 5%; background: var(--bg-nav);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.4s ease, border 0.3s ease;
-        }
-        .nav-brand {
-            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
-            color: var(--accent-lime); letter-spacing: -0.5px;
-        }
-        .nav-brand img { height: 40px; width: auto; }
-        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
-        .nav-links a {
-            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
-            position: relative; transition: color 0.3s;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
-            background: var(--accent-gradient); transition: width 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a:hover::after { width: 100%; }
-        
-        /* Dark/Light Toggle Button */
-        .theme-toggle {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; color: var(--text-primary);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
-
-        /* =========================================
-           4. HERO SECTION (Watermark & Glow)
-           ========================================= */
-        .hero {
-            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 2rem 5%; position: relative; overflow: hidden;
-        }
-        /* The Logo Watermark Engine */
-        .hero::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('images/logo.png'); background-size: 60%; background-repeat: no-repeat;
-            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
-            animation: slowFloat 20s infinite alternate ease-in-out;
-        }
-        @keyframes slowFloat {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(3deg); }
-        }
-        .hero-content {
-            position: relative; z-index: 1; max-width: 900px;
-            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-        }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
-            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; text-shadow: 0 0 40px var(--glow-lime);
-        }
-        .hero p {
-            font-size: 1.3rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2.5rem auto;
-            -webkit-text-fill-color: var(--text-secondary); /* Reset for p */
-        }
-        .btn-primary {
-            display: inline-block; padding: 16px 48px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
-            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
-            transition: all 0.3s ease; position: relative; overflow: hidden;
-            box-shadow: 0 0 20px var(--glow-cyan);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime);
-        }
-
-        /* =========================================
-           5. SERVICE PREVIEW SECTION (Index Home)
-           ========================================= */
-        .services-preview {
-            padding: 6rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .section-header h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .section-header p { color: var(--text-secondary); font-size: 1.1rem; }
-
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;
-            max-width: 1200px; margin: 0 auto;
-        }
-        .service-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 3rem 2rem; border-radius: 20px; text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
-        }
-        .service-card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--accent-gradient); transform: scaleX(0); transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-        .service-card:hover { transform: translateY(-10px); border-color: var(--accent-cyan); box-shadow: 0 20px 40px var(--shadow-color); }
-        .service-card:hover::before { transform: scaleX(1); }
-        .service-icon { font-size: 3.5rem; display: block; margin-bottom: 1.5rem; }
-        .service-card h3 { font-size: 1.5rem; margin-bottom: 0.8rem; }
-        .service-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
-        .service-link { color: var(--accent-lime); font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 5px; }
-        .service-link:hover { color: var(--accent-cyan); gap: 12px; }
-
-        /* =========================================
-           6. CIVIL PROJECT GALLERY (Domestic)
-           ========================================= */
-        .projects-gallery {
-            padding: 6rem 5%; background: var(--bg-body);
-        }
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;
-            max-width: 1100px; margin: 2rem auto 0 auto;
-        }
-        .gallery-item {
-            border-radius: 16px; overflow: hidden; position: relative;
-            aspect-ratio: 4/3; border: 1px solid var(--border-color);
-            transition: transform 0.4s ease, border 0.3s ease;
-        }
-        .gallery-item:hover { transform: scale(1.03); border-color: var(--accent-lime); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        /* =========================================
-           7. ENGINEERED FOOTER
-           ========================================= */
-        footer {
-            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
-            text-align: center; transition: background 0.3s;
-        }
-        body.theme-light footer { background: #e2e8f0; }
-        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
-        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
-        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
-        .footer-content a:hover { color: var(--accent-lime); }
-        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
-        body.theme-light .copyright { color: #94a3b8; }
-
-        /* =========================================
-           8. RESPONSIVE ENGINEERING
-           ========================================= */
-        @media (max-width: 992px) {
-            .nav-links { gap: 1.5rem; }
-        }
-        @media (max-width: 768px) {
-            .navbar { padding: 1rem 5%; }
-            .nav-links { gap: 1rem; font-size: 0.9rem; }
-            .nav-brand { font-size: 1.1rem; gap: 8px; }
-            .nav-brand img { height: 30px; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero p { font-size: 1.1rem; }
-        }
-        @media (max-width: 480px) {
-            .nav-links { display: none; /* In real advanced build we'd put a burger menu here */ }
-            .hero h1 { font-size: 2.2rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -241,65 +15,104 @@
             SMART ZAMBIA
         </div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="services.html">Services</a>
             <a href="about.html">About</a>
             <a href="partner.html">Partner</a>
             <a href="contact.html">Contact</a>
-            <!-- Theme Toggle -->
+            <a href="contact.html" class="nav-cta">Get a Quote</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- PROFESSIONAL HERO SECTION -->
     <section class="hero">
+        <!-- Floating Design Elements -->
+        <div class="hero-orb-1"></div>
+        <div class="hero-orb-2"></div>
+        
         <div class="hero-content">
-            <h1>Making your living<br>easier and smarter</h1>
+            <h1 class="gradient-text">Making your living<br>easier and smarter</h1>
             <p>Affordable Electrical, Mechanical, Civil, and IT solutions tailored for domestic residential projects across Zambia.</p>
             <a href="partner.html"><button class="btn-primary">Partner With Us</button></a>
         </div>
+
+        <!-- Bouncing Disappearing Scroll Indicator -->
+        <div class="scroll-indicator">
+            SCROLL
+            <div class="scroll-chevron"></div>
+        </div>
     </section>
 
-    <!-- SERVICES PREVIEW -->
-    <section class="services-preview" id="services">
-        <div class="section-header">
-            <h2>Our Core <span>Solutions</span></h2>
-            <p>Innovation and implementation tailored for everyday living.</p>
+    <!-- SCROLLING MARQUEE (Big Company Professionalism) -->
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <span><strong>⚡ Electrical</strong> | Wiring & Smart Homes</span>
+            <span><strong>⚙️ Mechanical</strong> | Plumbing & HVAC</span>
+            <span><strong>🏗️ Civil</strong> | Foundations & Roofing</span>
+            <span><strong>💻 IT Solutions</strong> | Networking & Security</span>
+            <span><strong>⚡ Electrical</strong> | Wiring & Smart Homes</span>
+            <span><strong>⚙️ Mechanical</strong> | Plumbing & HVAC</span>
+            <span><strong>🏗️ Civil</strong> | Foundations & Roofing</span>
+            <span><strong>💻 IT Solutions</strong> | Networking & Security</span>
         </div>
+    </div>
+
+    <!-- SERVICES PREVIEW -->
+    <section id="services">
+        <h2 class="section-title">Our Core <span class="gradient-text">Solutions</span></h2>
+        <p class="section-desc">Innovation and implementation tailored for everyday living.</p>
         <div class="services-grid">
             <div class="service-card">
                 <span class="service-icon">⚡</span>
                 <h3>Electrical</h3>
                 <p>Domestic wiring, smart home automation, energy-efficient lighting, and solar panel installations.</p>
-                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">⚙️</span>
                 <h3>Mechanical</h3>
                 <p>Plumbing systems, HVAC installations, and mechanical maintenance for residential properties.</p>
-                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">🏗️</span>
                 <h3>Civil</h3>
                 <p>Domestic construction, foundation laying, block work, roofing, and structural renovations.</p>
-                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">💻</span>
                 <h3>IT Solutions</h3>
                 <p>Network setup, security systems (CCTV), internet infrastructure, and smart software integration.</p>
-                <a href="services.html" class="service-link">View Details →</a>
             </div>
         </div>
     </section>
 
-    <!-- PROJECTS GALLERY -->
-    <section class="projects-gallery" id="projects">
-        <div class="section-header">
-            <h2>Recent <span>Constructions</span></h2>
-            <p>High-quality domestic civil projects we have completed.</p>
+    <!-- HOW WE WORK (Professional Process) -->
+    <section id="process">
+        <h2 class="section-title">How We <span class="gradient-text">Engineer Excellence</span></h2>
+        <p class="section-desc">A streamlined approach to bring your domestic projects to life with precision and care.</p>
+        <div class="process-grid">
+            <div class="process-card">
+                <div class="process-step">1</div>
+                <h4>Consult & Design</h4>
+                <p>We sit down with you to understand your needs, budget, and vision, crafting a tailored plan that fits your home perfectly.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-step">2</div>
+                <h4>Implement & Build</h4>
+                <p>Our expert engineers and civil contractors execute the project with top-tier materials, safety standards, and strict timelines.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-step">3</div>
+                <h4>Maintain & Support</h4>
+                <p>We don't just build and leave. Smart Zambia offers ongoing maintenance and support to ensure long-term reliability.</p>
+            </div>
         </div>
+    </section>
+
+    <!-- CIVIL PROJECTS GALLERY -->
+    <section id="projects">
+        <h2 class="section-title">Recent <span class="gradient-text">Constructions</span></h2>
+        <p class="section-desc">High-quality domestic civil projects we have completed.</p>
         <div class="gallery-grid">
             <div class="gallery-item"><img src="images/civil1.jpg" alt="Civil Project 1"></div>
             <div class="gallery-item"><img src="images/civil2.jpg" alt="Civil Project 2"></div>
@@ -315,36 +128,31 @@
             <h3>Green & Better Zambia</h3>
             <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
             <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
-            <div class="copyright">
-                &copy; 2026 Smart Zambia. All rights reserved.
-            </div>
+            <div class="copyright">&copy; 2026 Smart Zambia. All rights reserved.</div>
         </div>
     </footer>
 
-    <!-- ENGINEERED JAVASCRIPT FOR THEME PERSISTENCE -->
+    <!-- JAVASCRIPT -->
     <script>
+        // Theme Toggle Engine
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
-
-        // 1. Load preferred theme from LocalStorage
-        if(localStorage.getItem('siteTheme') === 'light') {
-            body.classList.add('theme-light');
-            toggleBtn.textContent = '☀️';
-        } else {
-            toggleBtn.textContent = '🌙';
-        }
-
-        // 2. Handle toggle click
+        if(localStorage.getItem('siteTheme') === 'light') { body.classList.add('theme-light'); toggleBtn.textContent = '☀️'; } 
+        else { toggleBtn.textContent = '🌙'; }
         toggleBtn.addEventListener('click', () => {
             body.classList.toggle('theme-light');
-            
-            // 3. Save state and update icon
-            if(body.classList.contains('theme-light')) {
-                localStorage.setItem('siteTheme', 'light');
-                toggleBtn.textContent = '☀️';
+            body.classList.contains('theme-light') ? (localStorage.setItem('siteTheme', 'light'), toggleBtn.textContent = '☀️') : (localStorage.setItem('siteTheme', 'dark'), toggleBtn.textContent = '🌙');
+        });
+
+        // Disappearing Scroll Indicator on Scroll
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 150) {
+                scrollIndicator.style.opacity = '0';
+                scrollIndicator.style.pointerEvents = 'none';
             } else {
-                localStorage.setItem('siteTheme', 'dark');
-                toggleBtn.textContent = '🌙';
+                scrollIndicator.style.opacity = '1';
+                scrollIndicator.style.pointerEvents = 'auto';
             }
         });
     </script>
