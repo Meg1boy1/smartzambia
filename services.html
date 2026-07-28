@@ -1,1119 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Partner with Smart Zambia</title>
-
-    <!-- SEO & Security -->
-    <meta name="description" content="Partner with Smart Zambia. Register your company to collaborate on engineering projects across Zambia. Electrical, mechanical, civil, and IT partnerships welcome." />
-    <meta name="theme-color" content="#0d4a2e" />
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Smart Zambia</title>
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* =========================================
+           1. CSS VARIABLES & THEME ENGINE
+           ========================================= */
         :root {
-            --green-dark: #0d4a2e;
-            --green-mid: #1a6e3e;
-            --green-light: #2d8f54;
-            --copper: #c87a2e;
-            --copper-light: #e8a54b;
-            --copper-glow: rgba(200, 122, 46, 0.3);
-            --white: #ffffff;
-            --off-white: #f2f5f0;
-            --grey-100: #e9ece8;
-            --grey-800: #2c3a2f;
-            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
-            --radius: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Core Colors - Dark Mode (Default) */
+            --bg-body: #0b0d11;
+            --bg-card: #14171e;
+            --bg-nav: rgba(11, 13, 17, 0.92);
+            --text-primary: #f0f4f8;
+            --text-secondary: #9aa3b5;
+            --border-color: #252a36;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            
+            /* Brand Accents */
+            --accent-lime: #9dff00;
+            --accent-cyan: #00faff;
+            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+            
+            /* Glow Effects */
+            --glow-lime: rgba(157, 255, 0, 0.3);
+            --glow-cyan: rgba(0, 250, 255, 0.3);
         }
-        html {
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
+
+        /* Light Mode Overrides */
+        body.theme-light {
+            --bg-body: #f2f6fc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(242, 246, 252, 0.95);
+            --text-primary: #131a26;
+            --text-secondary: #516077;
+            --border-color: #dce3ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
         }
+
+        /* =========================================
+           2. RESET & ENGINEERED TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--off-white);
-            color: var(--grey-800);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
         }
 
-        /* ============================================================
-           PRELOADER
-           ============================================================ */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: var(--green-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 24px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+        /* Custom Advanced Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+
+        /* =========================================
+           3. NAVIGATION BAR (Sticky Glassmorphism)
+           ========================================= */
+        .navbar {
+            position: sticky; top: 0; z-index: 999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: var(--bg-nav);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease, border 0.3s ease;
         }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
+            color: var(--accent-lime); letter-spacing: -0.5px;
         }
-        .loader-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--copper-light);
+        .nav-brand img { height: 40px; width: auto; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+        .nav-links a {
+            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
+            position: relative; transition: color 0.3s;
         }
-        .loader-icon .bolt {
-            color: var(--white);
-            font-size: 2.4rem;
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-gradient); transition: width 0.3s ease;
         }
-        .loader-bar {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Active Page Highlight */
+        .nav-links a.active { color: var(--text-primary); }
+        .nav-links a.active::after { width: 100%; background: var(--accent-cyan); }
+        
+        /* Dark/Light Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .loader-bar span {
-            display: block;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--copper), var(--copper-light));
-            border-radius: 4px;
-            animation: loadProgress 1.8s ease-in-out forwards;
+        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
+
+        /* =========================================
+           4. SERVICES HERO (Watermark & Glow)
+           ========================================= */
+        .services-hero {
+            min-height: 55vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 5%; position: relative; overflow: hidden;
         }
-        @keyframes loadProgress {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
+        /* The Logo Watermark Engine */
+        .services-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/logo.png'); background-size: 50%; background-repeat: no-repeat;
+            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
+            animation: slowFloat 20s infinite alternate ease-in-out;
+        }
+        @keyframes slowFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
+        }
+        .hero-content {
+            position: relative; z-index: 1; max-width: 800px;
+            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .services-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .services-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .services-hero p {
+            font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
+            -webkit-text-fill-color: var(--text-secondary);
         }
 
-        /* ============================================================
-           HEADER
-           ============================================================ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(13, 74, 46, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: var(--transition);
+        /* =========================================
+           5. DETAILED SERVICES SECTION
+           ========================================= */
+        .services-expertise {
+            padding: 6rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
-        .header.scrolled {
-            background: rgba(13, 74, 46, 0.98);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .section-header h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem;
+            max-width: 1200px; margin: 0 auto;
         }
-        .header__inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 76px;
+        .service-detailed-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem; border-radius: 20px; text-align: left;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--white);
-            letter-spacing: -0.5px;
+        .service-detailed-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent-gradient); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
         }
-        .logo__icon {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            background: var(--copper);
-            padding: 6px 10px 6px 8px;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1.1rem;
-            line-height: 1;
+        .service-detailed-card:hover { transform: translateY(-10px); border-color: var(--accent-lime); box-shadow: 0 20px 40px var(--shadow-color); }
+        .service-detailed-card:hover::before { transform: scaleX(1); }
+        
+        .service-detailed-card .icon-wrapper {
+            display: inline-block; font-size: 3.2rem; margin-bottom: 1.5rem;
+            background: var(--bg-body); padding: 12px; border-radius: 16px; border: 1px solid var(--border-color);
         }
-        .logo__icon .bolt {
-            color: #fff4d6;
-            font-size: 1rem;
+        .service-detailed-card h3 { font-size: 1.6rem; margin-bottom: 0.8rem; }
+        .service-detailed-card p { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5rem; }
+        .service-features { list-style: none; padding: 0; margin: 0; }
+        .service-features li {
+            padding: 0.4rem 0; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; font-size: 0.95rem;
         }
-        .logo__text span {
-            color: var(--copper-light);
-        }
-        .nav__list {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nav__list a {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.75);
-            transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.3px;
-        }
-        .nav__list a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--copper-light);
-            transition: var(--transition);
-        }
-        .nav__list a:hover,
-        .nav__list a.active {
-            color: var(--white);
-        }
-        .nav__list a:hover::after,
-        .nav__list a.active::after {
-            width: 100%;
-        }
-        .nav__toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .nav__toggle .bar {
-            width: 28px;
-            height: 2.5px;
-            background: var(--white);
-            border-radius: 4px;
-            transition: var(--transition);
-            transform-origin: center;
-        }
-        .nav__toggle.open .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .nav__toggle.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .nav__toggle.open .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+        .service-features li::before {
+            content: "▸"; color: var(--accent-lime); font-weight: bold; font-size: 1.2rem;
         }
 
-        /* ============================================================
-           COMMON SECTION STYLES
-           ============================================================ */
-        .section {
-            padding: 80px 0;
+        /* =========================================
+           6. CORE VALUES (Why Smart Zambia)
+           ========================================= */
+        .core-values {
+            padding: 6rem 5%; background: var(--bg-body);
         }
-        .section__header {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 56px;
+        .values-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem;
+            max-width: 1100px; margin: 0 auto;
         }
-        .section__tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--copper);
-            background: rgba(200, 122, 46, 0.08);
-            padding: 6px 16px;
-            border-radius: 50px;
-            margin-bottom: 16px;
+        .value-card {
+            text-align: center; padding: 2.5rem; border-radius: 16px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            transition: border 0.3s;
         }
-        .section__title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            color: var(--green-dark);
-        }
-        .section__title span {
-            color: var(--copper);
-        }
-        .section__desc {
-            font-size: 1.1rem;
-            color: var(--grey-800);
-            opacity: 0.8;
-            margin-top: 12px;
-            line-height: 1.7;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-        .btn--primary {
-            background: var(--copper);
-            color: var(--white);
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-        }
-        .btn--primary:hover {
-            background: var(--copper-light);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(200, 122, 46, 0.45);
-        }
-        .btn--outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .btn--outline:hover {
-            border-color: var(--copper-light);
-            background: rgba(200, 122, 46, 0.15);
-            transform: translateY(-3px);
-        }
-        .btn--large {
-            padding: 18px 44px;
-            font-size: 1.1rem;
-        }
+        .value-card:hover { border-color: var(--accent-cyan); }
+        .value-card h4 { font-size: 1.4rem; margin: 1rem 0 0.5rem; }
+        .value-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .value-icon { font-size: 2.8rem; }
 
-        /* ============================================================
-           PAGE HERO (Partner)
-           ============================================================ */
-        .page-hero {
-            position: relative;
-            padding: 160px 0 80px;
-            background: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
+        /* =========================================
+           7. CTA BANNER
+           ========================================= */
+        .cta-banner {
+            background: var(--bg-card); margin: 0 5% 4rem 5%; padding: 4rem; border-radius: 32px;
+            text-align: center; border: 1px solid var(--border-color);
+            position: relative; overflow: hidden;
         }
-        .page-hero__bg {
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 30%/cover no-repeat;
-            opacity: 0.12;
-            mix-blend-mode: overlay;
+        .cta-banner h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+        .cta-banner h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .cta-banner p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto; font-size: 1.1rem; }
+        .btn-primary {
+            display: inline-block; padding: 16px 48px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 0 20px var(--glow-cyan);
         }
-        .page-hero__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13, 74, 46, 0.9) 0%, rgba(13, 74, 46, 0.5) 100%);
-            z-index: 1;
-        }
-        .page-hero__content {
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .page-hero__content h1 {
-            font-size: 3.6rem;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-        }
-        .page-hero__content h1 span {
-            color: var(--copper-light);
-        }
-        .page-hero__content p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-        .page-hero__breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .page-hero__breadcrumb a {
-            color: var(--copper-light);
-            transition: var(--transition);
-        }
-        .page-hero__breadcrumb a:hover {
-            color: var(--white);
-        }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime); }
 
-        /* ============================================================
-           PARTNER BENEFITS
-           ============================================================ */
-        .partner-benefits {
-            background: var(--white);
+        /* =========================================
+           8. ENGINEERED FOOTER
+           ========================================= */
+        footer {
+            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
+            text-align: center; transition: background 0.3s;
         }
-        .partner-benefits__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-        .benefit-card {
-            text-align: center;
-            padding: 32px 20px;
-            background: var(--off-white);
-            border-radius: var(--radius);
-            transition: var(--transition);
-            border-bottom: 4px solid transparent;
-        }
-        .benefit-card:hover {
-            transform: translateY(-6px);
-            border-bottom-color: var(--copper);
-            box-shadow: var(--shadow);
-        }
-        .benefit-card__icon {
-            font-size: 2.6rem;
-            color: var(--copper);
-            margin-bottom: 12px;
-        }
-        .benefit-card h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--green-dark);
-            margin-bottom: 6px;
-        }
-        .benefit-card p {
-            font-size: 0.95rem;
-            opacity: 0.7;
-            line-height: 1.6;
-        }
+        body.theme-light footer { background: #e2e8f0; }
+        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
+        .footer-content a:hover { color: var(--accent-lime); }
+        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
+        body.theme-light .copyright { color: #94a3b8; }
 
-        /* ============================================================
-           PARTNER FORM
-           ============================================================ */
-        .partner-form-section {
-            background: var(--off-white);
+        /* =========================================
+           9. RESPONSIVE ENGINEERING
+           ========================================= */
+        @media (max-width: 992px) { .nav-links { gap: 1.5rem; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; } .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .nav-brand { font-size: 1.1rem; gap: 8px; } .nav-brand img { height: 30px; }
+            .services-hero h1 { font-size: 2.8rem; } .services-hero p { font-size: 1.1rem; }
+            .cta-banner { padding: 3rem 1.5rem; }
         }
-        .partner-form__wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-        .partner-form__info h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--green-dark);
-            margin-bottom: 12px;
-        }
-        .partner-form__info h2 span {
-            color: var(--copper);
-        }
-        .partner-form__info p {
-            font-size: 1.05rem;
-            opacity: 0.8;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-        .partner-form__info ul {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .partner-form__info ul li {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-weight: 500;
-        }
-        .partner-form__info ul li i {
-            color: var(--copper);
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-        }
-
-        .partner-form__form {
-            background: var(--white);
-            padding: 40px 32px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .partner-form__form .form-group {
-            margin-bottom: 20px;
-        }
-        .partner-form__form label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--green-dark);
-            margin-bottom: 4px;
-        }
-        .partner-form__form label .required {
-            color: #c0392b;
-            margin-left: 2px;
-        }
-        .partner-form__form input,
-        .partner-form__form select,
-        .partner-form__form textarea {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--grey-100);
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--off-white);
-            color: var(--grey-800);
-        }
-        .partner-form__form input:focus,
-        .partner-form__form select:focus,
-        .partner-form__form textarea:focus {
-            outline: none;
-            border-color: var(--copper);
-            box-shadow: 0 0 0 4px var(--copper-glow);
-            background: var(--white);
-        }
-        .partner-form__form textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .partner-form__form .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-        .partner-form__form .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 4px;
-        }
-        .partner-form__form .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 400;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        .partner-form__form .checkbox-group input[type="checkbox"] {
-            width: auto;
-            accent-color: var(--copper);
-            width: 18px;
-            height: 18px;
-        }
-        .partner-form__form .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 16px;
-            font-size: 1rem;
-        }
-
-        /* Honeypot field (hidden) */
-        .hp-field {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            opacity: 0;
-            pointer-events: none;
-            height: 0;
-            width: 0;
-        }
-
-        /* ============================================================
-           FOOTER
-           ============================================================ */
-        .footer {
-            background: var(--green-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 0 24px;
-        }
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer__brand .logo {
-            margin-bottom: 16px;
-        }
-        .footer__tagline {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 320px;
-            opacity: 0.75;
-        }
-        .footer__social {
-            display: flex;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .footer__social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .footer__social a:hover {
-            background: var(--copper);
-            transform: translateY(-4px);
-        }
-        .footer__links h4,
-        .footer__contact h4 {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 16px;
-            letter-spacing: 0.3px;
-        }
-        .footer__links ul,
-        .footer__contact ul {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer__links a,
-        .footer__contact a {
-            transition: var(--transition);
-            font-size: 0.92rem;
-        }
-        .footer__links a:hover,
-        .footer__contact a:hover {
-            color: var(--copper-light);
-        }
-        .footer__contact li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.92rem;
-        }
-        .footer__contact i {
-            width: 20px;
-            color: var(--copper-light);
-            font-size: 0.95rem;
-        }
-        .footer__bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.85rem;
-        }
-        .footer__legal {
-            display: flex;
-            gap: 16px;
-        }
-        .footer__legal a {
-            transition: var(--transition);
-        }
-        .footer__legal a:hover {
-            color: var(--copper-light);
-        }
-
-        /* ============================================================
-           BACK TO TOP
-           ============================================================ */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 900;
-            width: 48px;
-            height: 48px;
-            background: var(--copper);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        #backToTop.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #backToTop:hover {
-            background: var(--copper-light);
-            transform: translateY(-4px);
-        }
-
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 992px) {
-            .partner-form__wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .partner-benefits__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .nav__list {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 76px;
-                left: 0;
-                right: 0;
-                background: var(--green-dark);
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 2px solid var(--copper);
-                box-shadow: var(--shadow);
-            }
-            .nav__list.open {
-                display: flex;
-            }
-            .nav__toggle {
-                display: flex;
-            }
-        }
-        @media (max-width: 640px) {
-            .page-hero__content h1 {
-                font-size: 2.4rem;
-            }
-            .partner-benefits__grid {
-                grid-template-columns: 1fr;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr;
-            }
-            .section__title {
-                font-size: 2rem;
-            }
-            .partner-form__form .form-row {
-                grid-template-columns: 1fr;
-            }
-            .partner-form__form {
-                padding: 24px 16px;
-            }
+        @media (max-width: 480px) {
+            .nav-links { display: none; /* Burger menu would go here in final build */ }
+            .services-hero h1 { font-size: 2.2rem; }
+            .services-grid, .values-grid { grid-template-columns: 1fr; }
+            .cta-banner h2 { font-size: 1.6rem; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- ============================================================
-    PRELOADER
-    ============================================================ -->
-    <div id="preloader" aria-hidden="true">
-        <div class="loader-icon">
-            <span>SZ</span>
-            <span class="bolt"><i class="fas fa-bolt"></i></span>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Smart Zambia Logo"> 
+            SMART ZAMBIA
         </div>
-        <div class="loader-bar"><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html" class="active">Services</a>
+            <a href="about.html">About</a>
+            <a href="partner.html">Partner</a>
+            <a href="contact.html">Contact</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="services-hero">
+        <div class="hero-content">
+            <h1>Engineered for <span>Excellence</span></h1>
+            <p>We offer comprehensive, affordable, and tailored solutions across Electrical, Mechanical, Civil, and IT domains—exclusively focused on domestic residential projects across Zambia.</p>
+        </div>
+    </section>
+
+    <!-- DETAILED SERVICES -->
+    <section class="services-expertise">
+        <div class="section-header">
+            <h2>Our Complete <span>Expertise</span></h2>
+            <p>Modernizing and upgrading your living space with cutting-edge engineering.</p>
+        </div>
+        <div class="services-grid">
+            
+            <div class="service-detailed-card">
+                <div class="icon-wrapper">⚡</div>
+                <h3>Electrical Engineering</h3>
+                <p>We ensure your home is safe, energy-efficient, and smartly connected. From wiring to solar power, we handle it all with precision.</p>
+                <ul class="service-features">
+                    <li>Domestic Wiring & Distribution Boards</li>
+                    <li>Energy-Efficient Lighting Solutions</li>
+                    <li>Complete Solar Panel Installations</li>
+                    <li>Smart Home Automation Systems</li>
+                </ul>
+            </div>
+
+            <div class="service-detailed-card">
+                <div class="icon-wrapper">⚙️</div>
+                <h3>Mechanical Systems</h3>
+                <p>Installation and maintenance of essential mechanical infrastructure to ensure comfort and functionality in your residential space.</p>
+                <ul class="service-features">
+                    <li>Plumbing and Drainage Systems</li>
+                    <li>HVAC (Heating, Ventilation, AC)</li>
+                    <li>Water Heating & Storage Tanks</li>
+                    <li>Mechanical Maintenance Services</li>
+                </ul>
+            </div>
+
+            <div class="service-detailed-card">
+                <div class="icon-wrapper">🏗️</div>
+                <h3>Civil Construction</h3>
+                <p>Our specialty is domestic civil works. We build strong foundations, beautiful structures, and reliable roofs for long-lasting homes.</p>
+                <ul class="service-features">
+                    <li>Foundations & Concrete Slabs</li>
+                    <li>Block Work & Structural Walls</li>
+                    <li>Domestic Roofing & Trusses</li>
+                    <li>Renovations & Home Extensions</li>
+                </ul>
+            </div>
+
+            <div class="service-detailed-card">
+                <div class="icon-wrapper">💻</div>
+                <h3>IT & Security</h3>
+                <p>Bring the smart city experience to your home with reliable networking, advanced security systems, and digital integration.</p>
+                <ul class="service-features">
+                    <li>Residential Wi-Fi & Network Cabling</li>
+                    <li>CCTV & Surveillance Systems</li>
+                    <li>Internet Infrastructure Setup</li>
+                    <li>Smart Software & App Integration</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="core-values">
+        <div class="section-header">
+            <h2>Why <span>Smart Zambia</span></h2>
+            <p>Affordable, efficient, and locally dedicated to making life easier for you.</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">💰</div>
+                <h4>Affordable Pricing</h4>
+                <p>We bring premium engineering services at budget-friendly rates. Quality domestic solutions shouldn't break the bank.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌿</div>
+                <h4>Green & Better</h4>
+                <p>We prioritize sustainable energy and eco-friendly building materials, ensuring a greener, more energy-efficient future for your home.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h4>Domestic Focus</h4>
+                <p>We are specialists in residential projects. Whether it's a new build or a renovation, we treat your home like our own.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner">
+        <h2>Ready to start your <span>next project</span>?</h2>
+        <p>Let's transform your home. Contact our expert team today for a free consultation and estimate.</p>
+        <a href="contact.html"><button class="btn-primary">Get a Free Quote</button></a>
     </div>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
-    <header class="header" id="header" role="banner">
-        <div class="container header__inner">
-            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <div class="logo__icon">
-                    <span>SZ</span>
-                    <span class="bolt"><i class="fas fa-bolt"></i></span>
-                </div>
-                <span class="logo__text">Smart<span>Zambia</span></span>
-            </a>
-
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav__list" id="navList">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="partner.html" class="active">Partner</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- ============================================================
-    PAGE HERO
-    ============================================================ -->
-    <section class="page-hero" aria-label="Partner page header">
-        <div class="page-hero__bg"></div>
-        <div class="page-hero__overlay"></div>
-        <div class="container page-hero__content">
-            <div class="page-hero__breadcrumb">
-                <a href="index.html">Home</a> <span>/</span> <span>Partner</span>
-            </div>
-            <h1>Partner <span>with Us</span></h1>
-            <p>Join forces with Smart Zambia to deliver world‑class engineering solutions across Zambia. Let's grow together.</p>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    PARTNER BENEFITS
-    ============================================================ -->
-    <section class="partner-benefits section" aria-label="Partner benefits">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-handshake"></i> Why Partner</span>
-                <h2 class="section__title">Benefits of <span>Collaboration</span></h2>
-                <p class="section__desc">We believe in building strong, mutually beneficial relationships with our partners.</p>
-            </div>
-            <div class="partner-benefits__grid">
-                <div class="benefit-card">
-                    <div class="benefit-card__icon"><i class="fas fa-expand"></i></div>
-                    <h4>Wider Reach</h4>
-                    <p>Tap into Smart Zambia's growing network across all 10 provinces of Zambia.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card__icon"><i class="fas fa-sync-alt"></i></div>
-                    <h4>Shared Expertise</h4>
-                    <p>Exchange knowledge and best practices with our team of experienced engineers.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card__icon"><i class="fas fa-chart-line"></i></div>
-                    <h4>Growth Opportunities</h4>
-                    <p>Access larger projects, joint ventures, and long‑term contracts with reputable clients.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    PARTNER REGISTRATION FORM
-    ============================================================ -->
-    <section class="partner-form-section section" aria-label="Partner registration form">
-        <div class="container">
-            <div class="partner-form__wrapper">
-                <div class="partner-form__info">
-                    <span class="section__tag" style="margin-bottom:12px;"><i class="fas fa-file-signature"></i> Registration</span>
-                    <h2>Tell Us About <span>Your Company</span></h2>
-                    <p>
-                        Fill in the form below to register your interest in partnering with
-                        Smart Zambia. We'll review your details and get back to you within
-                        48 hours.
-                    </p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> All fields marked with <span style="color:#c0392b;">*</span> are required</li>
-                        <li><i class="fas fa-check-circle"></i> We respect your data and will never share it with third parties</li>
-                        <li><i class="fas fa-check-circle"></i> You'll receive a confirmation email after submission</li>
-                    </ul>
-                    <div style="margin-top:24px;padding:16px 20px;background:var(--off-white);border-radius:8px;border-left:4px solid var(--copper);">
-                        <p style="font-weight:600;font-size:0.9rem;">
-                            <i class="fas fa-phone" style="color:var(--copper);margin-right:8px;"></i>
-                            Questions? Call us on <a href="tel:+260958752821" style="color:var(--copper);font-weight:700;">+260 958 752 821</a>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="partner-form__form">
-                    <form id="partnerForm" action="#" method="POST" novalidate>
-                        <!-- Honeypot field (anti‑bot) -->
-                        <input type="text" class="hp-field" name="hp_website" tabindex="-1" autocomplete="off" />
-
-                        <div class="form-group">
-                            <label for="companyName">Company Name <span class="required">*</span></label>
-                            <input type="text" id="companyName" name="companyName" required placeholder="e.g. Zambian Engineering Ltd" />
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contactPerson">Contact Person <span class="required">*</span></label>
-                                <input type="text" id="contactPerson" name="contactPerson" required placeholder="Full name" />
-                            </div>
-                            <div class="form-group">
-                                <label for="position">Position / Title <span class="required">*</span></label>
-                                <input type="text" id="position" name="position" required placeholder="e.g. Managing Director" />
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="email">Email Address <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" required placeholder="company@example.com" />
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number <span class="required">*</span></label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+260 9XX XXX XXX" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="years">Years in Business <span class="required">*</span></label>
-                            <select id="years" name="years" required>
-                                <option value="">Select years</option>
-                                <option value="0-1">Less than 1 year</option>
-                                <option value="1-3">1 – 3 years</option>
-                                <option value="3-5">3 – 5 years</option>
-                                <option value="5-10">5 – 10 years</option>
-                                <option value="10+">10+ years</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Areas of Expertise <span class="required">*</span> (select all that apply)</label>
-                            <div class="checkbox-group">
-                                <label><input type="checkbox" name="expertise" value="electrical" /> Electrical</label>
-                                <label><input type="checkbox" name="expertise" value="mechanical" /> Mechanical</label>
-                                <label><input type="checkbox" name="expertise" value="civil" /> Civil</label>
-                                <label><input type="checkbox" name="expertise" value="it" /> IT / Smart Solutions</label>
-                                <label><input type="checkbox" name="expertise" value="other" /> Other</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Company Description <span class="required">*</span></label>
-                            <textarea id="description" name="description" required placeholder="Tell us about your company, your team, key projects, and what you can bring to a partnership..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="referral">How did you hear about us?</label>
-                            <input type="text" id="referral" name="referral" placeholder="e.g. Google, LinkedIn, Word of mouth" />
-                        </div>
-
-                        <button type="submit" class="btn btn--primary">
-                            <i class="fas fa-paper-plane"></i> Submit Registration
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo__icon">
-                            <span>SZ</span>
-                            <span class="bolt"><i class="fas fa-bolt"></i></span>
-                        </div>
-                        <span class="logo__text">Smart<span>Zambia</span></span>
-                    </a>
-                    <p class="footer__tagline">
-                        Engineering solutions through innovation and implementation.
-                        Building a smarter Zambia, one project at a time.
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer__links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="partner.html">Partner</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="services.html#electrical">Electrical</a></li>
-                        <li><a href="services.html#mechanical">Mechanical</a></li>
-                        <li><a href="services.html#civil">Civil</a></li>
-                        <li><a href="services.html#it">IT Services</a></li>
-                        <li><a href="contact.html">Smart House</a></li>
-                    </ul>
-                </div>
-                <div class="footer__contact">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Lusaka, Zambia</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
-                <p class="footer__legal">
-                    <a href="#">Privacy Policy</a> &bull;
-                    <a href="#">Terms of Service</a>
-                </p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Green & Better Zambia</h3>
+            <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
+            <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
+            <div class="copyright">
+                &copy; 2026 Smart Zambia. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- ============================================================
-    BACK TO TOP
-    ============================================================ -->
-    <button id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
+    <!-- ENGINEERED JAVASCRIPT FOR THEME PERSISTENCE -->
     <script>
-        (function() {
-            'use strict';
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // Preloader
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => {
-                preloader.classList.add('hidden');
-            });
+        // 1. Load preferred theme from LocalStorage
+        if(localStorage.getItem('siteTheme') === 'light') {
+            body.classList.add('theme-light');
+            toggleBtn.textContent = '☀️';
+        } else {
+            toggleBtn.textContent = '🌙';
+        }
 
-            // Mobile nav
-            const toggle = document.getElementById('navToggle');
-            const navList = document.getElementById('navList');
-            toggle.addEventListener('click', () => {
-                const open = toggle.classList.toggle('open');
-                navList.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', open);
-            });
-            document.querySelectorAll('.nav__list a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggle.classList.remove('open');
-                    navList.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // Header shadow
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                header.classList.toggle('scrolled', y > 60);
-                const btn = document.getElementById('backToTop');
-                btn.classList.toggle('visible', y > 500);
-            });
-
-            // Back to top
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // Form validation & honeypot
-            const form = document.getElementById('partnerForm');
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Honeypot check
-                const hp = this.querySelector('input[name="hp_website"]');
-                if (hp && hp.value.trim() !== '') {
-                    alert('Bot detected. Submission blocked.');
-                    return;
-                }
-
-                // Basic validation (HTML5 does most, but we double‑check)
-                const requiredFields = this.querySelectorAll('[required]');
-                let valid = true;
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        field.style.borderColor = '#c0392b';
-                        valid = false;
-                    } else {
-                        field.style.borderColor = '';
-                    }
-                });
-
-                if (!valid) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-
-                // Check at least one expertise box is checked
-                const checkboxes = this.querySelectorAll('input[name="expertise"]:checked');
-                if (checkboxes.length === 0) {
-                    alert('Please select at least one area of expertise.');
-                    return;
-                }
-
-                // Simulate submission
-                const btn = this.querySelector('.btn');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-                btn.disabled = true;
-
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-check"></i> Submitted Successfully!';
-                    btn.style.background = '#2d8f54';
-                    btn.style.boxShadow = '0 8px 24px rgba(45,143,84,0.35)';
-
-                    // Reset after 4 seconds
-                    setTimeout(() => {
-                        btn.innerHTML = originalText;
-                        btn.style.background = '';
-                        btn.style.boxShadow = '';
-                        btn.disabled = false;
-                        form.reset();
-                    }, 4000);
-                }, 1800);
-            });
-
-            // Remove error border on input
-            document.querySelectorAll('#partnerForm input, #partnerForm select, #partnerForm textarea').forEach(el => {
-                el.addEventListener('input', function() {
-                    this.style.borderColor = '';
-                });
-            });
-
-        })();
+        // 2. Handle toggle click
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('theme-light');
+            
+            // 3. Save state and update icon
+            if(body.classList.contains('theme-light')) {
+                localStorage.setItem('siteTheme', 'light');
+                toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('siteTheme', 'dark');
+                toggleBtn.textContent = '🌙';
+            }
+        });
     </script>
-
 </body>
 </html>
