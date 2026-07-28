@@ -1,830 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Partner with Us – Smart Zambia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us | Smart Zambia</title>
     <style>
-        /* ============================================================
-           SAME STYLES AS PREVIOUS PAGES
-           ============================================================ */
+        /* =========================================
+           1. CSS VARIABLES & THEME ENGINE
+           ========================================= */
         :root {
-            --green-dark: #1B5E20;
-            --green-mid: #2E7D32;
-            --green-light: #4CAF50;
-            --orange-dark: #E65100;
-            --orange-mid: #F57C00;
-            --orange-light: #FFB74D;
-            --slate: #263238;
-            --steel: #546E7A;
-            --silver: #B0BEC5;
-            --bg-light: #F5F7FA;
-            --white: #FFFFFF;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-            --radius: 12px;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --card-bg: #ffffff;
-            --text-primary: #263238;
-            --text-secondary: #546E7A;
-            --border-color: #B0BEC5;
-            --input-bg: #F5F7FA;
+            /* Core Colors - Dark Mode (Default) */
+            --bg-body: #0b0d11;
+            --bg-card: #14171e;
+            --bg-nav: rgba(11, 13, 17, 0.92);
+            --text-primary: #f0f4f8;
+            --text-secondary: #9aa3b5;
+            --border-color: #252a36;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            
+            /* Brand Accents */
+            --accent-lime: #9dff00;
+            --accent-cyan: #00faff;
+            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+            
+            /* Glow Effects */
+            --glow-lime: rgba(157, 255, 0, 0.3);
+            --glow-cyan: rgba(0, 250, 255, 0.3);
         }
-        body.dark-mode {
-            --bg-light: #1a1a1a;
-            --white: #2d2d2d;
-            --slate: #e0e0e0;
-            --steel: #b0b0b0;
-            --silver: #555;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-            --card-bg: #333;
-            --text-primary: #e0e0e0;
-            --text-secondary: #b0b0b0;
-            --border-color: #555;
-            --input-bg: #444;
+
+        /* Light Mode Overrides */
+        body.theme-light {
+            --bg-body: #f2f6fc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(242, 246, 252, 0.95);
+            --text-primary: #131a26;
+            --text-secondary: #516077;
+            --border-color: #dce3ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
+
+        /* =========================================
+           2. RESET & ENGINEERED TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-            background: var(--bg-light);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
             color: var(--text-primary);
             line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
         }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+
+        /* Custom Advanced Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+
+        /* =========================================
+           3. NAVIGATION BAR (Sticky Glassmorphism)
+           ========================================= */
         .navbar {
-            background: var(--white);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 12px 0;
-            border-bottom: 3px solid var(--orange-mid);
-            transition: background 0.3s;
+            position: sticky; top: 0; z-index: 999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: var(--bg-nav);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease, border 0.3s ease;
         }
-        .navbar .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
+            color: var(--accent-lime); letter-spacing: -0.5px;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo svg {
-            width: 56px;
-            height: 56px;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
-        }
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        .logo-text span.green {
-            color: var(--green-dark);
-        }
-        .logo-text span.orange {
-            color: var(--orange-dark);
-        }
-        .logo-text small {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            color: var(--steel);
-            text-transform: uppercase;
-        }
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-            font-weight: 600;
-            font-size: 1rem;
-            align-items: center;
-        }
+        .nav-brand img { height: 40px; width: auto; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
         .nav-links a {
-            padding: 6px 0;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition);
-            color: var(--text-primary);
+            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
+            position: relative; transition: color 0.3s;
         }
-        .nav-links a:hover,
-        .nav-links a.active {
-            border-bottom-color: var(--orange-mid);
-            color: var(--green-dark);
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-gradient); transition: width 0.3s ease;
         }
-        body.dark-mode .nav-links a:hover,
-        body.dark-mode .nav-links a.active {
-            color: var(--orange-light);
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Active Page Highlight */
+        .nav-links a.active { color: var(--text-primary); }
+        .nav-links a.active::after { width: 100%; background: var(--accent-cyan); }
+        
+        /* Dark/Light Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .nav-links .cta-nav {
-            background: var(--orange-dark);
-            color: var(--white) !important;
-            padding: 10px 22px;
-            border-radius: 40px;
-            border-bottom: none !important;
-            font-weight: 600;
-            transition: var(--transition);
+        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
+
+        /* =========================================
+           4. PARTNER HERO (Watermark & Glow)
+           ========================================= */
+        .partner-hero {
+            min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 5%; position: relative; overflow: hidden;
         }
-        .nav-links .cta-nav:hover {
-            background: var(--green-dark);
-            transform: scale(1.04);
+        /* The Logo Watermark Engine */
+        .partner-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/logo.png'); background-size: 50%; background-repeat: no-repeat;
+            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
+            animation: slowFloat 20s infinite alternate ease-in-out;
         }
-        .dark-toggle {
-            background: var(--bg-light);
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
+        @keyframes slowFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
         }
-        .dark-toggle:hover {
-            border-color: var(--orange-mid);
-            transform: rotate(20deg);
+        .hero-content {
+            position: relative; z-index: 1; max-width: 800px;
+            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
         }
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .partner-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
         }
-        .hamburger span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: var(--text-primary);
-            border-radius: 4px;
-            transition: var(--transition);
+        .partner-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .partner-hero p {
+            font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
+            -webkit-text-fill-color: var(--text-secondary);
         }
-        .section-title {
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
+
+        /* =========================================
+           5. PARTNER FORM SECTION
+           ========================================= */
+        .partner-form-section {
+            padding: 5rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
-        .section-title .highlight {
-            color: var(--orange-dark);
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 { font-size: 2.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .section-header h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        .form-wrapper {
+            max-width: 550px; margin: 0 auto; background: var(--bg-card);
+            border: 1px solid var(--border-color); padding: 3rem; border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow-color);
         }
-        .section-sub {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+        .form-group { margin-bottom: 1.8rem; }
+        .form-group label { display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 0.95rem; }
+        .form-control {
+            width: 100%; padding: 14px; background: var(--bg-body);
+            border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary);
+            font-size: 1rem; outline: none; transition: all 0.3s;
         }
-        .section-pad {
-            padding: 70px 0;
+        .form-control:focus { border-color: var(--accent-lime); box-shadow: 0 0 0 3px var(--glow-lime); }
+        body.theme-light .form-control { background: #f2f6fc; }
+
+        .btn-submit {
+            width: 100%; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 0 20px var(--glow-cyan);
         }
-        .badge {
-            background: var(--orange-light);
-            color: var(--slate);
-            font-weight: 700;
-            font-size: 0.7rem;
-            padding: 2px 12px;
-            border-radius: 40px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .btn-submit:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime); }
+        .btn-secondary {
+            width: 100%; padding: 16px; border-radius: 50px; font-weight: 600; font-size: 1rem;
+            background: transparent; color: var(--text-secondary); border: 1px solid var(--border-color);
+            cursor: pointer; transition: all 0.3s ease; margin-top: 1rem;
         }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 34px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
+        .btn-secondary:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+        /* Hidden OTP Step */
+        .step-2-container { display: none; margin-top: 1.5rem; }
+        .step-2-container.active { display: block; }
+        .step-1-container.active { display: block; }
+        .step-1-container.hidden { display: none; }
+        
+        .otp-status { 
+            text-align: center; font-size: 1rem; margin-bottom: 1.5rem; padding: 10px;
+            background: var(--bg-body); border-radius: 8px; border: 1px solid var(--border-color);
+            color: var(--accent-cyan);
         }
-        .btn-primary {
-            background: var(--orange-mid);
-            color: var(--white);
-            box-shadow: 0 4px 14px rgba(245, 124, 0, 0.35);
-        }
-        .btn-primary:hover {
-            background: var(--orange-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(245, 124, 0, 0.45);
-        }
-        .btn-outline {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
-        }
-        .btn-outline:hover {
-            border-color: var(--orange-mid);
-            color: var(--orange-dark);
-        }
+        .otp-status.error { color: #ff4757; border-color: #ff4757; }
+        .otp-status.success { color: var(--accent-lime); border-color: var(--accent-lime); }
+
+        /* =========================================
+           6. BENEFITS SECTION
+           ========================================= */
         .partner-benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            padding: 5rem 5%; background: var(--bg-body);
         }
-        .partner-benefits .benefit {
-            background: var(--card-bg);
-            padding: 30px 24px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            border-top: 6px solid var(--orange-mid);
-            transition: var(--transition);
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem;
+            max-width: 1100px; margin: 0 auto;
         }
-        .partner-benefits .benefit:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        .benefit-card {
+            text-align: center; padding: 2.5rem; border-radius: 16px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            transition: border 0.3s, transform 0.3s;
         }
-        .partner-benefits .benefit i {
-            font-size: 2.6rem;
-            color: var(--orange-mid);
-            margin-bottom: 12px;
+        .benefit-card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .benefit-card h4 { font-size: 1.4rem; margin: 1rem 0 0.5rem; }
+        .benefit-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .benefit-icon { font-size: 2.8rem; }
+
+        /* =========================================
+           7. ENGINEERED FOOTER
+           ========================================= */
+        footer {
+            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
+            text-align: center; transition: background 0.3s;
         }
-        .partner-benefits .benefit h4 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        .partner-benefits .benefit p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-        .partner-form {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .partner-form h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            text-align: center;
-            color: var(--text-primary);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-primary);
-        }
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: var(--transition);
-            font-family: inherit;
-            background: var(--input-bg);
-            color: var(--text-primary);
-        }
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: var(--green-mid);
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .form-group .validation-error {
-            color: #d32f2f;
-            font-size: 0.85rem;
-            margin-top: 4px;
-            display: none;
-        }
-        .form-group .validation-error.visible {
-            display: block;
-        }
-        .form-group .validation-success {
-            color: #2E7D32;
-            font-size: 0.85rem;
-            margin-top: 4px;
-            display: none;
-        }
-        .form-group .validation-success.visible {
-            display: block;
-        }
-        .form-group input.error {
-            border-color: #d32f2f;
-            background: #ffebee;
-        }
-        body.dark-mode .form-group input.error {
-            background: #3d1a1a;
-            border-color: #ef5350;
-        }
-        .honeypot {
-            display: none !important;
-        }
-        .captcha-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .captcha-row input {
-            flex: 0 0 120px;
-        }
-        .footer {
-            background: var(--slate);
-            color: rgba(255, 255, 255, 0.75);
-            padding: 40px 0 20px;
-            margin-top: 40px;
-            border-top: 6px solid var(--orange-mid);
-        }
-        .footer .container {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-        .footer h4 {
-            color: var(--white);
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-        }
-        .footer ul {
-            list-style: none;
-        }
-        .footer ul li {
-            margin-bottom: 10px;
-        }
-        .footer ul a:hover {
-            color: var(--orange-light);
-        }
-        .footer .social-icons {
-            display: flex;
-            gap: 16px;
-            margin-top: 12px;
-        }
-        .footer .social-icons a {
-            background: rgba(255, 255, 255, 0.06);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            font-size: 1.2rem;
-        }
-        .footer .social-icons a:hover {
-            background: var(--orange-mid);
-            color: var(--white);
-            transform: translateY(-3px);
-        }
-        .footer .copyright {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
+        body.theme-light footer { background: #e2e8f0; }
+        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
+        .footer-content a:hover { color: var(--accent-lime); }
+        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
+        body.theme-light .copyright { color: #94a3b8; }
+
+        /* =========================================
+           8. RESPONSIVE ENGINEERING
+           ========================================= */
+        @media (max-width: 992px) { .nav-links { gap: 1.5rem; } }
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                padding: 20px 0 10px;
-                gap: 16px;
-                background: var(--white);
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .partner-benefits {
-                grid-template-columns: 1fr 1fr;
-            }
-            .footer .container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer .social-icons {
-                justify-content: center;
-            }
+            .navbar { padding: 1rem 5%; } .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .nav-brand { font-size: 1.1rem; gap: 8px; } .nav-brand img { height: 30px; }
+            .partner-hero h1 { font-size: 2.8rem; }
+            .form-wrapper { padding: 2rem; }
         }
         @media (max-width: 480px) {
-            .partner-benefits {
-                grid-template-columns: 1fr;
-            }
-            .partner-form {
-                padding: 24px;
-            }
+            .nav-links { display: none; }
+            .partner-hero h1 { font-size: 2.2rem; }
+            .benefits-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <header class="navbar">
-        <div class="container">
-            <div class="logo">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <text x="18" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#1B5E20">S</text>
-                    <text x="40" y="68" font-family="Arial, sans-serif" font-weight="900" font-size="56" fill="#E65100">Z</text>
-                    <polygon points="48,22 38,52 52,52 44,78 62,46 48,46" fill="#FFC107" stroke="#F57C00" stroke-width="2" />
-                    <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,183,77,0.15)" stroke-width="2" />
-                </svg>
-                <div class="logo-text">
-                    <span class="green">Smart</span><span class="orange">Zambia</span>
-                    <small>⚡ engineering · innovation</small>
-                </div>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="partner.html" class="cta-nav active">Partner with us</a></li>
-            </ul>
-            <div style="display:flex; align-items:center; gap:12px;">
-                <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Smart Zambia Logo"> 
+            SMART ZAMBIA
         </div>
-    </header>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="partner.html" class="active">Partner</a>
+            <a href="contact.html">Contact</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+    </nav>
 
-    <!-- ===== PARTNER CONTENT ===== -->
-    <section class="section-pad">
-        <div class="container">
-            <h2 class="section-title">🤝 Partner with <span class="highlight">Smart Zambia</span></h2>
-            <p class="section-sub">
-                Join us in building a smarter, more connected Zambia. We're looking for passionate partners who share our vision.
-            </p>
+    <!-- HERO -->
+    <section class="partner-hero">
+        <div class="hero-content">
+            <h1>Partner <span>With Us</span></h1>
+            <p>Join Smart Zambia in bringing world-class domestic engineering to Zambian homes. Whether you are a supplier, contractor, or investor, we want to hear from you.</p>
+        </div>
+    </section>
 
-            <!-- Benefits -->
-            <div class="partner-benefits">
-                <div class="benefit">
-                    <i class="fas fa-handshake"></i>
-                    <h4>Collaborative Growth</h4>
-                    <p>Work alongside a growing team on impactful projects across the country.</p>
+    <!-- VERIFICATION FORM -->
+    <section class="partner-form-section">
+        <div class="section-header">
+            <h2>Start Your <span>Partnership</span></h2>
+            <p>Enter your email below to receive a secure One-Time Password (OTP) via <strong>smartzambia@proton.me</strong> and begin your journey with us.</p>
+        </div>
+        
+        <div class="form-wrapper">
+            <!-- STEP 1: Email -->
+            <div id="step1" class="step-1-container active">
+                <div class="form-group">
+                    <label for="emailInput">Your Email Address</label>
+                    <input type="email" id="emailInput" class="form-control" placeholder="you@example.com" required>
                 </div>
-                <div class="benefit">
-                    <i class="fas fa-tools"></i>
-                    <h4>Access to Resources</h4>
-                    <p>Get access to equipment, training, and technical support to deliver excellence.</p>
-                </div>
-                <div class="benefit">
-                    <i class="fas fa-bullhorn"></i>
-                    <h4>Marketing Support</h4>
-                    <p>We promote your work through our channels and help you reach new clients.</p>
-                </div>
-                <div class="benefit">
-                    <i class="fas fa-users"></i>
-                    <h4>Community Impact</h4>
-                    <p>Be part of initiatives that improve lives and create sustainable development.</p>
-                </div>
+                <button class="btn-submit" onclick="sendOTP()">Send Verification OTP</button>
             </div>
 
-            <!-- Partnership Form -->
-            <div class="partner-form">
-                <h3>📝 Express your interest</h3>
-                <form id="partnerForm" novalidate>
-                    <div class="form-group">
-                        <label for="partnerName">Full name</label>
-                        <input type="text" id="partnerName" placeholder="e.g. Mary Mwamba" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerEmail">Email address</label>
-                        <input type="email" id="partnerEmail" placeholder="e.g. mary@company.com" required />
-                        <div class="validation-error" id="partnerEmailError">Please enter a valid email address.</div>
-                        <div class="validation-success" id="partnerEmailSuccess">✓ Valid email</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerPhone">Phone number</label>
-                        <input type="text" id="partnerPhone" placeholder="e.g. +260 97 123 4567" />
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerCompany">Company / Organisation name</label>
-                        <input type="text" id="partnerCompany" placeholder="e.g. Mwamba Construction" />
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerRole">Your role / title</label>
-                        <input type="text" id="partnerRole" placeholder="e.g. Director, Project Manager" />
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerInterest">What interests you?</label>
-                        <select id="partnerInterest">
-                            <option value="">Select an option...</option>
-                            <option value="contractor">Contractor / Subcontractor</option>
-                            <option value="supplier">Supplier of materials / equipment</option>
-                            <option value="consultant">Consultant / Designer</option>
-                            <option value="innovator">Innovator / Tech partner</option>
-                            <option value="investor">Investor / Sponsor</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="partnerMessage">Tell us more about yourself and what you can bring</label>
-                        <textarea id="partnerMessage" placeholder="Describe your experience, skills, and how you'd like to collaborate..." required></textarea>
-                    </div>
-
-                    <!-- ===== SECURITY: Honeypot ===== -->
-                    <div class="form-group honeypot">
-                        <label for="partnerWebsite">Website (leave empty)</label>
-                        <input type="text" id="partnerWebsite" name="website" placeholder="Leave empty" />
-                    </div>
-
-                    <!-- ===== SECURITY: Math CAPTCHA ===== -->
-                    <div class="form-group captcha-row">
-                        <label style="font-weight:600;" id="captchaLabel">What is 5 + 3?</label>
-                        <input type="number" id="captchaAnswer" placeholder="Your answer" style="flex:0 0 120px;" />
-                        <span style="font-size:0.85rem;color:var(--text-secondary);">(anti-bot check)</span>
-                    </div>
-
-                    <!-- ===== SECURITY: Timestamp ===== -->
-                    <input type="hidden" id="formTimestamp" value="" />
-
-                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
-                        <i class="fas fa-paper-plane"></i> Submit interest
-                    </button>
-                    <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);text-align:center;">
-                        <i class="fas fa-lock"></i> We'll get back to you within 48 hours.
-                    </p>
-                </form>
+            <!-- STEP 2: OTP & Verification -->
+            <div id="step2" class="step-2-container">
+                <div id="otpStatus" class="otp-status">✓ A 6-digit code has been sent to your email.</div>
+                
+                <div class="form-group">
+                    <label for="otpInput">Enter 6-Digit OTP</label>
+                    <input type="text" id="otpInput" class="form-control" placeholder="123456" maxlength="6" required>
+                </div>
+                <button class="btn-submit" onclick="verifyOTP()">Verify & Submit Application</button>
+                <button class="btn-secondary" onclick="resetForm()">← Go Back</button>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="container">
-            <div>
-                <h4>📍 Smart Zambia</h4>
-                <p style="max-width:280px;">
-                    Affordable, fast, and professional engineering services for homes,
-                    businesses, and national infrastructure.
-                </p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
+    <!-- PARTNER BENEFITS -->
+    <section class="partner-benefits">
+        <div class="section-header">
+            <h2>Why Partner <span>With Us</span></h2>
+            <p>Grow your business with one of Zambia's fastest-growing domestic engineering firms.</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h4>Market Growth</h4>
+                <p>Align with a brand focused on the rapidly expanding domestic construction and smart home sector in Zambia.</p>
             </div>
-            <div>
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="services.html">Electrical</a></li>
-                    <li><a href="services.html">Mechanical</a></li>
-                    <li><a href="services.html">Civil</a></li>
-                    <li><a href="services.html">IT &amp; Automation</a></li>
-                </ul>
+            <div class="benefit-card">
+                <div class="benefit-icon">🤝</div>
+                <h4>Reliable Network</h4>
+                <p>Join a community of top-tier engineers, electricians, and civil contractors dedicated to quality and integrity.</p>
             </div>
-            <div>
-                <h4>Quick links</h4>
-                <ul>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="partner.html">Partners</a></li>
-                    <li><a href="index.html#galleryGrid">Projects</a></li>
-                </ul>
+            <div class="benefit-card">
+                <div class="benefit-icon">🇿🇲</div>
+                <h4>Local Impact</h4>
+                <p>Help us build a greener, smarter, and more sustainable domestic infrastructure for the Zambian people.</p>
             </div>
-            <div>
-                <h4>Contact</h4>
-                <ul>
-                    <li><i class="fas fa-phone" style="width:20px;"></i> +260 958 752 821</li>
-                    <li><i class="fas fa-envelope"></i> info@smartzambia.co.zm</li>
-                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                    <li><i class="fas fa-map-marker-alt"></i> Lusaka, Zambia</li>
-                </ul>
-            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Green & Better Zambia</h3>
+            <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
+            <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
             <div class="copyright">
-                &copy; 2026 Smart Zambia. Built with <i class="fas fa-heart" style="color:#E65100;"></i> for a smarter nation.
+                &copy; 2026 Smart Zambia. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- ===== JAVASCRIPT ===== -->
+    <!-- ENGINEERED JAVASCRIPT FOR THEME & OTP SIMULATION -->
     <script>
-        (function() {
-            'use strict';
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // ---- Mobile menu ----
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.getElementById('navLinks');
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', function() {
-                    navLinks.classList.toggle('open');
-                });
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('open');
-                    });
-                });
+        // 1. Load preferred theme from LocalStorage
+        if(localStorage.getItem('siteTheme') === 'light') {
+            body.classList.add('theme-light');
+            toggleBtn.textContent = '☀️';
+        } else {
+            toggleBtn.textContent = '🌙';
+        }
+
+        // 2. Handle theme toggle
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('theme-light');
+            if(body.classList.contains('theme-light')) {
+                localStorage.setItem('siteTheme', 'light');
+                toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('siteTheme', 'dark');
+                toggleBtn.textContent = '🌙';
+            }
+        });
+
+        // =========================================
+        // OTP SIMULATION LOGIC
+        // =========================================
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const emailInput = document.getElementById('emailInput');
+        const otpInput = document.getElementById('otpInput');
+        const otpStatus = document.getElementById('otpStatus');
+
+        function sendOTP() {
+            const email = emailInput.value.trim();
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                alert("Please enter a valid email address.");
+                return;
             }
 
-            // ---- Dark mode ----
-            const darkToggle = document.getElementById('darkToggle');
-            const body = document.body;
-            if (darkToggle) {
-                const icon = darkToggle.querySelector('i');
-                if (localStorage.getItem('darkMode') === 'true') {
-                    body.classList.add('dark-mode');
-                    if (icon) icon.classList.replace('fa-moon', 'fa-sun');
-                }
-                darkToggle.addEventListener('click', function() {
-                    body.classList.toggle('dark-mode');
-                    const isDark = body.classList.contains('dark-mode');
-                    localStorage.setItem('darkMode', isDark);
-                    if (icon) {
-                        if (isDark) icon.classList.replace('fa-moon', 'fa-sun');
-                        else icon.classList.replace('fa-sun', 'fa-moon');
-                    }
-                });
+            // Simulate backend sending OTP via smartzambia@proton.me
+            alert(`Simulating email delivery to ${email}.\n\n(Note: In a live production environment, an OTP would be securely sent from smartzambia@proton.me to this inbox.)`);
+
+            // Transition to Step 2
+            step1.classList.add('hidden');
+            step1.classList.remove('active');
+            step2.classList.add('active');
+            
+            otpStatus.className = 'otp-status';
+            otpStatus.textContent = "✓ A 6-digit code has been sent to your email.";
+            otpStatus.style.color = "var(--accent-cyan)";
+            otpInput.value = '';
+        }
+
+        function verifyOTP() {
+            const otp = otpInput.value.trim();
+            if (otp.length !== 6 || isNaN(otp)) {
+                otpStatus.className = 'otp-status error';
+                otpStatus.textContent = "✗ Invalid OTP. Please check the 6-digit code and try again.";
+                otpStatus.style.color = "#ff4757";
+                return;
             }
 
-            // ---- Email validation ----
-            const emailInput = document.getElementById('partnerEmail');
-            const emailError = document.getElementById('partnerEmailError');
-            const emailSuccess = document.getElementById('partnerEmailSuccess');
+            // Simulate OTP verification
+            otpStatus.className = 'otp-status success';
+            otpStatus.textContent = "✔ OTP Verified Successfully! Your partnership application is pending review.";
+            otpStatus.style.color = "var(--accent-lime)";
+            otpInput.disabled = true;
 
-            if (emailInput) {
-                emailInput.addEventListener('input', function() {
-                    const value = this.value.trim();
-                    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-                    if (value === '') {
-                        this.classList.remove('error');
-                        if (emailError) emailError.classList.remove('visible');
-                        if (emailSuccess) emailSuccess.classList.remove('visible');
-                        return;
-                    }
-                    if (isValid) {
-                        this.classList.remove('error');
-                        if (emailError) emailError.classList.remove('visible');
-                        if (emailSuccess) emailSuccess.classList.add('visible');
-                    } else {
-                        this.classList.add('error');
-                        if (emailError) emailError.classList.add('visible');
-                        if (emailSuccess) emailSuccess.classList.remove('visible');
-                    }
-                });
-            }
+            setTimeout(() => {
+                alert("Congratulations! Your verification is complete. Our team at Smart Zambia will review your partnership request and contact you shortly.");
+                resetForm();
+            }, 2000);
+        }
 
-            // ---- Timestamp ----
-            const timestampField = document.getElementById('formTimestamp');
-            if (timestampField) {
-                timestampField.value = Date.now();
-            }
-
-            // ---- Rate limiting ----
-            function checkRateLimit() {
-                const now = Date.now();
-                const key = 'smartZambiaPartnerSubmissions';
-                let submissions = JSON.parse(localStorage.getItem(key) || '[]');
-                submissions = submissions.filter(t => now - t < 300000);
-                if (submissions.length >= 3) {
-                    alert('⚠️ Too many submissions. Please wait a few minutes and try again.');
-                    return false;
-                }
-                submissions.push(now);
-                localStorage.setItem(key, JSON.stringify(submissions));
-                return true;
-            }
-
-            // ---- CAPTCHA rotation ----
-            const captchaLabel = document.getElementById('captchaLabel');
-            if (captchaLabel) {
-                const num1 = Math.floor(Math.random() * 10) + 1;
-                const num2 = Math.floor(Math.random() * 10) + 1;
-                captchaLabel.textContent = `What is ${num1} + ${num2}?`;
-                captchaLabel.dataset.num1 = num1;
-                captchaLabel.dataset.num2 = num2;
-            }
-
-            // ---- Form submission ----
-            const form = document.getElementById('partnerForm');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Honeypot
-                    const honeypot = document.getElementById('partnerWebsite');
-                    if (honeypot && honeypot.value.trim() !== '') {
-                        alert('⚠️ Bot detected. Your submission has been blocked.');
-                        return;
-                    }
-
-                    // CAPTCHA
-                    const captchaAnswer = document.getElementById('captchaAnswer');
-                    if (captchaAnswer) {
-                        const num1 = parseInt(captchaLabel.dataset.num1);
-                        const num2 = parseInt(captchaLabel.dataset.num2);
-                        if (parseInt(captchaAnswer.value) !== (num1 + num2)) {
-                            alert('⚠️ Incorrect CAPTCHA answer. Please try again.');
-                            captchaAnswer.classList.add('error');
-                            return;
-                        }
-                        captchaAnswer.classList.remove('error');
-                    }
-
-                    // Timestamp
-                    const timestamp = document.getElementById('formTimestamp');
-                    if (timestamp) {
-                        const elapsed = (Date.now() - parseInt(timestamp.value)) / 1000;
-                        if (elapsed < 5) {
-                            alert('⚠️ Form submitted too quickly. Please take your time.');
-                            return;
-                        }
-                    }
-
-                    // Rate limit
-                    if (!checkRateLimit()) {
-                        return;
-                    }
-
-                    // Validate email
-                    const email = emailInput.value.trim();
-                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                        emailInput.classList.add('error');
-                        if (emailError) emailError.classList.add('visible');
-                        if (emailSuccess) emailSuccess.classList.remove('visible');
-                        alert('⚠️ Please enter a valid email address.');
-                        return;
-                    }
-
-                    // Build message
-                    const name = document.getElementById('partnerName').value.trim();
-                    const phone = document.getElementById('partnerPhone').value.trim();
-                    const company = document.getElementById('partnerCompany').value.trim();
-                    const role = document.getElementById('partnerRole').value.trim();
-                    const interest = document.getElementById('partnerInterest').value || 'Not specified';
-                    const message = document.getElementById('partnerMessage').value.trim();
-
-                    let fullMessage = '🤝 Smart Zambia Partnership Enquiry\n';
-                    fullMessage += `📅 ${new Date().toLocaleString()}\n`;
-                    if (name) fullMessage += `👤 Name: ${name}\n`;
-                    if (email) fullMessage += `📧 Email: ${email}\n`;
-                    if (phone) fullMessage += `📞 Phone: ${phone}\n`;
-                    if (company) fullMessage += `🏢 Company: ${company}\n`;
-                    if (role) fullMessage += `💼 Role: ${role}\n`;
-                    fullMessage += `📌 Interest: ${interest}\n`;
-                    fullMessage += `\n📝 Message:\n${message || '(No message provided)'}`;
-
-                    alert('✅ Thank you! We will contact you soon.\n\n' + fullMessage);
-
-                    // WhatsApp redirect
-                    const waNumber = '260958752821';
-                    const waMsg = encodeURIComponent(fullMessage);
-                    window.open(`https://wa.me/${waNumber}?text=${waMsg}`, '_blank');
-                });
-            }
-
-            // ---- Active nav link ----
-            const currentPath = window.location.pathname.split('/').pop() || 'partner.html';
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                const linkHref = link.getAttribute('href');
-                if (linkHref === currentPath) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-
-        })();
+        function resetForm() {
+            step2.classList.remove('active');
+            step1.classList.remove('hidden');
+            step1.classList.add('active');
+            emailInput.value = '';
+            otpInput.value = '';
+            otpInput.disabled = false;
+            otpStatus.className = 'otp-status';
+            otpStatus.textContent = "✓ A 6-digit code has been sent to your email.";
+            otpStatus.style.color = "var(--accent-cyan)";
+        }
     </script>
-
 </body>
 </html>
