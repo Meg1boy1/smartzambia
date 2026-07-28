@@ -1,1652 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Zambia – Engineering Solutions</title>
-
-    <!-- SEO & Security -->
-    <meta name="description" content="Smart Zambia provides electrical, mechanical, civil, and IT engineering solutions. Innovative, reliable, and affordable for Zambian communities." />
-    <meta name="theme-color" content="#0d4a2e" />
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Zambia | Making Living Easier</title>
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* CSS VARIABLES FOR THEME */
         :root {
-            --green-dark: #0d4a2e;
-            --green-mid: #1a6e3e;
-            --green-light: #2d8f54;
-            --copper: #c87a2e;
-            --copper-light: #e8a54b;
-            --copper-glow: rgba(200, 122, 46, 0.3);
-            --white: #ffffff;
-            --off-white: #f2f5f0;
-            --grey-100: #e9ece8;
-            --grey-800: #2c3a2f;
-            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
-            --radius: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Dark Mode (Default) */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --border-color: #222222;
+            --card-bg: #121212;
+            --nav-bg: rgba(10, 10, 10, 0.95);
+            
+            /* Accent Colors */
+            --primary-lime: #9dff00;
+            --primary-cyan: #00faff;
+            --glow-color: rgba(0, 250, 255, 0.3);
         }
 
-        html {
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
+        /* Light Mode Classes */
+        body.light-mode {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.95);
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--off-white);
-            color: var(--grey-800);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* RESET & BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-primary); color: var(--text-primary); scroll-behavior: smooth; transition: background-color 0.3s ease, color 0.3s ease; }
+        a { text-decoration: none; color: inherit; }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        /* NAVIGATION BAR */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; transition: background 0.3s ease, border 0.3s ease; }
+        .nav-logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-lime); display: flex; align-items: center; gap: 10px; }
+        .nav-logo img { height: 40px; width: auto; }
+        .nav-right { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-cyan); }
 
-        /* ============================================================
-           PRELOADER
-           ============================================================ */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: var(--green-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 24px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-        .loader-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--copper-light);
-        }
-        .loader-icon .bolt {
-            color: var(--white);
-            font-size: 2.4rem;
-        }
-        .loader-bar {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .loader-bar span {
-            display: block;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--copper), var(--copper-light));
-            border-radius: 4px;
-            animation: loadProgress 1.8s ease-in-out forwards;
-        }
-        @keyframes loadProgress {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
-        }
+        /* THEME TOGGLE BUTTON */
+        .theme-toggle { background: transparent; border: none; cursor: pointer; font-size: 1.5rem; color: var(--text-primary); transition: transform 0.3s; display: flex; align-items: center; }
+        .theme-toggle:hover { transform: rotate(20deg); }
 
-        /* ============================================================
-           HEADER
-           ============================================================ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(13, 74, 46, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: var(--transition);
-        }
-        .header.scrolled {
-            background: rgba(13, 74, 46, 0.98);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        }
-        .header__inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 76px;
-        }
+        /* HERO SECTION */
+        .hero { height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 5%; }
+        /* WATERMARK LOGO BACKGROUND */
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.04; pointer-events: none; z-index: 0; }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+        .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero h1 span { color: var(--primary-lime); }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.6; }
+        .hero-btn { padding: 14px 40px; background: linear-gradient(135deg, var(--primary-lime), var(--primary-cyan)); color: #000; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .hero-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--glow-color); }
 
-        /* ============================================================
-           NEW LOGO: SZ crossing with lightning
-           ============================================================ */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--white);
-            letter-spacing: -0.5px;
-            text-decoration: none;
-        }
+        /* SECTION COMMON STYLES */
+        section { padding: 5rem 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; }
+        .section-title span { color: var(--primary-cyan); }
+        .section-subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem; }
 
-        .logo__mark {
-            position: relative;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--copper);
-            border-radius: 10px;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(200, 122, 46, 0.3);
-        }
+        /* SERVICES */
+        #services { background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transition: background 0.3s; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+        .service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 2.5rem 1.5rem; text-align: center; border-radius: 12px; transition: all 0.3s ease; }
+        .service-card:hover { border-color: var(--primary-lime); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .service-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+        .service-card h4 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .service-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
 
-        .logo__mark .sz-letters {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 1.6rem;
-            color: var(--white);
-            line-height: 1;
-        }
+        /* CIVIL PROJECTS GALLERY */
+        #projects { background: var(--bg-primary); transition: background 0.3s; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .gallery-item { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); transition: border 0.3s ease; aspect-ratio: 16/10; background: #1a1a1a; }
+        .gallery-item:hover { border-color: var(--primary-cyan); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* S and Z overlapping */
-        .logo__mark .sz-letters span {
-            position: absolute;
-            font-weight: 900;
-            color: var(--white);
-        }
-        .logo__mark .sz-letters .s {
-            transform: rotate(-10deg) translateX(-2px);
-            font-size: 1.7rem;
-        }
-        .logo__mark .sz-letters .z {
-            transform: rotate(10deg) translateX(2px);
-            font-size: 1.7rem;
-            opacity: 0.85;
-        }
+        /* FOOTER */
+        footer { background: #050505; padding: 3rem 5%; border-top: 1px solid var(--border-color); text-align: center; transition: background 0.3s; }
+        body.light-mode footer { background: #f1f5f9; }
+        .footer-info p { margin: 0.5rem 0; color: var(--text-secondary); }
+        .footer-info a { color: var(--primary-lime); font-weight: 500; transition: color 0.3s; }
+        .footer-info a:hover { color: var(--primary-cyan); }
+        .copyright { margin-top: 2rem; color: #444; font-size: 0.8rem; }
+        body.light-mode .copyright { color: #94a3b8; }
 
-        /* Lightning bolt crossing through */
-        .logo__mark .lightning-bolt {
-            position: absolute;
-            font-size: 1.2rem;
-            color: #fff4d6;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-            transform: rotate(15deg) scaleX(-1);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .logo__text {
-            font-size: 1.3rem;
-            letter-spacing: -0.5px;
-        }
-        .logo__text span {
-            color: var(--copper-light);
-        }
-
-        /* Navigation */
-        .nav__list {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nav__list a {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.75);
-            transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.3px;
-        }
-        .nav__list a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--copper-light);
-            transition: var(--transition);
-        }
-        .nav__list a:hover,
-        .nav__list a.active {
-            color: var(--white);
-        }
-        .nav__list a:hover::after,
-        .nav__list a.active::after {
-            width: 100%;
-        }
-
-        /* Mobile toggle */
-        .nav__toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .nav__toggle .bar {
-            width: 28px;
-            height: 2.5px;
-            background: var(--white);
-            border-radius: 4px;
-            transition: var(--transition);
-            transform-origin: center;
-        }
-        .nav__toggle.open .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .nav__toggle.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .nav__toggle.open .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-
-        /* ============================================================
-           HERO (unchanged)
-           ============================================================ */
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 0 80px;
-            overflow: hidden;
-            background: var(--green-dark);
-        }
-        .hero__bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center 30%;
-            background-repeat: no-repeat;
-            opacity: 0.35;
-            mix-blend-mode: overlay;
-            transform: scale(1.05);
-            transition: transform 8s ease;
-        }
-        .hero:hover .hero__bg {
-            transform: scale(1);
-        }
-        .hero__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13, 74, 46, 0.85) 0%, rgba(13, 74, 46, 0.4) 60%, rgba(200, 122, 46, 0.15) 100%);
-            z-index: 1;
-        }
-        .hero__content {
-            position: relative;
-            z-index: 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .hero__text {
-            color: var(--white);
-        }
-        .hero__badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(200, 122, 46, 0.2);
-            border: 1px solid rgba(200, 122, 46, 0.3);
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--copper-light);
-            margin-bottom: 24px;
-            backdrop-filter: blur(4px);
-        }
-        .hero__badge i {
-            font-size: 0.9rem;
-        }
-        .hero__title {
-            font-size: 4.2rem;
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-            margin-bottom: 20px;
-        }
-        .hero__title span {
-            color: var(--copper-light);
-            position: relative;
-        }
-        .hero__title span::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: var(--copper);
-            opacity: 0.35;
-            border-radius: 4px;
-        }
-        .hero__desc {
-            font-size: 1.2rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 500px;
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-        .hero__desc strong {
-            color: var(--white);
-        }
-        .hero__actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-        .btn--primary {
-            background: var(--copper);
-            color: var(--white);
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-        }
-        .btn--primary:hover {
-            background: var(--copper-light);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(200, 122, 46, 0.45);
-        }
-        .btn--outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .btn--outline:hover {
-            border-color: var(--copper-light);
-            background: rgba(200, 122, 46, 0.15);
-            transform: translateY(-3px);
-        }
-        .btn--secondary {
-            background: var(--green-light);
-            color: var(--white);
-            box-shadow: 0 8px 24px rgba(45, 143, 84, 0.35);
-        }
-        .btn--secondary:hover {
-            background: var(--green-mid);
-            transform: translateY(-3px);
-        }
-        .btn--large {
-            padding: 18px 44px;
-            font-size: 1.1rem;
-        }
-
-        .hero__stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius);
-            padding: 30px 24px;
-        }
-        .stat {
-            text-align: center;
-            color: var(--white);
-        }
-        .stat__number {
-            display: block;
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--copper-light);
-            letter-spacing: -1px;
-        }
-        .stat__label {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.65);
-            margin-top: 4px;
-        }
-
-        .hero__scroll {
-            position: absolute;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-            color: rgba(255, 255, 255, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            animation: bounceDown 2.4s infinite;
-        }
-        .hero__scroll i {
-            font-size: 1rem;
-        }
-        @keyframes bounceDown {
-            0%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(8px);
-            }
-        }
-
-        /* ============================================================
-           SECTION COMMON
-           ============================================================ */
-        .section {
-            padding: 80px 0;
-        }
-        .section__header {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 56px;
-        }
-        .section__tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--copper);
-            background: rgba(200, 122, 46, 0.08);
-            padding: 6px 16px;
-            border-radius: 50px;
-            margin-bottom: 16px;
-        }
-        .section__title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            color: var(--green-dark);
-        }
-        .section__title span {
-            color: var(--copper);
-        }
-        .section__desc {
-            font-size: 1.1rem;
-            color: var(--grey-800);
-            opacity: 0.8;
-            margin-top: 12px;
-            line-height: 1.7;
-        }
-
-        /* ============================================================
-           SERVICES PREVIEW (unchanged)
-           ============================================================ */
-        .services-preview {
-            background: var(--white);
-        }
-        .services-preview__grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-        }
-        .service-card {
-            background: var(--off-white);
-            border-radius: var(--radius);
-            padding: 32px 24px;
-            transition: var(--transition);
-            border-bottom: 4px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(200, 122, 46, 0.04), transparent);
-            opacity: 0;
-            transition: var(--transition);
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
-            border-bottom-color: var(--copper);
-        }
-        .service-card:hover::before {
-            opacity: 1;
-        }
-        .service-card__icon {
-            width: 56px;
-            height: 56px;
-            background: var(--green-dark);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            color: var(--copper-light);
-            margin-bottom: 20px;
-            transition: var(--transition);
-        }
-        .service-card:hover .service-card__icon {
-            background: var(--copper);
-            color: var(--white);
-            transform: scale(1.05);
-        }
-        .service-card__title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--green-dark);
-        }
-        .service-card__desc {
-            font-size: 0.95rem;
-            color: var(--grey-800);
-            opacity: 0.75;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-        .service-card__link {
-            font-weight: 700;
-            color: var(--copper);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: var(--transition);
-        }
-        .service-card__link:hover {
-            gap: 12px;
-            color: var(--copper-light);
-        }
-
-        /* ============================================================
-           WHY US (unchanged)
-           ============================================================ */
-        .why-us {
-            background: var(--off-white);
-        }
-        .why-us__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .why-us__image {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .why-us__image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-        .why-us__badge {
-            position: absolute;
-            bottom: 24px;
-            left: 24px;
-            background: var(--copper);
-            color: var(--white);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-        }
-        .why-us__content .section__title {
-            text-align: left;
-        }
-        .why-us__text {
-            font-size: 1.05rem;
-            opacity: 0.8;
-            margin: 16px 0 24px;
-            line-height: 1.8;
-        }
-        .why-us__list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-        .why-us__list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            font-weight: 500;
-        }
-        .why-us__list i {
-            color: var(--copper);
-            font-size: 1.2rem;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        /* ============================================================
-           PROJECTS (with your images)
-           ============================================================ */
-        .projects {
-            background: var(--white);
-        }
-        .projects__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-        .project-card {
-            border-radius: var(--radius);
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            transition: var(--transition);
-            aspect-ratio: 4/3;
-            background: var(--grey-100);
-        }
-        .project-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        .project-card:hover img {
-            transform: scale(1.06);
-        }
-        .project-card__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, rgba(13, 74, 46, 0.85) 0%, transparent 70%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            color: var(--white);
-            opacity: 0;
-            transition: var(--transition);
-        }
-        .project-card:hover .project-card__overlay {
-            opacity: 1;
-        }
-        .project-card__overlay h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .project-card__overlay span {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* ============================================================
-           SMART HOUSE CTA (unchanged)
-           ============================================================ */
-        .smart-cta {
-            background: var(--green-dark);
-            color: var(--white);
-        }
-        .smart-cta__inner {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .smart-cta .section__tag {
-            background: rgba(200, 122, 46, 0.2);
-            color: var(--copper-light);
-        }
-        .smart-cta .section__title {
-            color: var(--white);
-        }
-        .smart-cta .section__title span {
-            color: var(--copper-light);
-        }
-        .smart-cta__text {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin: 16px 0 28px;
-            line-height: 1.8;
-        }
-        .smart-cta__visual {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-        .smart-cta__icon-wrap {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            background: rgba(200, 122, 46, 0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--copper-light);
-            border: 2px solid rgba(200, 122, 46, 0.3);
-        }
-        .pulse-ring {
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 2px solid rgba(200, 122, 46, 0.2);
-            animation: pulseRing 2.4s ease-out infinite;
-        }
-        @keyframes pulseRing {
-            0% {
-                transform: scale(0.9);
-                opacity: 0.6;
-            }
-            100% {
-                transform: scale(1.4);
-                opacity: 0;
-            }
-        }
-        .smart-cta__features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-        .smart-cta__features span {
-            background: rgba(255, 255, 255, 0.06);
-            padding: 4px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .smart-cta__features i {
-            color: var(--copper-light);
-        }
-
-        /* ============================================================
-           TESTIMONIALS (unchanged)
-           ============================================================ */
-        .testimonials {
-            background: var(--off-white);
-        }
-        .testimonials__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-        .testimonial {
-            background: var(--white);
-            padding: 28px 24px;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            border-left: 4px solid var(--copper);
-        }
-        .testimonial__stars {
-            color: var(--copper-light);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-            letter-spacing: 2px;
-        }
-        .testimonial__text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--grey-800);
-            opacity: 0.85;
-            font-style: italic;
-            margin-bottom: 16px;
-        }
-        .testimonial__footer {
-            display: flex;
-            flex-direction: column;
-        }
-        .testimonial__footer strong {
-            font-weight: 700;
-            color: var(--green-dark);
-        }
-        .testimonial__footer span {
-            font-size: 0.85rem;
-            opacity: 0.6;
-        }
-
-        /* ============================================================
-           PARTNER CTA (unchanged)
-           ============================================================ */
-        .partner-cta {
-            background: var(--white);
-            border-top: 1px solid var(--grey-100);
-            border-bottom: 1px solid var(--grey-100);
-        }
-        .partner-cta__inner {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .partner-cta__content .section__title {
-            text-align: left;
-        }
-        .partner-cta__text {
-            font-size: 1.05rem;
-            opacity: 0.8;
-            margin: 12px 0 24px;
-            line-height: 1.8;
-            max-width: 560px;
-        }
-        .partner-cta__icon {
-            font-size: 6rem;
-            color: var(--copper);
-            opacity: 0.2;
-            text-align: center;
-        }
-
-        /* ============================================================
-           FOOTER (unchanged)
-           ============================================================ */
-        .footer {
-            background: var(--green-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 0 24px;
-        }
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer__brand .logo {
-            margin-bottom: 16px;
-        }
-        .footer__tagline {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 320px;
-            opacity: 0.75;
-        }
-        .footer__social {
-            display: flex;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .footer__social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .footer__social a:hover {
-            background: var(--copper);
-            transform: translateY(-4px);
-        }
-
-        .footer__links h4,
-        .footer__contact h4 {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 16px;
-            letter-spacing: 0.3px;
-        }
-        .footer__links ul,
-        .footer__contact ul {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer__links a,
-        .footer__contact a {
-            transition: var(--transition);
-            font-size: 0.92rem;
-        }
-        .footer__links a:hover,
-        .footer__contact a:hover {
-            color: var(--copper-light);
-        }
-        .footer__contact li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.92rem;
-        }
-        .footer__contact i {
-            width: 20px;
-            color: var(--copper-light);
-            font-size: 0.95rem;
-        }
-
-        .footer__bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.85rem;
-        }
-        .footer__legal {
-            display: flex;
-            gap: 16px;
-        }
-        .footer__legal a {
-            transition: var(--transition);
-        }
-        .footer__legal a:hover {
-            color: var(--copper-light);
-        }
-
-        /* ============================================================
-           BACK TO TOP
-           ============================================================ */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 900;
-            width: 48px;
-            height: 48px;
-            background: var(--copper);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        #backToTop.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #backToTop:hover {
-            background: var(--copper-light);
-            transform: translateY(-4px);
-        }
-
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 992px) {
-            .hero__content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero__title {
-                font-size: 3.2rem;
-            }
-            .hero__desc {
-                margin: 0 auto 32px;
-            }
-            .hero__actions {
-                justify-content: center;
-            }
-            .hero__stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .services-preview__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .why-us__grid {
-                grid-template-columns: 1fr;
-            }
-            .projects__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .testimonials__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .smart-cta__inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .partner-cta__inner {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .partner-cta__text {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .nav__list {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 76px;
-                left: 0;
-                right: 0;
-                background: var(--green-dark);
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 2px solid var(--copper);
-                box-shadow: var(--shadow);
-            }
-            .nav__list.open {
-                display: flex;
-            }
-            .nav__toggle {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .hero__title {
-                font-size: 2.4rem;
-            }
-            .hero__stats {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .services-preview__grid {
-                grid-template-columns: 1fr;
-            }
-            .projects__grid {
-                grid-template-columns: 1fr;
-            }
-            .testimonials__grid {
-                grid-template-columns: 1fr;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr;
-            }
-            .section__title {
-                font-size: 2rem;
-            }
-            .btn {
-                padding: 12px 24px;
-                font-size: 0.9rem;
-            }
-            .hero__title span::after {
-                height: 4px;
-                bottom: 2px;
-            }
-            /* Logo smaller on mobile */
-            .logo__mark {
-                width: 38px;
-                height: 38px;
-            }
-            .logo__mark .sz-letters .s,
-            .logo__mark .sz-letters .z {
-                font-size: 1.2rem;
-            }
-            .logo__mark .lightning-bolt {
-                font-size: 0.9rem;
-            }
-            .logo__text {
-                font-size: 1rem;
-            }
-        }
-
-        /* Anti-bot hidden field */
-        .hp-field {
-            position: absolute;
-            left: -9999px;
-            top: -9999px;
-            opacity: 0;
-            pointer-events: none;
-            height: 0;
-            width: 0;
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .nav-right { gap: 1rem; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- ============================================================
-    PRELOADER
-    ============================================================ -->
-    <div id="preloader" aria-hidden="true">
-        <div class="loader-icon">
-            <span>SZ</span>
-            <span class="bolt"><i class="fas fa-bolt"></i></span>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-logo">
+            <img src="images/logo.png" alt="Smart Zambia Logo"> 
+            SMART ZAMBIA
         </div>
-        <div class="loader-bar"><span></span></div>
-    </div>
-
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
-    <header class="header" id="header" role="banner">
-        <div class="container header__inner">
-            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <!-- New logo: SZ crossing + lightning -->
-                <div class="logo__mark">
-                    <div class="sz-letters">
-                        <span class="s">S</span>
-                        <span class="z">Z</span>
-                    </div>
-                    <i class="fas fa-bolt lightning-bolt"></i>
-                </div>
-                <span class="logo__text">Smart<span>Zambia</span></span>
-            </a>
-
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav__list" id="navList">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="partner.html">Partner</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- ============================================================
-    HERO
-    ============================================================ -->
-    <section class="hero" id="home" aria-label="Hero banner">
-        <!-- YOUR IMAGE: civil-site-01 -->
-        <div class="hero__bg" style="background-image: url('civil-site-01');"></div>
-        <div class="hero__overlay"></div>
-        <div class="container hero__content">
-            <div class="hero__text">
-                <span class="hero__badge">
-                    <i class="fas fa-bolt"></i> Engineering Innovation
-                </span>
-                <h1 class="hero__title">
-                    Building Zambia's<br />
-                    <span>Smart Future</span>
-                </h1>
-                <p class="hero__desc">
-                    <strong>Electrical &bull; Mechanical &bull; Civil &bull; IT</strong><br />
-                    Reliable, affordable engineering solutions for Zambian communities.
-                </p>
-                <div class="hero__actions">
-                    <a href="services.html" class="btn btn--primary">
-                        <i class="fas fa-arrow-right"></i> Our Services
-                    </a>
-                    <a href="contact.html" class="btn btn--outline">
-                        <i class="fas fa-phone"></i> Get in Touch
-                    </a>
-                </div>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="about.html">About</a>
+                <a href="partner.html">Partner</a>
+                <a href="contact.html">Contact</a>
             </div>
-            <div class="hero__stats">
-                <div class="stat">
-                    <span class="stat__number" data-count="142">0</span>
-                    <span class="stat__label">Projects Delivered</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__number" data-count="99">0</span>
-                    <span class="stat__label">Satisfaction %</span>
-                </div>
-                <div class="stat">
-                    <span class="stat__number" data-count="16">0</span>
-                    <span class="stat__label">Years of Experience</span>
-                </div>
-            </div>
+            <!-- THEME TOGGLE BUTTON -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
         </div>
-        <div class="hero__scroll">
-            <span>Scroll</span>
-            <i class="fas fa-chevron-down"></i>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Making your living <br><span>easier and smarter</span></h1>
+            <p>Affordable Electrical, Mechanical, Civil, and IT solutions tailored for domestic residential projects across Zambia.</p>
+            <a href="partner.html"><button class="hero-btn">Partner With Us</button></a>
         </div>
     </section>
 
-    <!-- ============================================================
-    SERVICES PREVIEW
-    ============================================================ -->
-    <section class="services-preview section" aria-label="Services overview">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-cogs"></i> What We Do</span>
-                <h2 class="section__title">Engineering Solutions <span>for Every Need</span></h2>
-                <p class="section__desc">
-                    From powering homes to building smart infrastructure — we deliver
-                    innovative, cost‑effective engineering across four core disciplines.
-                </p>
+    <!-- SERVICES -->
+    <section id="services">
+        <h2 class="section-title">Our Core <span>Solutions</span></h2>
+        <p class="section-subtitle">Innovation and implementation tailored for you.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">⚡</span>
+                <h4>Electrical</h4>
+                <p>Domestic wiring, smart home automation, energy-efficient lighting, and solar panel installations.</p>
             </div>
-            <div class="services-preview__grid">
-                <article class="service-card">
-                    <div class="service-card__icon"><i class="fas fa-bolt"></i></div>
-                    <h3 class="service-card__title">Electrical</h3>
-                    <p class="service-card__desc">Wiring, solar systems, backup power, and smart home automation — safe, efficient, and tailored to Zambia.</p>
-                    <a href="services.html#electrical" class="service-card__link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </article>
-                <article class="service-card">
-                    <div class="service-card__icon"><i class="fas fa-cogs"></i></div>
-                    <h3 class="service-card__title">Mechanical</h3>
-                    <p class="service-card__desc">HVAC, plumbing, machinery installation, and maintenance — keeping your operations running smoothly.</p>
-                    <a href="services.html#mechanical" class="service-card__link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </article>
-                <article class="service-card">
-                    <div class="service-card__icon"><i class="fas fa-building"></i></div>
-                    <h3 class="service-card__title">Civil</h3>
-                    <p class="service-card__desc">Structural design, construction management, surveying, and infrastructure for residential and commercial.</p>
-                    <a href="services.html#civil" class="service-card__link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </article>
-                <article class="service-card">
-                    <div class="service-card__icon"><i class="fas fa-laptop-code"></i></div>
-                    <h3 class="service-card__title">IT Services</h3>
-                    <p class="service-card__desc">Network setup, software solutions, cybersecurity, and smart building integration for the digital age.</p>
-                    <a href="services.html#it" class="service-card__link">Learn More <i class="fas fa-arrow-right"></i></a>
-                </article>
+            <div class="service-card">
+                <span class="service-icon">⚙️</span>
+                <h4>Mechanical</h4>
+                <p>Plumbing systems, HVAC installations, and mechanical maintenance for residential properties.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🏗️</span>
+                <h4>Civil</h4>
+                <p>Domestic construction, foundation laying, block work, roofing, and structural renovations.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">💻</span>
+                <h4>IT Solutions</h4>
+                <p>Network setup, security systems (CCTV), internet infrastructure, and smart software integration.</p>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-    WHY US
-    ============================================================ -->
-    <section class="why-us section" aria-label="Why choose Smart Zambia">
-        <div class="container">
-            <div class="why-us__grid">
-                <div class="why-us__image">
-                    <!-- YOUR IMAGE: civil-site-01 (1) -->
-                    <img src="civil-site-01%20(1)" alt="Civil construction works" loading="lazy" />
-                    <div class="why-us__badge">
-                        <i class="fas fa-shield-alt"></i> 16+ Years Trusted
-                    </div>
-                </div>
-                <div class="why-us__content">
-                    <span class="section__tag"><i class="fas fa-star"></i> Why Smart Zambia</span>
-                    <h2 class="section__title">Reliable, Affordable &amp; <span>Visionary</span></h2>
-                    <p class="why-us__text">
-                        We combine global engineering standards with local expertise
-                        to deliver solutions that are durable, cost‑effective, and
-                        future‑ready. Every project is built on trust, transparency,
-                        and a commitment to Zambian communities.
-                    </p>
-                    <ul class="why-us__list">
-                        <li><i class="fas fa-check-circle"></i> Qualified engineers with local &amp; international experience</li>
-                        <li><i class="fas fa-check-circle"></i> Affordable pricing without compromising quality</li>
-                        <li><i class="fas fa-check-circle"></i> Innovative smart solutions for homes and businesses</li>
-                        <li><i class="fas fa-check-circle"></i> Reliable after‑sales support and maintenance</li>
-                    </ul>
-                    <a href="about.html" class="btn btn--primary">
-                        <i class="fas fa-info-circle"></i> More About Us
-                    </a>
-                </div>
-            </div>
+    <!-- CIVIL PROJECTS GALLERY -->
+    <section id="projects">
+        <h2 class="section-title">Recent <span>Constructions</span></h2>
+        <p class="section-subtitle">High-quality domestic civil projects we have completed.</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="images/civil1.jpg" alt="Civil Project 1"></div>
+            <div class="gallery-item"><img src="images/civil2.jpg" alt="Civil Project 2"></div>
+            <div class="gallery-item"><img src="images/civil3.jpg" alt="Civil Project 3"></div>
+            <div class="gallery-item"><img src="images/civil4.jpg" alt="Civil Project 4"></div>
+            <div class="gallery-item"><img src="images/civil5.jpg" alt="Civil Project 5"></div>
         </div>
     </section>
 
-    <!-- ============================================================
-    PROJECTS (with your construction images)
-    ============================================================ -->
-    <section class="projects section" aria-label="Featured projects">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-hard-hat"></i> Our Work</span>
-                <h2 class="section__title">Featured <span>Projects</span></h2>
-                <p class="section__desc">A glimpse of what we've built for our clients across Zambia.</p>
-            </div>
-            <div class="projects__grid">
-                <div class="project-card">
-                    <!-- YOUR IMAGE: civil-site-01 (2) -->
-                    <img src="civil-site-01%20(2)" alt="Residential construction" loading="lazy" />
-                    <div class="project-card__overlay">
-                        <h4>Modern Residential Development</h4>
-                        <span>Lusaka, 2025</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <!-- YOUR IMAGE: civil-site-01 (3) -->
-                    <img src="civil-site-01%20(3)" alt="Commercial construction" loading="lazy" />
-                    <div class="project-card__overlay">
-                        <h4>Commercial Complex</h4>
-                        <span>Kitwe, 2024</span>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <!-- YOUR IMAGE: civil-site-01 (4) -->
-                    <img src="civil-site-01%20(4)" alt="Smart house prototype" loading="lazy" />
-                    <div class="project-card__overlay">
-                        <h4>Smart House Prototype</h4>
-                        <span>Ndola, 2025</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    SMART HOUSE CTA
-    ============================================================ -->
-    <section class="smart-cta section" aria-label="Smart house call to action">
-        <div class="container">
-            <div class="smart-cta__inner">
-                <div class="smart-cta__content">
-                    <span class="section__tag"><i class="fas fa-home"></i> Smart Living</span>
-                    <h2 class="section__title">Want to Build a <span>Smart House?</span></h2>
-                    <p class="smart-cta__text">
-                        Let's design and build your dream smart home — automated lighting,
-                        security, climate control, and energy management, all integrated
-                        seamlessly. From concept to completion, we make it happen.
-                    </p>
-                    <a href="contact.html" class="btn btn--primary btn--large">
-                        <i class="fas fa-arrow-right"></i> Let's Build Together
-                    </a>
-                </div>
-                <div class="smart-cta__visual">
-                    <div class="smart-cta__icon-wrap">
-                        <i class="fas fa-house-signal"></i>
-                        <span class="pulse-ring"></span>
-                    </div>
-                    <div class="smart-cta__features">
-                        <span><i class="fas fa-lightbulb"></i> Lighting</span>
-                        <span><i class="fas fa-shield-alt"></i> Security</span>
-                        <span><i class="fas fa-thermometer-half"></i> Climate</span>
-                        <span><i class="fas fa-wifi"></i> Automation</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    TESTIMONIALS
-    ============================================================ -->
-    <section class="testimonials section" aria-label="Client testimonials">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-quote-left"></i> Testimonials</span>
-                <h2 class="section__title">What Our Clients <span>Say</span></h2>
-            </div>
-            <div class="testimonials__grid">
-                <blockquote class="testimonial">
-                    <div class="testimonial__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial__text">“Smart Zambia installed a complete solar system for our clinic. Professional, fast, and flawless for over a year. Highly recommend!”</p>
-                    <footer class="testimonial__footer">
-                        <strong>Dr. Mwansa Chanda</strong>
-                        <span>Lusaka, Zambia</span>
-                    </footer>
-                </blockquote>
-                <blockquote class="testimonial">
-                    <div class="testimonial__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial__text">“They handled the full mechanical and electrical fit‑out for our office. Great communication, on budget, quality outstanding.”</p>
-                    <footer class="testimonial__footer">
-                        <strong>Mr. Kelvin Banda</strong>
-                        <span>Kitwe, Zambia</span>
-                    </footer>
-                </blockquote>
-                <blockquote class="testimonial">
-                    <div class="testimonial__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial__text">“The IT team set up our entire network and security system. Reliable, fast, and always available for support. Best in the business.”</p>
-                    <footer class="testimonial__footer">
-                        <strong>Ms. Grace Phiri</strong>
-                        <span>Ndola, Zambia</span>
-                    </footer>
-                </blockquote>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    PARTNER CTA
-    ============================================================ -->
-    <section class="partner-cta section" aria-label="Partner with us">
-        <div class="container">
-            <div class="partner-cta__inner">
-                <div class="partner-cta__content">
-                    <span class="section__tag"><i class="fas fa-handshake"></i> Partnerships</span>
-                    <h2 class="section__title">Want to Partner <span>with Us?</span></h2>
-                    <p class="partner-cta__text">
-                        We're always looking for like‑minded companies and professionals
-                        to collaborate with. Register your interest and let's build
-                        something great together.
-                    </p>
-                    <a href="partner.html" class="btn btn--secondary">
-                        <i class="fas fa-arrow-right"></i> Register Interest
-                    </a>
-                </div>
-                <div class="partner-cta__icon">
-                    <i class="fas fa-handshake"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo__mark">
-                            <div class="sz-letters">
-                                <span class="s">S</span>
-                                <span class="z">Z</span>
-                            </div>
-                            <i class="fas fa-bolt lightning-bolt"></i>
-                        </div>
-                        <span class="logo__text">Smart<span>Zambia</span></span>
-                    </a>
-                    <p class="footer__tagline">
-                        Engineering solutions through innovation and implementation.
-                        Building a smarter Zambia, one project at a time.
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer__links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="partner.html">Partner</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="services.html#electrical">Electrical</a></li>
-                        <li><a href="services.html#mechanical">Mechanical</a></li>
-                        <li><a href="services.html#civil">Civil</a></li>
-                        <li><a href="services.html#it">IT Services</a></li>
-                        <li><a href="contact.html">Smart House</a></li>
-                    </ul>
-                </div>
-                <div class="footer__contact">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Lusaka, Zambia</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
-                <p class="footer__legal">
-                    <a href="#">Privacy Policy</a> &bull;
-                    <a href="#">Terms of Service</a>
-                </p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-info">
+            <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
+            <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
+            <div class="copyright">
+                &copy; 2026 Smart Zambia. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- ============================================================
-    BACK TO TOP
-    ============================================================ -->
-    <button id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
+    <!-- JAVASCRIPT: THEME TOGGLE -->
     <script>
-        (function() {
-            'use strict';
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // ─── PRELOADER ───
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => {
-                preloader.classList.add('hidden');
-                setTimeout(animateCounters, 400);
-            });
+        // Check for saved theme preference in LocalStorage
+        if(localStorage.getItem('theme') === 'light') {
+            body.classList.add('light-mode');
+            toggleBtn.textContent = '☀️';
+        } else {
+            toggleBtn.textContent = '🌙';
+        }
 
-            // ─── MOBILE NAV ───
-            const toggle = document.getElementById('navToggle');
-            const navList = document.getElementById('navList');
-            toggle.addEventListener('click', () => {
-                const open = toggle.classList.toggle('open');
-                navList.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', open);
-            });
-            document.querySelectorAll('.nav__list a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggle.classList.remove('open');
-                    navList.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // ─── HEADER SCROLL SHADOW ───
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                if (y > 60) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                const btn = document.getElementById('backToTop');
-                if (y > 500) {
-                    btn.classList.add('visible');
-                } else {
-                    btn.classList.remove('visible');
-                }
-            });
-
-            // ─── BACK TO TOP ───
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            // ─── COUNTER ANIMATION ───
-            function animateCounters() {
-                const counters = document.querySelectorAll('.stat__number[data-count]');
-                counters.forEach(counter => {
-                    const target = parseInt(counter.getAttribute('data-count'), 10);
-                    if (isNaN(target)) return;
-                    let current = 0;
-                    const increment = Math.ceil(target / 60);
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            counter.textContent = target;
-                            clearInterval(timer);
-                        } else {
-                            counter.textContent = current;
-                        }
-                    }, 25);
-                });
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Save preference and change icon
+            if(body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                toggleBtn.textContent = '🌙';
             }
-
-            // ─── SMOOTH SCROLL FOR NAV LINKS ───
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#') return;
-                    const target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-        })();
+        });
     </script>
-
 </body>
 </html>
