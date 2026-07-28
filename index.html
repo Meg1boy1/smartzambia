@@ -3,165 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Zambia | Making Living Easier</title>
+    <title>Smart Zambia | Engineering the Future</title>
     <style>
-        /* CSS VARIABLES FOR THEME */
+        /* =========================================
+           1. CSS VARIABLES & THEME ENGINE
+           ========================================= */
         :root {
-            /* Dark Mode (Default) */
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --text-primary: #e0e0e0;
-            --text-secondary: #888888;
-            --border-color: #222222;
-            --card-bg: #121212;
-            --nav-bg: rgba(10, 10, 10, 0.95);
+            /* Core Colors - Dark Mode (Default) */
+            --bg-body: #0b0d11;
+            --bg-card: #14171e;
+            --bg-nav: rgba(11, 13, 17, 0.92);
+            --text-primary: #f0f4f8;
+            --text-secondary: #9aa3b5;
+            --border-color: #252a36;
+            --shadow-color: rgba(0, 0, 0, 0.6);
             
-            /* Accent Colors */
-            --primary-lime: #9dff00;
-            --primary-cyan: #00faff;
-            --glow-color: rgba(0, 250, 255, 0.3);
+            /* Brand Accents */
+            --accent-lime: #9dff00;
+            --accent-cyan: #00faff;
+            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+            
+            /* Glow Effects */
+            --glow-lime: rgba(157, 255, 0, 0.3);
+            --glow-cyan: rgba(0, 250, 255, 0.3);
         }
 
-        /* Light Mode Classes */
-        body.light-mode {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --text-primary: #1a202c;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-            --card-bg: #ffffff;
-            --nav-bg: rgba(255, 255, 255, 0.95);
+        /* Light Mode Overrides */
+        body.theme-light {
+            --bg-body: #f2f6fc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(242, 246, 252, 0.95);
+            --text-primary: #131a26;
+            --text-secondary: #516077;
+            --border-color: #dce3ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
         }
 
-        /* RESET & BASE STYLES */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-primary); color: var(--text-primary); scroll-behavior: smooth; transition: background-color 0.3s ease, color 0.3s ease; }
-        a { text-decoration: none; color: inherit; }
+        /* =========================================
+           2. RESET & ENGINEERED TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
+        }
 
-        /* NAVIGATION BAR */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; transition: background 0.3s ease, border 0.3s ease; }
-        .nav-logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-lime); display: flex; align-items: center; gap: 10px; }
-        .nav-logo img { height: 40px; width: auto; }
-        .nav-right { display: flex; align-items: center; gap: 2rem; }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--primary-cyan); }
+        /* Custom Advanced Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
 
-        /* THEME TOGGLE BUTTON */
-        .theme-toggle { background: transparent; border: none; cursor: pointer; font-size: 1.5rem; color: var(--text-primary); transition: transform 0.3s; display: flex; align-items: center; }
-        .theme-toggle:hover { transform: rotate(20deg); }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
 
-        /* HERO SECTION */
-        .hero { height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 5%; }
-        /* WATERMARK LOGO BACKGROUND */
-        .hero::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('images/logo.png'); background-size: contain; background-repeat: no-repeat; background-position: center; opacity: 0.04; pointer-events: none; z-index: 0; }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-        .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -1px; }
-        .hero h1 span { color: var(--primary-lime); }
-        .hero p { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2.5rem; line-height: 1.6; }
-        .hero-btn { padding: 14px 40px; background: linear-gradient(135deg, var(--primary-lime), var(--primary-cyan)); color: #000; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
-        .hero-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--glow-color); }
+        /* =========================================
+           3. NAVIGATION BAR (Sticky Glassmorphism)
+           ========================================= */
+        .navbar {
+            position: sticky; top: 0; z-index: 999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: var(--bg-nav);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease, border 0.3s ease;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
+            color: var(--accent-lime); letter-spacing: -0.5px;
+        }
+        .nav-brand img { height: 40px; width: auto; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+        .nav-links a {
+            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
+            position: relative; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-gradient); transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Dark/Light Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
 
-        /* SECTION COMMON STYLES */
-        section { padding: 5rem 5%; }
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; }
-        .section-title span { color: var(--primary-cyan); }
-        .section-subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 3rem; font-size: 1.1rem; }
+        /* =========================================
+           4. HERO SECTION (Watermark & Glow)
+           ========================================= */
+        .hero {
+            min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 2rem 5%; position: relative; overflow: hidden;
+        }
+        /* The Logo Watermark Engine */
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/logo.png'); background-size: 60%; background-repeat: no-repeat;
+            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
+            animation: slowFloat 20s infinite alternate ease-in-out;
+        }
+        @keyframes slowFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
+        }
+        .hero-content {
+            position: relative; z-index: 1; max-width: 900px;
+            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* SERVICES */
-        #services { background: var(--bg-secondary); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transition: background 0.3s; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .service-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 2.5rem 1.5rem; text-align: center; border-radius: 12px; transition: all 0.3s ease; }
-        .service-card:hover { border-color: var(--primary-lime); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .service-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
-        .service-card h4 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-        .service-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; text-shadow: 0 0 40px var(--glow-lime);
+        }
+        .hero p {
+            font-size: 1.3rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 2.5rem auto;
+            -webkit-text-fill-color: var(--text-secondary); /* Reset for p */
+        }
+        .btn-primary {
+            display: inline-block; padding: 16px 48px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+            box-shadow: 0 0 20px var(--glow-cyan);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime);
+        }
 
-        /* CIVIL PROJECTS GALLERY */
-        #projects { background: var(--bg-primary); transition: background 0.3s; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
-        .gallery-item { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); transition: border 0.3s ease; aspect-ratio: 16/10; background: #1a1a1a; }
-        .gallery-item:hover { border-color: var(--primary-cyan); }
+        /* =========================================
+           5. SERVICE PREVIEW SECTION (Index Home)
+           ========================================= */
+        .services-preview {
+            padding: 6rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .section-header h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-header p { color: var(--text-secondary); font-size: 1.1rem; }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .service-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 3rem 2rem; border-radius: 20px; text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent-gradient); transform: scaleX(0); transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--accent-cyan); box-shadow: 0 20px 40px var(--shadow-color); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-icon { font-size: 3.5rem; display: block; margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 0.8rem; }
+        .service-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        .service-link { color: var(--accent-lime); font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 5px; }
+        .service-link:hover { color: var(--accent-cyan); gap: 12px; }
+
+        /* =========================================
+           6. CIVIL PROJECT GALLERY (Domestic)
+           ========================================= */
+        .projects-gallery {
+            padding: 6rem 5%; background: var(--bg-body);
+        }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem;
+            max-width: 1100px; margin: 2rem auto 0 auto;
+        }
+        .gallery-item {
+            border-radius: 16px; overflow: hidden; position: relative;
+            aspect-ratio: 4/3; border: 1px solid var(--border-color);
+            transition: transform 0.4s ease, border 0.3s ease;
+        }
+        .gallery-item:hover { transform: scale(1.03); border-color: var(--accent-lime); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        /* FOOTER */
-        footer { background: #050505; padding: 3rem 5%; border-top: 1px solid var(--border-color); text-align: center; transition: background 0.3s; }
-        body.light-mode footer { background: #f1f5f9; }
-        .footer-info p { margin: 0.5rem 0; color: var(--text-secondary); }
-        .footer-info a { color: var(--primary-lime); font-weight: 500; transition: color 0.3s; }
-        .footer-info a:hover { color: var(--primary-cyan); }
-        .copyright { margin-top: 2rem; color: #444; font-size: 0.8rem; }
-        body.light-mode .copyright { color: #94a3b8; }
+        /* =========================================
+           7. ENGINEERED FOOTER
+           ========================================= */
+        footer {
+            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
+            text-align: center; transition: background 0.3s;
+        }
+        body.theme-light footer { background: #e2e8f0; }
+        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
+        .footer-content a:hover { color: var(--accent-lime); }
+        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
+        body.theme-light .copyright { color: #94a3b8; }
 
-        /* RESPONSIVE */
+        /* =========================================
+           8. RESPONSIVE ENGINEERING
+           ========================================= */
+        @media (max-width: 992px) {
+            .nav-links { gap: 1.5rem; }
+        }
         @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; }
             .nav-links { gap: 1rem; font-size: 0.9rem; }
-            .nav-right { gap: 1rem; }
-            .hero h1 { font-size: 2.5rem; }
+            .nav-brand { font-size: 1.1rem; gap: 8px; }
+            .nav-brand img { height: 30px; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.1rem; }
+        }
+        @media (max-width: 480px) {
+            .nav-links { display: none; /* In real advanced build we'd put a burger menu here */ }
+            .hero h1 { font-size: 2.2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
     <!-- NAVIGATION -->
-    <nav>
-        <div class="nav-logo">
+    <nav class="navbar">
+        <div class="nav-brand">
             <img src="images/logo.png" alt="Smart Zambia Logo"> 
             SMART ZAMBIA
         </div>
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="about.html">About</a>
-                <a href="partner.html">Partner</a>
-                <a href="contact.html">Contact</a>
-            </div>
-            <!-- THEME TOGGLE BUTTON -->
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">🌙</button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html">About</a>
+            <a href="partner.html">Partner</a>
+            <a href="contact.html">Contact</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
         </div>
     </nav>
 
     <!-- HERO -->
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="hero-content">
-            <h1>Making your living <br><span>easier and smarter</span></h1>
+            <h1>Making your living<br>easier and smarter</h1>
             <p>Affordable Electrical, Mechanical, Civil, and IT solutions tailored for domestic residential projects across Zambia.</p>
-            <a href="partner.html"><button class="hero-btn">Partner With Us</button></a>
+            <a href="partner.html"><button class="btn-primary">Partner With Us</button></a>
         </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services">
-        <h2 class="section-title">Our Core <span>Solutions</span></h2>
-        <p class="section-subtitle">Innovation and implementation tailored for you.</p>
+    <!-- SERVICES PREVIEW -->
+    <section class="services-preview" id="services">
+        <div class="section-header">
+            <h2>Our Core <span>Solutions</span></h2>
+            <p>Innovation and implementation tailored for everyday living.</p>
+        </div>
         <div class="services-grid">
             <div class="service-card">
                 <span class="service-icon">⚡</span>
-                <h4>Electrical</h4>
+                <h3>Electrical</h3>
                 <p>Domestic wiring, smart home automation, energy-efficient lighting, and solar panel installations.</p>
+                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">⚙️</span>
-                <h4>Mechanical</h4>
+                <h3>Mechanical</h3>
                 <p>Plumbing systems, HVAC installations, and mechanical maintenance for residential properties.</p>
+                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">🏗️</span>
-                <h4>Civil</h4>
+                <h3>Civil</h3>
                 <p>Domestic construction, foundation laying, block work, roofing, and structural renovations.</p>
+                <a href="services.html" class="service-link">View Details →</a>
             </div>
             <div class="service-card">
                 <span class="service-icon">💻</span>
-                <h4>IT Solutions</h4>
+                <h3>IT Solutions</h3>
                 <p>Network setup, security systems (CCTV), internet infrastructure, and smart software integration.</p>
+                <a href="services.html" class="service-link">View Details →</a>
             </div>
         </div>
     </section>
 
-    <!-- CIVIL PROJECTS GALLERY -->
-    <section id="projects">
-        <h2 class="section-title">Recent <span>Constructions</span></h2>
-        <p class="section-subtitle">High-quality domestic civil projects we have completed.</p>
+    <!-- PROJECTS GALLERY -->
+    <section class="projects-gallery" id="projects">
+        <div class="section-header">
+            <h2>Recent <span>Constructions</span></h2>
+            <p>High-quality domestic civil projects we have completed.</p>
+        </div>
         <div class="gallery-grid">
             <div class="gallery-item"><img src="images/civil1.jpg" alt="Civil Project 1"></div>
             <div class="gallery-item"><img src="images/civil2.jpg" alt="Civil Project 2"></div>
@@ -173,7 +311,8 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-info">
+        <div class="footer-content">
+            <h3>Green & Better Zambia</h3>
             <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
             <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
             <div class="copyright">
@@ -182,28 +321,29 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT: THEME TOGGLE -->
+    <!-- ENGINEERED JAVASCRIPT FOR THEME PERSISTENCE -->
     <script>
         const toggleBtn = document.getElementById('themeToggle');
         const body = document.body;
 
-        // Check for saved theme preference in LocalStorage
-        if(localStorage.getItem('theme') === 'light') {
-            body.classList.add('light-mode');
+        // 1. Load preferred theme from LocalStorage
+        if(localStorage.getItem('siteTheme') === 'light') {
+            body.classList.add('theme-light');
             toggleBtn.textContent = '☀️';
         } else {
             toggleBtn.textContent = '🌙';
         }
 
+        // 2. Handle toggle click
         toggleBtn.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
+            body.classList.toggle('theme-light');
             
-            // Save preference and change icon
-            if(body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
+            // 3. Save state and update icon
+            if(body.classList.contains('theme-light')) {
+                localStorage.setItem('siteTheme', 'light');
                 toggleBtn.textContent = '☀️';
             } else {
-                localStorage.setItem('theme', 'dark');
+                localStorage.setItem('siteTheme', 'dark');
                 toggleBtn.textContent = '🌙';
             }
         });
