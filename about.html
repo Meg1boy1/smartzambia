@@ -1,1205 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us – Smart Zambia</title>
-
-    <!-- SEO & Security -->
-    <meta name="description" content="Learn about Smart Zambia — our mission, vision, values, and the team behind Zambia's most trusted engineering solutions." />
-    <meta name="theme-color" content="#0d4a2e" />
-
-    <!-- Fonts & Icons -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Smart Zambia</title>
     <style>
-        /* ============================================================
-           RESET & BASE (same as index – kept for consistency)
-           ============================================================ */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* =========================================
+           1. CSS VARIABLES & THEME ENGINE
+           ========================================= */
         :root {
-            --green-dark: #0d4a2e;
-            --green-mid: #1a6e3e;
-            --green-light: #2d8f54;
-            --copper: #c87a2e;
-            --copper-light: #e8a54b;
-            --copper-glow: rgba(200, 122, 46, 0.3);
-            --white: #ffffff;
-            --off-white: #f2f5f0;
-            --grey-100: #e9ece8;
-            --grey-800: #2c3a2f;
-            --shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
-            --radius: 12px;
-            --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Core Colors - Dark Mode (Default) */
+            --bg-body: #0b0d11;
+            --bg-card: #14171e;
+            --bg-nav: rgba(11, 13, 17, 0.92);
+            --text-primary: #f0f4f8;
+            --text-secondary: #9aa3b5;
+            --border-color: #252a36;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            
+            /* Brand Accents */
+            --accent-lime: #9dff00;
+            --accent-cyan: #00faff;
+            --accent-gradient: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+            
+            /* Glow Effects */
+            --glow-lime: rgba(157, 255, 0, 0.3);
+            --glow-cyan: rgba(0, 250, 255, 0.3);
         }
-        html {
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
+
+        /* Light Mode Overrides */
+        body.theme-light {
+            --bg-body: #f2f6fc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(242, 246, 252, 0.95);
+            --text-primary: #131a26;
+            --text-secondary: #516077;
+            --border-color: #dce3ed;
+            --shadow-color: rgba(0, 0, 0, 0.05);
         }
+
+        /* =========================================
+           2. RESET & ENGINEERED TYPOGRAPHY
+           ========================================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--off-white);
-            color: var(--grey-800);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        ul {
-            list-style: none;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
+            transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s ease;
         }
 
-        /* ============================================================
-           PRELOADER
-           ============================================================ */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: var(--green-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 24px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+        /* Custom Advanced Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); border-left: 1px solid var(--border-color); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-gradient); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+
+        /* =========================================
+           3. NAVIGATION BAR (Sticky Glassmorphism)
+           ========================================= */
+        .navbar {
+            position: sticky; top: 0; z-index: 999;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 5%; background: var(--bg-nav);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.4s ease, border 0.3s ease;
         }
-        #preloader.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+        .nav-brand {
+            display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800;
+            color: var(--accent-lime); letter-spacing: -0.5px;
         }
-        .loader-icon {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: var(--copper-light);
+        .nav-brand img { height: 40px; width: auto; }
+        .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+        .nav-links a {
+            font-weight: 500; font-size: 1rem; color: var(--text-secondary);
+            position: relative; transition: color 0.3s;
         }
-        .loader-icon .bolt {
-            color: var(--white);
-            font-size: 2.4rem;
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+            background: var(--accent-gradient); transition: width 0.3s ease;
         }
-        .loader-bar {
-            width: 200px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-            overflow: hidden;
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        /* Active Page Highlight */
+        .nav-links a.active { color: var(--text-primary); }
+        .nav-links a.active::after { width: 100%; background: var(--accent-cyan); }
+        
+        /* Dark/Light Toggle Button */
+        .theme-toggle {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .loader-bar span {
-            display: block;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--copper), var(--copper-light));
-            border-radius: 4px;
-            animation: loadProgress 1.8s ease-in-out forwards;
+        .theme-toggle:hover { transform: rotate(30deg) scale(1.1); border-color: var(--accent-cyan); box-shadow: 0 0 15px var(--glow-cyan); }
+
+        /* =========================================
+           4. ABOUT HERO (Watermark & Glow)
+           ========================================= */
+        .about-hero {
+            min-height: 55vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 5%; position: relative; overflow: hidden;
         }
-        @keyframes loadProgress {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
+        /* The Logo Watermark Engine */
+        .about-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/logo.png'); background-size: 50%; background-repeat: no-repeat;
+            background-position: center; opacity: 0.035; pointer-events: none; z-index: 0;
+            animation: slowFloat 20s infinite alternate ease-in-out;
+        }
+        @keyframes slowFloat {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(3deg); }
+        }
+        .hero-content {
+            position: relative; z-index: 1; max-width: 800px;
+            animation: fadeUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .about-hero h1 {
+            font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem;
+        }
+        .about-hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about-hero p {
+            font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
+            -webkit-text-fill-color: var(--text-secondary);
+        }
+        .founded-badge {
+            display: inline-block; margin-top: 2rem; padding: 10px 30px;
+            border: 1px solid var(--border-color); border-radius: 50px;
+            background: var(--bg-card); color: var(--accent-lime); font-weight: 700; font-size: 1.1rem;
         }
 
-        /* ============================================================
-           HEADER (same as index)
-           ============================================================ */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(13, 74, 46, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            transition: var(--transition);
+        /* =========================================
+           5. OUR STORY & MISSION SECTION
+           ========================================= */
+        .our-story {
+            padding: 6rem 5%; background: var(--bg-body); border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
         }
-        .header.scrolled {
-            background: rgba(13, 74, 46, 0.98);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        .story-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            max-width: 1200px; margin: 0 auto;
         }
-        .header__inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 76px;
+        .story-text h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1.5rem; }
+        .story-text h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .story-text p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem; }
+        .story-text ul { padding: 0; margin: 0; }
+        .story-text ul li {
+            padding: 0.6rem 0; color: var(--text-secondary); display: flex; align-items: center; gap: 10px; font-size: 1rem;
         }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.5rem;
-            color: var(--white);
-            letter-spacing: -0.5px;
-        }
-        .logo__icon {
-            display: flex;
-            align-items: center;
-            gap: 2px;
-            background: var(--copper);
-            padding: 6px 10px 6px 8px;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1.1rem;
-            line-height: 1;
-        }
-        .logo__icon .bolt {
-            color: #fff4d6;
-            font-size: 1rem;
-        }
-        .logo__text span {
-            color: var(--copper-light);
-        }
-        .nav__list {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-        }
-        .nav__list a {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.75);
-            transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.3px;
-        }
-        .nav__list a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--copper-light);
-            transition: var(--transition);
-        }
-        .nav__list a:hover,
-        .nav__list a.active {
-            color: var(--white);
-        }
-        .nav__list a:hover::after,
-        .nav__list a.active::after {
-            width: 100%;
-        }
-        .nav__toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-        }
-        .nav__toggle .bar {
-            width: 28px;
-            height: 2.5px;
-            background: var(--white);
-            border-radius: 4px;
-            transition: var(--transition);
-            transform-origin: center;
-        }
-        .nav__toggle.open .bar:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .nav__toggle.open .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .nav__toggle.open .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
+        .story-text ul li::before { content: "✔"; color: var(--accent-lime); font-weight: bold; font-size: 1.2rem; }
 
-        /* ============================================================
-           COMMON SECTION STYLES
-           ============================================================ */
-        .section {
-            padding: 80px 0;
+        .stats-box {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
         }
-        .section__header {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 56px;
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2rem; border-radius: 16px; text-align: center;
+            transition: transform 0.3s ease, border 0.3s ease;
         }
-        .section__tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--copper);
-            background: rgba(200, 122, 46, 0.08);
-            padding: 6px 16px;
-            border-radius: 50px;
-            margin-bottom: 16px;
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan); }
+        .stat-number {
+            font-size: 2.8rem; font-weight: 900;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            display: block; margin-bottom: 0.3rem;
         }
-        .section__title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -1px;
-            color: var(--green-dark);
-        }
-        .section__title span {
-            color: var(--copper);
-        }
-        .section__desc {
-            font-size: 1.1rem;
-            color: var(--grey-800);
-            opacity: 0.8;
-            margin-top: 12px;
-            line-height: 1.7;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            letter-spacing: 0.3px;
-        }
-        .btn--primary {
-            background: var(--copper);
-            color: var(--white);
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-        }
-        .btn--primary:hover {
-            background: var(--copper-light);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 32px rgba(200, 122, 46, 0.45);
-        }
-        .btn--outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-        .btn--outline:hover {
-            border-color: var(--copper-light);
-            background: rgba(200, 122, 46, 0.15);
-            transform: translateY(-3px);
-        }
-        .btn--large {
-            padding: 18px 44px;
-            font-size: 1.1rem;
-        }
+        .stat-label { color: var(--text-secondary); font-weight: 500; }
 
-        /* ============================================================
-           PAGE HERO (About)
-           ============================================================ */
-        .page-hero {
-            position: relative;
-            padding: 160px 0 80px;
-            background: var(--green-dark);
-            overflow: hidden;
-            text-align: center;
+        /* =========================================
+           6. CORE VALUES (Who We Are)
+           ========================================= */
+        .core-values {
+            padding: 6rem 5%; background: var(--bg-body);
         }
-        .page-hero__bg {
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center 30%/cover no-repeat;
-            opacity: 0.15;
-            mix-blend-mode: overlay;
+        .values-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem;
+            max-width: 1100px; margin: 0 auto;
         }
-        .page-hero__overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(13, 74, 46, 0.9) 0%, rgba(13, 74, 46, 0.5) 100%);
-            z-index: 1;
+        .value-card {
+            text-align: center; padding: 2.5rem; border-radius: 16px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            transition: border 0.3s, transform 0.3s;
         }
-        .page-hero__content {
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .page-hero__content h1 {
-            font-size: 3.6rem;
-            font-weight: 900;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-        }
-        .page-hero__content h1 span {
-            color: var(--copper-light);
-        }
-        .page-hero__content p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-        .page-hero__breadcrumb {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 24px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.5);
-        }
-        .page-hero__breadcrumb a {
-            color: var(--copper-light);
-            transition: var(--transition);
-        }
-        .page-hero__breadcrumb a:hover {
-            color: var(--white);
-        }
+        .value-card:hover { border-color: var(--accent-lime); transform: translateY(-5px); }
+        .value-card h4 { font-size: 1.4rem; margin: 1rem 0 0.5rem; }
+        .value-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+        .value-icon { font-size: 2.8rem; }
 
-        /* ============================================================
-           ABOUT STORY
-           ============================================================ */
-        .about-story {
-            background: var(--white);
+        /* =========================================
+           7. DOMESTIC FOCUS BANNER
+           ========================================= */
+        .domestic-banner {
+            background: var(--bg-card); margin: 0 5% 4rem 5%; padding: 4rem; border-radius: 32px;
+            text-align: center; border: 1px solid var(--border-color);
+            position: relative; overflow: hidden;
         }
-        .about-story__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        .domestic-banner h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+        .domestic-banner h2 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .domestic-banner p { color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem auto; font-size: 1.1rem; }
+        .btn-primary {
+            display: inline-block; padding: 16px 48px; border-radius: 50px; font-weight: 700; font-size: 1.1rem;
+            background: var(--accent-gradient); color: #0b0d11; border: none; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 0 20px var(--glow-cyan);
         }
-        .about-story__image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .about-story__image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-        .about-story__content .section__title {
-            text-align: left;
-        }
-        .about-story__content p {
-            font-size: 1.05rem;
-            opacity: 0.8;
-            line-height: 1.8;
-            margin: 16px 0 8px;
-        }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px var(--glow-lime); }
 
-        /* ============================================================
-           MISSION & VISION
-           ============================================================ */
-        .mission-vision {
-            background: var(--off-white);
+        /* =========================================
+           8. ENGINEERED FOOTER
+           ========================================= */
+        footer {
+            background: #05070a; padding: 4rem 5%; border-top: 1px solid var(--border-color);
+            text-align: center; transition: background 0.3s;
         }
-        .mission-vision__grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        .mv-card {
-            background: var(--white);
-            padding: 40px 32px;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            border-top: 6px solid var(--copper);
-            transition: var(--transition);
-        }
-        .mv-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-        }
-        .mv-card__icon {
-            font-size: 2.4rem;
-            color: var(--copper);
-            margin-bottom: 16px;
-        }
-        .mv-card h3 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--green-dark);
-            margin-bottom: 12px;
-        }
-        .mv-card p {
-            opacity: 0.8;
-            line-height: 1.7;
-        }
+        body.theme-light footer { background: #e2e8f0; }
+        .footer-content h3 { color: var(--accent-lime); font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-content p { color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .footer-content a { color: var(--accent-cyan); font-weight: 600; }
+        .footer-content a:hover { color: var(--accent-lime); }
+        .copyright { margin-top: 2.5rem; color: #555; font-size: 0.85rem; }
+        body.theme-light .copyright { color: #94a3b8; }
 
-        /* ============================================================
-           VALUES / CORE
-           ============================================================ */
-        .values {
-            background: var(--white);
+        /* =========================================
+           9. RESPONSIVE ENGINEERING
+           ========================================= */
+        @media (max-width: 992px) { .nav-links { gap: 1.5rem; } }
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 5%; } .nav-links { gap: 1rem; font-size: 0.9rem; }
+            .nav-brand { font-size: 1.1rem; gap: 8px; } .nav-brand img { height: 30px; }
+            .about-hero h1 { font-size: 2.8rem; }
+            .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .stats-box { grid-template-columns: 1fr 1fr; }
+            .domestic-banner { padding: 3rem 1.5rem; }
         }
-        .values__grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 28px;
-        }
-        .value-item {
-            text-align: center;
-            padding: 32px 20px;
-            background: var(--off-white);
-            border-radius: var(--radius);
-            transition: var(--transition);
-            border-bottom: 4px solid transparent;
-        }
-        .value-item:hover {
-            transform: translateY(-6px);
-            border-bottom-color: var(--copper);
-            box-shadow: var(--shadow);
-        }
-        .value-item__icon {
-            font-size: 2.4rem;
-            color: var(--copper);
-            margin-bottom: 12px;
-        }
-        .value-item h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--green-dark);
-            margin-bottom: 6px;
-        }
-        .value-item p {
-            font-size: 0.95rem;
-            opacity: 0.7;
-            line-height: 1.6;
-        }
-
-        /* ============================================================
-           TIMELINE
-           ============================================================ */
-        .timeline {
-            background: var(--off-white);
-        }
-        .timeline__list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .timeline__list::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--copper);
-            opacity: 0.2;
-        }
-        .timeline-item {
-            display: flex;
-            gap: 32px;
-            padding-left: 70px;
-            position: relative;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 22px;
-            top: 6px;
-            width: 18px;
-            height: 18px;
-            background: var(--copper);
-            border-radius: 50%;
-            border: 4px solid var(--white);
-            box-shadow: 0 0 0 3px var(--copper);
-        }
-        .timeline-item__year {
-            font-weight: 900;
-            font-size: 1.6rem;
-            color: var(--copper);
-            min-width: 80px;
-            letter-spacing: -0.5px;
-        }
-        .timeline-item__content h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--green-dark);
-        }
-        .timeline-item__content p {
-            opacity: 0.75;
-            line-height: 1.6;
-        }
-
-        /* ============================================================
-           TEAM / LEADERSHIP (optional placeholder)
-           ============================================================ */
-        .team {
-            background: var(--white);
-        }
-        .team__grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-        .team-card {
-            background: var(--off-white);
-            border-radius: var(--radius);
-            padding: 28px 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .team-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-        }
-        .team-card__avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--green-dark);
-            margin: 0 auto 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--copper-light);
-        }
-        .team-card h4 {
-            font-weight: 700;
-            color: var(--green-dark);
-        }
-        .team-card span {
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
-        .team-card p {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 8px;
-            line-height: 1.5;
-        }
-
-        /* ============================================================
-           CTA SECTION
-           ============================================================ */
-        .about-cta {
-            background: var(--green-dark);
-            color: var(--white);
-            text-align: center;
-        }
-        .about-cta .section__title {
-            color: var(--white);
-        }
-        .about-cta .section__title span {
-            color: var(--copper-light);
-        }
-        .about-cta p {
-            max-width: 560px;
-            margin: 16px auto 32px;
-            opacity: 0.8;
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================================
-           FOOTER (same as index)
-           ============================================================ */
-        .footer {
-            background: var(--green-dark);
-            color: rgba(255, 255, 255, 0.7);
-            padding: 60px 0 24px;
-        }
-        .footer__grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        .footer__brand .logo {
-            margin-bottom: 16px;
-        }
-        .footer__tagline {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            max-width: 320px;
-            opacity: 0.75;
-        }
-        .footer__social {
-            display: flex;
-            gap: 14px;
-            margin-top: 20px;
-        }
-        .footer__social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .footer__social a:hover {
-            background: var(--copper);
-            transform: translateY(-4px);
-        }
-        .footer__links h4,
-        .footer__contact h4 {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 16px;
-            letter-spacing: 0.3px;
-        }
-        .footer__links ul,
-        .footer__contact ul {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer__links a,
-        .footer__contact a {
-            transition: var(--transition);
-            font-size: 0.92rem;
-        }
-        .footer__links a:hover,
-        .footer__contact a:hover {
-            color: var(--copper-light);
-        }
-        .footer__contact li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.92rem;
-        }
-        .footer__contact i {
-            width: 20px;
-            color: var(--copper-light);
-            font-size: 0.95rem;
-        }
-        .footer__bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            font-size: 0.85rem;
-        }
-        .footer__legal {
-            display: flex;
-            gap: 16px;
-        }
-        .footer__legal a {
-            transition: var(--transition);
-        }
-        .footer__legal a:hover {
-            color: var(--copper-light);
-        }
-
-        /* ============================================================
-           BACK TO TOP
-           ============================================================ */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 900;
-            width: 48px;
-            height: 48px;
-            background: var(--copper);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(200, 122, 46, 0.35);
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-        }
-        #backToTop.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        #backToTop:hover {
-            background: var(--copper-light);
-            transform: translateY(-4px);
-        }
-
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 992px) {
-            .about-story__grid {
-                grid-template-columns: 1fr;
-            }
-            .mission-vision__grid {
-                grid-template-columns: 1fr;
-            }
-            .values__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .team__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .nav__list {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 76px;
-                left: 0;
-                right: 0;
-                background: var(--green-dark);
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 2px solid var(--copper);
-                box-shadow: var(--shadow);
-            }
-            .nav__list.open {
-                display: flex;
-            }
-            .nav__toggle {
-                display: flex;
-            }
-        }
-        @media (max-width: 640px) {
-            .page-hero__content h1 {
-                font-size: 2.4rem;
-            }
-            .values__grid {
-                grid-template-columns: 1fr;
-            }
-            .team__grid {
-                grid-template-columns: 1fr;
-            }
-            .footer__grid {
-                grid-template-columns: 1fr;
-            }
-            .section__title {
-                font-size: 2rem;
-            }
-            .timeline-item {
-                flex-direction: column;
-                gap: 4px;
-                padding-left: 60px;
-            }
-            .timeline-item__year {
-                font-size: 1.2rem;
-            }
-            .timeline__list::before {
-                left: 20px;
-            }
-            .timeline-item::before {
-                left: 12px;
-            }
-            .about-story__image img {
-                height: 250px;
-            }
+        @media (max-width: 480px) {
+            .nav-links { display: none; }
+            .about-hero h1 { font-size: 2.2rem; }
+            .values-grid { grid-template-columns: 1fr; }
+            .stats-box { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- ============================================================
-    PRELOADER
-    ============================================================ -->
-    <div id="preloader" aria-hidden="true">
-        <div class="loader-icon">
-            <span>SZ</span>
-            <span class="bolt"><i class="fas fa-bolt"></i></span>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="images/logo.png" alt="Smart Zambia Logo"> 
+            SMART ZAMBIA
         </div>
-        <div class="loader-bar"><span></span></div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="about.html" class="active">About</a>
+            <a href="partner.html">Partner</a>
+            <a href="contact.html">Contact</a>
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>Green & <span>Better Zambia</span></h1>
+            <p>We are on a mission to make domestic living easier, smarter, and highly affordable by delivering cheap, top-quality engineering solutions to families across Zambia.</p>
+            <div class="founded-badge">Founded 2026</div>
+        </div>
+    </section>
+
+    <!-- OUR STORY -->
+    <section class="our-story">
+        <div class="story-grid">
+            <div class="story-text">
+                <h2>Building a <span>Better Future</span></h2>
+                <p>Smart Zambia was founded in 2026 with one clear goal: to provide cheap, highly affordable domestic services without ever sacrificing quality or safety. We strongly believe that a better, greener future starts right at home.</p>
+                <p>By combining advanced technology with cost-effective engineering, we help Zambian households stay modern, efficient, and eco-friendly—all at a price that fits every budget. We are breaking the stereotype that premium innovation must cost a fortune.</p>
+                <p><strong>Currently, we are 100% dedicated to domestic/residential projects.</strong> However, we have ambitious future plans to scale our operations and expand into commercial engineering and construction as we grow.</p>
+                <ul>
+                    <li><strong>Cheap & Reliable:</strong> Best value for money in the market.</li>
+                    <li><strong>Greener Future:</strong> Sustainable materials and solar energy solutions.</li>
+                    <li><strong>Domestic Experts (Future Commercial):</strong> Focusing on homes today, with plans for commercial expansion tomorrow.</li>
+                </ul>
+            </div>
+            
+            <div class="stats-box">
+                <div class="stat-card">
+                    <span class="stat-number">2026</span>
+                    <span class="stat-label">Year Founded</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Core Pillars</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Cheap</span>
+                    <span class="stat-label">Unbeatable Prices</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Green</span>
+                    <span class="stat-label">Eco-Friendly Focus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="core-values">
+        <div class="section-header" style="text-align: center; margin-bottom: 4rem;">
+            <h2 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem;">Our Core <span style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Values</span></h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">What drives Smart Zambia to deliver affordable excellence every single day.</p>
+        </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">💰</div>
+                <h4>Affordability First</h4>
+                <p>We guarantee cheap, highly competitive pricing across all our services. Innovation should not be a luxury; it should be accessible to everyone.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h4>Sustainable Future</h4>
+                <p>We are deeply committed to building a greener Zambia. Our projects integrate solar energy, eco-friendly materials, and energy-efficient systems.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🇿🇲</div>
+                <h4>Locally Dedicated</h4>
+                <p>We are a fully Zambian-owned company. We know the local market, and we care deeply about building a better, affordable future for our local communities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOMESTIC FOCUS BANNER -->
+    <div class="domestic-banner">
+        <h2>Smart Living. <span>Cheap Pricing.</span></h2>
+        <p>We don't cut corners—we cut costs for you. Whether you need a new roof, a solar installation, or a smart security system, we deliver outstanding engineering at unmatched cheap rates. Join us in building a greener, smarter, and more affordable Zambia.</p>
+        <a href="partner.html"><button class="btn-primary">Partner With Us Today</button></a>
     </div>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
-    <header class="header" id="header" role="banner">
-        <div class="container header__inner">
-            <a href="index.html" class="logo" aria-label="Smart Zambia Home">
-                <div class="logo__icon">
-                    <span>SZ</span>
-                    <span class="bolt"><i class="fas fa-bolt"></i></span>
-                </div>
-                <span class="logo__text">Smart<span>Zambia</span></span>
-            </a>
-
-            <nav class="nav" aria-label="Main navigation">
-                <ul class="nav__list" id="navList">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="partner.html">Partner</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
-            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- ============================================================
-    PAGE HERO
-    ============================================================ -->
-    <section class="page-hero" aria-label="About page header">
-        <div class="page-hero__bg"></div>
-        <div class="page-hero__overlay"></div>
-        <div class="container page-hero__content">
-            <div class="page-hero__breadcrumb">
-                <a href="index.html">Home</a> <span>/</span> <span>About Us</span>
-            </div>
-            <h1>About <span>Smart Zambia</span></h1>
-            <p>We are a team of engineers, innovators, and problem‑solvers dedicated to building a smarter, more sustainable Zambia.</p>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    ABOUT STORY
-    ============================================================ -->
-    <section class="about-story section" aria-label="Our story">
-        <div class="container">
-            <div class="about-story__grid">
-                <div class="about-story__image">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart Zambia engineering team" loading="lazy" />
-                </div>
-                <div class="about-story__content">
-                    <span class="section__tag"><i class="fas fa-leaf"></i> Our Story</span>
-                    <h2 class="section__title">Building Zambia's <span>Future</span></h2>
-                    <p>
-                        Smart Zambia was founded with a clear vision: to deliver world‑class
-                        engineering solutions that are accessible, reliable, and tailored to
-                        the unique needs of Zambian communities. From humble beginnings, we
-                        have grown into a trusted partner for residential, commercial, and
-                        industrial projects across the country.
-                    </p>
-                    <p>
-                        Our strength lies in our local expertise combined with a global
-                        mindset. We don't just build structures — we build relationships,
-                        empower communities, and drive innovation at every level.
-                    </p>
-                    <a href="services.html" class="btn btn--primary" style="margin-top:12px;">
-                        <i class="fas fa-arrow-right"></i> Explore Our Services
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    MISSION & VISION
-    ============================================================ -->
-    <section class="mission-vision section" aria-label="Mission and vision">
-        <div class="container">
-            <div class="mission-vision__grid">
-                <div class="mv-card">
-                    <div class="mv-card__icon"><i class="fas fa-bullseye"></i></div>
-                    <h3>Our Mission</h3>
-                    <p>
-                        To provide innovative, high‑quality engineering solutions that are
-                        affordable and sustainable, while fostering local talent and
-                        contributing to Zambia's socio‑economic development.
-                    </p>
-                </div>
-                <div class="mv-card">
-                    <div class="mv-card__icon"><i class="fas fa-eye"></i></div>
-                    <h3>Our Vision</h3>
-                    <p>
-                        To become Zambia's most trusted engineering partner, recognised for
-                        excellence, integrity, and a relentless commitment to building a
-                        smarter, more connected future for all Zambians.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    CORE VALUES
-    ============================================================ -->
-    <section class="values section" aria-label="Core values">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-heart"></i> Our Values</span>
-                <h2 class="section__title">What <span>Guides Us</span></h2>
-                <p class="section__desc">These principles define who we are and how we work every day.</p>
-            </div>
-            <div class="values__grid">
-                <div class="value-item">
-                    <div class="value-item__icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4>Integrity</h4>
-                    <p>Honest, transparent, and accountable in all we do.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-item__icon"><i class="fas fa-lightbulb"></i></div>
-                    <h4>Innovation</h4>
-                    <p>Embracing new ideas and technologies to solve old challenges.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-item__icon"><i class="fas fa-users"></i></div>
-                    <h4>Community</h4>
-                    <p>Putting Zambian people and their needs at the heart of our work.</p>
-                </div>
-                <div class="value-item">
-                    <div class="value-item__icon"><i class="fas fa-gem"></i></div>
-                    <h4>Excellence</h4>
-                    <p>Delivering quality that exceeds expectations, every time.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    TIMELINE
-    ============================================================ -->
-    <section class="timeline section" aria-label="Company timeline">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-clock"></i> Our Journey</span>
-                <h2 class="section__title">The <span>Timeline</span></h2>
-                <p class="section__desc">Key milestones that have shaped Smart Zambia into what it is today.</p>
-            </div>
-            <div class="timeline__list">
-                <div class="timeline-item">
-                    <div class="timeline-item__year">2010</div>
-                    <div class="timeline-item__content">
-                        <h4>Foundation</h4>
-                        <p>Smart Zambia was established in Lusaka with a small team of 5 engineers, focusing on residential electrical installations.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-item__year">2014</div>
-                    <div class="timeline-item__content">
-                        <h4>Expansion into Civil & Mechanical</h4>
-                        <p>We broadened our services to include civil construction and mechanical systems, taking on larger commercial projects.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-item__year">2018</div>
-                    <div class="timeline-item__content">
-                        <h4>Smart Home & IT Division</h4>
-                        <p>Launched our IT and smart home automation division, integrating cutting‑edge technology into everyday living.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-item__year">2023</div>
-                    <div class="timeline-item__content">
-                        <h4>Nationwide Reach</h4>
-                        <p>With projects in Lusaka, Kitwe, Ndola, and beyond, we became a trusted name across all 10 provinces of Zambia.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-item__year">Today</div>
-                    <div class="timeline-item__content">
-                        <h4>Building the Future</h4>
-                        <p>We continue to innovate, train local talent, and deliver sustainable engineering solutions for generations to come.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    TEAM (placeholder)
-    ============================================================ -->
-    <section class="team section" aria-label="Leadership team">
-        <div class="container">
-            <div class="section__header">
-                <span class="section__tag"><i class="fas fa-user-tie"></i> Leadership</span>
-                <h2 class="section__title">Meet the <span>Team</span></h2>
-                <p class="section__desc">The experienced professionals driving our vision forward.</p>
-            </div>
-            <div class="team__grid">
-                <div class="team-card">
-                    <div class="team-card__avatar">KM</div>
-                    <h4>Kelvin Mwansa</h4>
-                    <span>Managing Director</span>
-                    <p>15+ years in civil engineering and project management.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-card__avatar">CT</div>
-                    <h4>Chanda Tembo</h4>
-                    <span>Head of Electrical</span>
-                    <p>Specialist in solar systems and smart home automation.</p>
-                </div>
-                <div class="team-card">
-                    <div class="team-card__avatar">BM</div>
-                    <h4>Bwalya Mulenga</h4>
-                    <span>Lead Mechanical Engineer</span>
-                    <p>Expert in HVAC, plumbing, and industrial maintenance.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    CTA SECTION
-    ============================================================ -->
-    <section class="about-cta section" aria-label="Call to action">
-        <div class="container">
-            <span class="section__tag" style="background:rgba(200,122,46,0.2);color:var(--copper-light);">
-                <i class="fas fa-handshake"></i> Let's Work Together
-            </span>
-            <h2 class="section__title">Ready to Build <span>Something Great?</span></h2>
-            <p>Whether you need a smart home, a commercial complex, or a complete engineering overhaul — we're here to help.</p>
-            <a href="contact.html" class="btn btn--primary btn--large">
-                <i class="fas fa-arrow-right"></i> Get in Touch
-            </a>
-        </div>
-    </section>
-
-    <!-- ============================================================
-    FOOTER
-    ============================================================ -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer__grid">
-                <div class="footer__brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo__icon">
-                            <span>SZ</span>
-                            <span class="bolt"><i class="fas fa-bolt"></i></span>
-                        </div>
-                        <span class="logo__text">Smart<span>Zambia</span></span>
-                    </a>
-                    <p class="footer__tagline">
-                        Engineering solutions through innovation and implementation.
-                        Building a smarter Zambia, one project at a time.
-                    </p>
-                    <div class="footer__social">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer__links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="partner.html">Partner</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer__links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><a href="services.html#electrical">Electrical</a></li>
-                        <li><a href="services.html#mechanical">Mechanical</a></li>
-                        <li><a href="services.html#civil">Civil</a></li>
-                        <li><a href="services.html#it">IT Services</a></li>
-                        <li><a href="contact.html">Smart House</a></li>
-                    </ul>
-                </div>
-                <div class="footer__contact">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+260958752821">+260 958 752 821</a></li>
-                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/260958752821" target="_blank">WhatsApp</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span>Lusaka, Zambia</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p>&copy; 2026 <strong>Smart Zambia</strong>. All rights reserved.</p>
-                <p class="footer__legal">
-                    <a href="#">Privacy Policy</a> &bull;
-                    <a href="#">Terms of Service</a>
-                </p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <h3>Green & Better Zambia</h3>
+            <p>Contact us via WhatsApp: <a href="https://wa.me/260958752821">+260 95 875 2821</a></p>
+            <p>Email: <a href="mailto:smartzambia@proton.me">smartzambia@proton.me</a></p>
+            <div class="copyright">
+                &copy; 2026 Smart Zambia. All rights reserved.
             </div>
         </div>
     </footer>
 
-    <!-- ============================================================
-    BACK TO TOP
-    ============================================================ -->
-    <button id="backToTop" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
+    <!-- ENGINEERED JAVASCRIPT FOR THEME PERSISTENCE -->
     <script>
-        (function() {
-            'use strict';
+        const toggleBtn = document.getElementById('themeToggle');
+        const body = document.body;
 
-            // Preloader
-            const preloader = document.getElementById('preloader');
-            window.addEventListener('load', () => {
-                preloader.classList.add('hidden');
-            });
+        // 1. Load preferred theme from LocalStorage
+        if(localStorage.getItem('siteTheme') === 'light') {
+            body.classList.add('theme-light');
+            toggleBtn.textContent = '☀️';
+        } else {
+            toggleBtn.textContent = '🌙';
+        }
 
-            // Mobile nav
-            const toggle = document.getElementById('navToggle');
-            const navList = document.getElementById('navList');
-            toggle.addEventListener('click', () => {
-                const open = toggle.classList.toggle('open');
-                navList.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', open);
-            });
-            document.querySelectorAll('.nav__list a').forEach(link => {
-                link.addEventListener('click', () => {
-                    toggle.classList.remove('open');
-                    navList.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // Header shadow
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                const y = window.scrollY;
-                header.classList.toggle('scrolled', y > 60);
-                const btn = document.getElementById('backToTop');
-                btn.classList.toggle('visible', y > 500);
-            });
-
-            // Back to top
-            document.getElementById('backToTop').addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-        })();
+        // 2. Handle toggle click
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('theme-light');
+            
+            // 3. Save state and update icon
+            if(body.classList.contains('theme-light')) {
+                localStorage.setItem('siteTheme', 'light');
+                toggleBtn.textContent = '☀️';
+            } else {
+                localStorage.setItem('siteTheme', 'dark');
+                toggleBtn.textContent = '🌙';
+            }
+        });
     </script>
-
 </body>
 </html>
